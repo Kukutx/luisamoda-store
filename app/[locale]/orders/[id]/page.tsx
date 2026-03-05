@@ -79,7 +79,7 @@ export default function OrderDetailPage() {
         <div className="mb-12 reveal">
           <button
             onClick={() => router.push(ROUTES.ORDERS)}
-            className="text-foreground/30 hover:text-foreground transition-colors text-[9px] tracking-mega uppercase font-bold"
+            className="text-foreground/30 hover:text-foreground transition-colors text-sm tracking-mega uppercase font-bold"
           >
             ← Back to History
           </button>
@@ -90,12 +90,12 @@ export default function OrderDetailPage() {
             <div className="space-y-6">
               <h1 className="font-serif text-5xl md:text-7xl tracking-widest uppercase italic leading-none">Entry Record</h1>
               <div className="flex flex-col gap-2 mt-6">
-                <p className="text-[10px] text-foreground/30 tracking-mega uppercase font-mono">SEQUENCE: {id.toUpperCase()}</p>
-                <p className="text-[10px] text-foreground/20 tracking-mega uppercase">Documented on {formatDate(order.createdAt)}</p>
+                <p className="text-sm text-foreground/30 tracking-mega uppercase font-mono">SEQUENCE: {id.toUpperCase()}</p>
+                <p className="text-sm text-foreground/20 tracking-mega uppercase">Documented on {formatDate(order.createdAt)}</p>
               </div>
             </div>
             <div className="mt-8 md:mt-0">
-               <span className={`px-8 py-3 border text-[10px] tracking-mega uppercase font-black ${status.className}`}>
+               <span className={`px-8 py-3 border text-sm tracking-mega uppercase font-black ${status.className}`}>
                 {status.text}
               </span>
             </div>
@@ -104,7 +104,7 @@ export default function OrderDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
             {/* Pieces Information */}
             <div className="lg:col-span-8 space-y-12">
-              <h2 className="text-[10px] text-foreground/40 tracking-mega uppercase font-bold border-b border-black/3 pb-6">Commissioned Pieces</h2>
+              <h2 className="text-sm text-foreground/40 tracking-mega uppercase font-bold border-b border-black/3 pb-6">Commissioned Pieces</h2>
               <div className="space-y-12">
                 {order.items.map((item, index) => (
                   <div key={index} className="flex gap-10 pb-12 border-b border-black/2 last:border-0 group">
@@ -119,7 +119,7 @@ export default function OrderDetailPage() {
                     </div>
                     <div className="flex-1 flex flex-col justify-center gap-4">
                       <h3 className="font-serif text-2xl tracking-wide text-foreground italic">{item.productName}</h3>
-                      <p className="text-[10px] text-foreground/30 tracking-widest uppercase">
+                      <p className="text-sm text-foreground/30 tracking-widest uppercase">
                         Qty: {item.quantity} · Rate: {formatPrice(item.price)}
                       </p>
                     </div>
@@ -136,8 +136,8 @@ export default function OrderDetailPage() {
             {/* Total */}
             <div className="lg:col-span-4 space-y-12">
               <div className="space-y-10 bg-neutral-50/50 p-8 border border-black/3">
-                <h2 className="text-[10px] text-foreground/40 tracking-mega uppercase font-bold border-b border-black/10 pb-4">Manifest Info</h2>
-                <div className="space-y-6 text-[11px] text-foreground/60 tracking-widest leading-relaxed uppercase">
+                <h2 className="text-sm text-foreground/40 tracking-mega uppercase font-bold border-b border-black/10 pb-4">Manifest Info</h2>
+                <div className="space-y-6 text-sm text-foreground/60 tracking-widest leading-relaxed uppercase">
                   <p><span className="text-foreground/20 mr-4">RECIPIENT:</span> {order.shippingAddress.name}</p>
                   <p><span className="text-foreground/20 mr-4">PROTOCOL:</span> {order.shippingAddress.phone}</p>
                   <p><span className="text-foreground/20 mr-4">LOCATION:</span> {order.shippingAddress.address || 'N/A'}</p>
@@ -147,7 +147,7 @@ export default function OrderDetailPage() {
 
               <div className="pt-8 space-y-6 px-4">
                 <div className="flex justify-between items-baseline">
-                  <span className="text-[10px] tracking-mega uppercase text-foreground/40 font-bold">Total Valuation</span>
+                  <span className="text-sm tracking-mega uppercase text-foreground/40 font-bold">Total Valuation</span>
                   <span className="text-4xl font-black tracking-tighter text-foreground">
                     {formatPrice(order.totalAmount)}
                   </span>

@@ -33,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Status Overlay - Ultra Minimalist (Modified for Light) */}
           {product.stock === 0 && (
             <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center">
-              <span className="text-foreground text-[10px] tracking-mega font-medium uppercase border-y border-black/10 py-2 px-6">
+              <span className="text-foreground text-sm tracking-mega font-medium uppercase border-y border-black/10 py-2 px-6">
                 {t('archived')}
               </span>
             </div>
@@ -46,7 +46,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <h3 className="text-foreground font-serif text-xl tracking-widest transition-opacity group-hover:opacity-60 duration-700">
               {product.name}
             </h3>
-            <p className="text-foreground/20 text-[9px] tracking-mega uppercase font-light">
+            <p className="text-foreground/20 text-sm tracking-mega uppercase font-light">
               {t('seriesPiece')}
             </p>
           </div>
@@ -56,7 +56,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               {formatPrice(product.price)}
             </span>
              {product.originalPrice && product.originalPrice > product.price && (
-               <span className="text-foreground/20 text-[10px] line-through font-light">
+               <span className="text-foreground/20 text-sm line-through font-light">
                  {formatPrice(product.originalPrice)}
                </span>
              )}

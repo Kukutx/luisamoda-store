@@ -64,14 +64,14 @@ export default function HomePage() {
           </div>
           
           <div className="reveal reveal-delay-1 flex flex-col items-center gap-12">
-            <p className="text-foreground/40 text-[11px] tracking-[0.8em] uppercase font-light max-w-lg leading-relaxed text-balance">
+            <p className="text-foreground/40 text-sm tracking-[0.8em] uppercase font-light max-w-lg leading-relaxed text-balance">
                {tHero('description')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-12 items-center">
               <a
                 href="#products"
-                className="group relative px-16 py-5 bg-foreground text-background text-[11px] tracking-ultra uppercase font-extrabold transition-all hover:px-20 hover:opacity-90 active:scale-95"
+                className="group relative px-16 py-5 bg-foreground text-background text-sm tracking-ultra uppercase font-extrabold transition-all hover:px-20 hover:opacity-90 active:scale-95"
               >
                 {tHero('collection')}
               </a>
@@ -82,7 +82,7 @@ export default function HomePage() {
         {/* Scroll Indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 reveal reveal-delay-2">
            <div className="h-16 w-px bg-linear-to-b from-foreground/20 to-transparent" />
-           <span className="text-[8px] tracking-widest text-foreground/20 uppercase">SCROLL</span>
+           <span className="text-xs tracking-widest text-foreground/20 uppercase">SCROLL</span>
         </div>
       </section>
 
@@ -92,7 +92,7 @@ export default function HomePage() {
         <div className="mb-32 reveal">
           <div className="flex flex-col lg:flex-row justify-between lg:items-end gap-16">
             <div className="space-y-6">
-               <span className="text-foreground/20 text-[10px] tracking-mega uppercase font-medium">{tCollection('volume')}</span>
+               <span className="text-foreground/20 text-sm tracking-mega uppercase font-medium">{tCollection('volume')}</span>
                <h2 className="font-serif text-5xl md:text-7xl text-foreground tracking-widest uppercase italic">{tCollection('title')}</h2>
             </div>
             
@@ -102,13 +102,13 @@ export default function HomePage() {
                 placeholder={tCollection('searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-transparent border-b border-foreground/10 text-foreground placeholder-foreground/20 px-0 py-3 w-full lg:w-80 focus:outline-none focus:border-foreground/40 transition-all text-[11px] tracking-mega"
+                className="bg-transparent border-b border-foreground/10 text-foreground placeholder-foreground/20 px-0 py-3 w-full lg:w-80 focus:outline-none focus:border-foreground/40 transition-all text-sm tracking-mega"
               />
               <div className="flex gap-10 flex-wrap text-foreground/30">
                 <button
                   onClick={() => setSelectedCategory('')}
-                  className={`text-[9px] tracking-mega transition-all uppercase relative py-2 ${
-                    selectedCategory === '' ? 'text-foreground font-bold' : 'hover:text-foreground'
+className={`text-sm tracking-mega transition-all uppercase relative py-2 ${
+                  selectedCategory === '' ? 'text-foreground font-bold' : 'hover:text-foreground'
                   }`}
                 >
                   {tCollection('all')}
@@ -118,7 +118,7 @@ export default function HomePage() {
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`text-[9px] tracking-mega transition-all uppercase relative py-2 ${
+                    className={`text-sm tracking-mega transition-all uppercase relative py-2 ${
                       selectedCategory === category.id ? 'text-foreground font-bold' : 'hover:text-foreground'
                     }`}
                   >
@@ -156,22 +156,22 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-start gap-20">
             <div className="space-y-6">
               <p className="font-serif text-3xl text-foreground tracking-[0.4em] uppercase">Luisa <span className="opacity-20 italic font-light">Series</span></p>
-              <p className="text-foreground/40 text-[10px] tracking-mega uppercase max-w-sm leading-relaxed">
+              <p className="text-foreground/40 text-sm tracking-mega uppercase max-w-sm leading-relaxed">
                 {tFooter('description')}
               </p>
             </div>
             
             <div className="grid grid-cols-2 gap-x-24 gap-y-12">
                <div className="space-y-6">
-                  <span className="text-foreground/10 text-[9px] tracking-mega uppercase font-bold">{tFooter('nav')}</span>
-                  <div className="flex flex-col gap-4 text-[9px] tracking-widest text-foreground/40 uppercase">
+                  <span className="text-foreground/10 text-sm tracking-mega uppercase font-bold">{tFooter('nav')}</span>
+                  <div className="flex flex-col gap-4 text-sm tracking-widest text-foreground/40 uppercase">
                     <Link href={ROUTES.HOME} className="hover:text-foreground transition-colors">{useTranslations('Header')('index')}</Link>
                     <Link href={ROUTES.CART} className="hover:text-foreground transition-colors">{useTranslations('Header')('inquiry')}</Link>
                   </div>
                </div>
                <div className="space-y-6">
-                  <span className="text-foreground/10 text-[9px] tracking-mega uppercase font-bold">{tFooter('legal')}</span>
-                  <div className="flex flex-col gap-4 text-[9px] tracking-widest text-foreground/40 uppercase font-light">
+                  <span className="text-foreground/10 text-sm tracking-mega uppercase font-bold">{tFooter('legal')}</span>
+                  <div className="flex flex-col gap-4 text-sm tracking-widest text-foreground/40 uppercase font-light">
                     <span>{tFooter('privacy')}</span>
                     <span>{tFooter('terms')}</span>
                     <span>© {tHero('year')}</span>

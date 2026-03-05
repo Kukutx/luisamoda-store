@@ -65,12 +65,12 @@ export default function CartPage() {
                         </Link>
                         <button
                           onClick={() => removeItem(item.productId)}
-                          className="text-[9px] text-foreground/20 hover:text-foreground transition-colors tracking-mega uppercase mt-2"
+                          className="text-sm text-foreground/20 hover:text-foreground transition-colors tracking-mega uppercase mt-2"
                         >
                           {t('dismiss')}
                         </button>
                       </div>
-                      <p className="text-foreground/30 text-[10px] font-light tracking-widest uppercase max-w-md">{item.product.description}</p>
+                      <p className="text-foreground/30 text-sm font-light tracking-widest uppercase max-w-md">{item.product.description}</p>
                     </div>
 
                     <div className="flex items-center justify-between mt-auto pt-8">
@@ -95,7 +95,7 @@ export default function CartPage() {
                          <p className="text-foreground font-bold text-xl tracking-tighter">
                           {formatPrice(item.product.price * item.quantity)}
                         </p>
-                        <p className="text-foreground/10 text-[9px] tracking-mega mt-2 uppercase">
+                        <p className="text-foreground/10 text-sm tracking-mega mt-2 uppercase">
                           {formatPrice(item.product.price)} {tProduct('unit')}
                         </p>
                       </div>
@@ -107,7 +107,7 @@ export default function CartPage() {
               <div className="pt-8">
                 <button
                   onClick={clearCart}
-                  className="text-[9px] text-foreground/10 hover:text-foreground/40 transition-colors tracking-mega uppercase"
+                  className="text-sm text-foreground/10 hover:text-foreground/40 transition-colors tracking-mega uppercase"
                 >
                   {t('clearList')}
                 </button>
@@ -117,19 +117,19 @@ export default function CartPage() {
             {/* Summary - Minimalist Surface */}
             <div className="lg:col-span-4 lg:sticky lg:top-48 self-start space-y-16 reveal reveal-delay-2 p-8 border border-black/3 bg-neutral-50/50 backdrop-blur-sm">
               <div className="space-y-10 group/summary">
-                 <span className="text-foreground/30 text-[10px] tracking-mega uppercase border-b border-black/10 pb-2">{t('summary')}</span>
+                 <span className="text-foreground/30 text-sm tracking-mega uppercase border-b border-black/10 pb-2">{t('summary')}</span>
                  <div className="space-y-6">
-                    <div className="flex justify-between text-[11px] text-foreground/40 tracking-widest font-light">
+                    <div className="flex justify-between text-sm text-foreground/40 tracking-widest font-light">
                        <span className="uppercase">{t('collectionTotal')}</span>
                        <span>{formatPrice(getTotalPrice())}</span>
                     </div>
-                    <div className="flex justify-between text-[11px] text-foreground/40 tracking-widest font-light">
+                    <div className="flex justify-between text-sm text-foreground/40 tracking-widest font-light">
                        <span className="uppercase">{t('deliveryFees')}</span>
                        <span className="italic opacity-50 underline decoration-black/10">{t('deliveryFees')}</span>
                     </div>
                     
                     <div className="pt-10 border-t border-black/5 flex justify-between items-baseline">
-                       <span className="text-[10px] tracking-mega uppercase text-foreground font-black">{t('estTotal')}</span>
+                       <span className="text-sm tracking-mega uppercase text-foreground font-black">{t('estTotal')}</span>
                        <span className="text-4xl font-black tracking-tighter text-foreground drop-shadow-sm transition-all group-hover/summary:tracking-normal duration-700">{formatPrice(getTotalPrice())}</span>
                     </div>
                  </div>
@@ -138,11 +138,11 @@ export default function CartPage() {
               <div className="space-y-6">
                  <button
                     onClick={handleCheckout}
-                    className="w-full bg-foreground text-background py-6 text-[11px] tracking-mega font-black uppercase transition-all hover:opacity-90 active:scale-95"
+                    className="w-full bg-foreground text-background py-6 text-sm tracking-mega font-black uppercase transition-all hover:opacity-90 active:scale-95"
                   >
                     {t('confirmOrder')}
                   </button>
-                  <p className="text-[8px] text-foreground/20 leading-relaxed text-center tracking-mega uppercase">
+                  <p className="text-xs text-foreground/20 leading-relaxed text-center tracking-mega uppercase">
                     {t('negotiationNotice')}
                   </p>
               </div>

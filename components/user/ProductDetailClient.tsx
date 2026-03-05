@@ -35,7 +35,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
 
   return (
     <>
-      <div className="mb-20 flex items-center gap-4 text-[9px] text-foreground/20 tracking-mega uppercase animate-reveal">
+      <div className="mb-20 flex items-center gap-4 text-sm text-foreground/20 tracking-mega uppercase animate-reveal">
         <Link href="/" className="hover:text-foreground transition-colors uppercase">{tHeader('index')}</Link>
         <span className="opacity-30">/</span>
         <span className="text-foreground/40">{product.name}</span>
@@ -59,7 +59,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
         <div className="lg:col-span-5 flex flex-col justify-start space-y-16 animate-reveal" style={{ animationDelay: '0.2s' }}>
           <div className="space-y-8 pb-16 border-b border-black/5">
             {product.categoryName && (
-              <p className="text-foreground/20 text-[10px] tracking-mega uppercase font-medium">{product.categoryName} Series</p>
+              <p className="text-foreground/20 text-sm tracking-mega uppercase font-medium">{product.categoryName} Series</p>
             )}
             <h1 className="font-serif text-5xl xl:text-7xl text-foreground leading-tight tracking-wider uppercase italic">
               {product.name}
@@ -79,7 +79,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
 
           <div className="space-y-16">
              <div className="space-y-6">
-                <span className="text-[10px] text-foreground/40 tracking-mega uppercase font-bold">{t('concept')}</span>
+                <span className="text-sm text-foreground/40 tracking-mega uppercase font-bold">{t('concept')}</span>
                 <p className="text-foreground/50 text-sm leading-relaxed font-light max-w-md">
                   {product.description}
                 </p>
@@ -88,7 +88,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
              {product.stock > 0 ? (
                <div className="space-y-12">
                  <div className="flex items-center justify-between py-6 border-y border-black/5">
-                   <span className="text-[10px] text-foreground/30 tracking-mega uppercase">{t('quantity')}</span>
+                   <span className="text-sm text-foreground/30 tracking-mega uppercase">{t('quantity')}</span>
                    <div className="flex items-center gap-10">
                      <button
                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -108,7 +108,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
 
                  <button
                    onClick={handleAddToCart}
-                   className={`w-full py-6 text-[11px] tracking-mega uppercase font-extrabold transition-all duration-700 border ${
+                   className={`w-full py-6 text-sm tracking-mega uppercase font-extrabold transition-all duration-700 border ${
                      added
                        ? 'bg-transparent border-black text-black'
                        : 'bg-foreground text-background border-foreground hover:bg-transparent hover:text-foreground shadow-premium'
@@ -118,13 +118,13 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                  </button>
                </div>
              ) : (
-               <div className="w-full py-6 text-[10px] tracking-mega border border-black/10 text-foreground/20 text-center uppercase font-mono">
+               <div className="w-full py-6 text-sm tracking-mega border border-black/10 text-foreground/20 text-center uppercase font-mono">
                  Piece currently {t('archived')}
                </div>
              )}
           </div>
           
-          <p className="text-[8px] text-foreground/10 tracking-mega uppercase pt-10 font-mono">
+          <p className="text-xs text-foreground/10 tracking-mega uppercase pt-10 font-mono">
              Artisan Piece No. {product.id.toString().slice(-4).toUpperCase()}
           </p>
         </div>

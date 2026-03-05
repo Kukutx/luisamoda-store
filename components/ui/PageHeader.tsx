@@ -19,7 +19,7 @@ export default function PageHeader({
   return (
     <div className={`mb-16 space-y-6 animate-reveal ${className}`}>
       {step && (
-        <span className="text-[9px] tracking-mega text-brand/30 uppercase font-medium">
+        <span className="text-sm tracking-mega text-brand/30 uppercase font-medium">
           Step {step}
         </span>
       )}

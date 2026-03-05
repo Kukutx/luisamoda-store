@@ -1,0 +1,41 @@
+# 自动修复：对 main/master 运行 lint --fix，若有变更则自动提交并推送
+name: Auto Fix
+
+on:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+    # 若本次 push 已是 auto-fix 提交，则不再运行，避免无意义重复
+    if: "!contains(github.event.head_commit.message, 'chore: auto-fix lint')"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint fix
+        run: npm run lint:fix
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --exit-code --quiet . || {
+            git add -A
+            git commit -m "chore: auto-fix lint (GitHub Actions)"
+            git push
+          }

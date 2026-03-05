@@ -59,21 +59,21 @@ export default function RegisterPage() {
           </Link>
           <div className="flex flex-col items-center gap-6">
              <div className="h-px w-16 bg-foreground/10" />
-             <p className="text-foreground/20 text-[9px] tracking-mega uppercase font-light leading-loose italic">Initialize Series Identity / Formal Access</p>
+             <p className="text-foreground/20 text-sm tracking-mega uppercase font-light leading-loose italic">Initialize Series Identity / Formal Access</p>
           </div>
         </div>
 
         {/* Register Form */}
         <div className="bg-transparent space-y-12">
           {error && (
-            <div className="text-foreground/60 border border-black/5 bg-black/2 px-6 py-4 text-[9px] tracking-[0.3em] uppercase leading-relaxed text-center">
+            <div className="text-foreground/60 border border-black/5 bg-black/2 px-6 py-4 text-sm tracking-[0.3em] uppercase leading-relaxed text-center">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-10">
             <div className="space-y-4">
-              <label className="block text-[9px] text-foreground/30 tracking-mega uppercase font-bold">Formal Designation</label>
+              <label className="block text-sm text-foreground/30 tracking-mega uppercase font-bold">Formal Designation</label>
               <input
                 type="text"
                 value={displayName}
@@ -84,7 +84,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-4">
-              <label className="block text-[9px] text-foreground/30 tracking-mega uppercase font-bold">Email Coordinate</label>
+              <label className="block text-sm text-foreground/30 tracking-mega uppercase font-bold">Email Coordinate</label>
               <input
                 type="email"
                 required
@@ -96,7 +96,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-4">
-              <label className="block text-[9px] text-foreground/30 tracking-mega uppercase font-bold">Personal Key</label>
+              <label className="block text-sm text-foreground/30 tracking-mega uppercase font-bold">Personal Key</label>
               <input
                 type="password"
                 required
@@ -108,7 +108,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-4">
-              <label className="block text-[9px] text-foreground/30 tracking-mega uppercase font-bold">Key Verification</label>
+              <label className="block text-sm text-foreground/30 tracking-mega uppercase font-bold">Key Verification</label>
               <input
                 type="password"
                 required
@@ -122,14 +122,14 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-foreground text-background py-5 text-[11px] tracking-mega font-black uppercase hover:opacity-90 transition-all disabled:opacity-20 mt-8 active:scale-95"
+              className="w-full bg-foreground text-background py-5 text-sm tracking-mega font-black uppercase hover:opacity-90 transition-all disabled:opacity-20 mt-8 active:scale-95"
             >
               {loading ? 'Creating Sequence...' : 'Initialize'}
             </button>
           </form>
 
           <div className="flex flex-col gap-10 text-center pt-8">
-             <Link href="/" className="text-foreground/10 hover:text-foreground/30 text-[9px] tracking-mega uppercase transition-colors">
+             <Link href="/" className="text-foreground/10 hover:text-foreground/30 text-sm tracking-mega uppercase transition-colors">
               ← Return to INDEX
             </Link>
           </div>

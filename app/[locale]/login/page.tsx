@@ -36,7 +36,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 relative overflow-hidden selection:bg-black selection:text-white text-foreground">
       {/* Dynamic Background (Light Mod) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(0,0,0,0.02)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-login-radial" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140vw] h-px bg-black/3 rotate-12 reveal opacity-10" />
 
       <div className="relative w-full max-w-sm reveal">
@@ -47,21 +47,21 @@ export default function LoginPage() {
           </Link>
           <div className="flex flex-col items-center gap-6">
              <div className="h-px w-16 bg-foreground/10" />
-             <p className="text-foreground/20 text-[9px] tracking-mega uppercase font-light leading-loose italic">Identity validation / Luisa Series</p>
+             <p className="text-foreground/20 text-sm tracking-mega uppercase font-light leading-loose italic">Identity validation / Luisa Series</p>
           </div>
         </div>
 
         {/* Login Form */}
         <div className="bg-transparent space-y-12">
           {error && (
-            <div className="text-foreground/60 border border-black/5 bg-black/2 px-6 py-4 text-[9px] tracking-[0.3em] uppercase leading-relaxed text-center">
+            <div className="text-foreground/60 border border-black/5 bg-black/2 px-6 py-4 text-sm tracking-[0.3em] uppercase leading-relaxed text-center">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-12">
             <div className="space-y-4">
-              <label className="block text-[9px] text-foreground/30 tracking-mega uppercase font-bold">Email Coordinate</label>
+              <label className="block text-sm text-foreground/30 tracking-mega uppercase font-bold">Email Coordinate</label>
               <input
                 type="email"
                 required
@@ -73,7 +73,7 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-4">
-              <label className="block text-[9px] text-foreground/30 tracking-mega uppercase font-bold">Encrypted Key</label>
+              <label className="block text-sm text-foreground/30 tracking-mega uppercase font-bold">Encrypted Key</label>
               <input
                 type="password"
                 required
@@ -87,14 +87,14 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-foreground text-background py-5 text-[11px] tracking-mega font-black uppercase hover:opacity-90 transition-all disabled:opacity-20 mt-8 active:scale-95"
+              className="w-full bg-foreground text-background py-5 text-sm tracking-mega font-black uppercase hover:opacity-90 transition-all disabled:opacity-20 mt-8 active:scale-95"
             >
               {loading ? 'Validating...' : 'Identify'}
             </button>
           </form>
 
           <div className="flex flex-col gap-10 text-center pt-8">
-             <Link href="/" className="text-foreground/10 hover:text-foreground/30 text-[9px] tracking-mega uppercase transition-colors">
+             <Link href="/" className="text-foreground/10 hover:text-foreground/30 text-sm tracking-mega uppercase transition-colors">
               ← Return to Main INDEX
             </Link>
           </div>

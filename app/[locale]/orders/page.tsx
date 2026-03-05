@@ -71,15 +71,15 @@ export default function OrdersPage() {
               <Link
                 key={order.id}
                 href={`${ROUTES.ORDERS}/${order.id}`}
-                className="group block bg-neutral-50/30 border border-black/[0.03] hover:border-black/10 p-10 md:p-16 transition-all duration-700"
+                className="group block bg-neutral-50/30 border border-black/0.03 hover:border-black/10 p-10 md:p-16 transition-all duration-700"
               >
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
                   <div className="space-y-6">
                     <div className="flex items-center gap-6">
-                       <span className={`text-[9px] tracking-mega font-black uppercase ${getStatusDisplay(order.status).className}`}>
+                       <span className={`text-sm tracking-mega font-black uppercase ${getStatusDisplay(order.status).className}`}>
                         {getStatusDisplay(order.status).text}
                       </span>
-                      <span className="text-foreground/10 text-[9px] tracking-mega uppercase font-mono">
+                      <span className="text-foreground/10 text-sm tracking-mega uppercase font-mono">
                         {order.id.slice(0, 8).toUpperCase()}
                       </span>
                     </div>
@@ -91,11 +91,11 @@ export default function OrdersPage() {
                   </div>
                   
                   <div className="flex flex-col md:items-end gap-4">
-                    <p className="text-[10px] text-foreground/20 tracking-mega uppercase font-medium">
+                    <p className="text-sm text-foreground/20 tracking-mega uppercase font-medium">
                       {formatDate(order.createdAt)}
                     </p>
                     <div className="h-px w-12 bg-black/10 group-hover:w-24 transition-all duration-700" />
-                    <span className="text-[9px] text-foreground/40 tracking-ultra uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-sm text-foreground/40 tracking-ultra uppercase opacity-0 group-hover:opacity-100 transition-opacity">
                       View Details →
                     </span>
                   </div>

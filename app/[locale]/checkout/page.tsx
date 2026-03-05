@@ -79,21 +79,21 @@ export default function CheckoutPage() {
           <div className="w-24 h-px bg-black/10 mb-20" />
           
           <h1 className="font-serif text-6xl md:text-8xl tracking-widest uppercase italic mb-8">{t('confirmedTitle')}</h1>
-          <p className="text-foreground/30 text-[10px] tracking-mega uppercase mb-20 font-medium">{t('confirmedSub')}</p>
+          <p className="text-foreground/30 text-sm tracking-mega uppercase mb-20 font-medium">{t('confirmedSub')}</p>
 
           <div className="w-full bg-neutral-50/50 p-16 mb-20 text-left space-y-16 border border-black/5">
              <div className="space-y-4">
-                <span className="text-foreground/20 text-[9px] tracking-mega uppercase font-bold">{t('refSequence')}</span>
+                <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">{t('refSequence')}</span>
                 <p className="font-mono text-sm text-foreground/50 tracking-widest font-bold">{orderId.toUpperCase()}</p>
              </div>
 
              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div className="space-y-6">
-                  <span className="text-foreground/20 text-[9px] tracking-mega uppercase font-bold">WeChat ID</span>
+                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">WeChat ID</span>
                   <p className="text-foreground font-serif text-2xl tracking-widest italic">{CONTACT.WECHAT}</p>
                 </div>
                 <div className="space-y-6">
-                  <span className="text-foreground/20 text-[9px] tracking-mega uppercase font-bold">WhatsApp</span>
+                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">WhatsApp</span>
                   <a href={CONTACT.WHATSAPP} target="_blank" rel="noopener noreferrer" className="block text-foreground hover:opacity-50 text-xs tracking-[0.3em] font-extrabold transition-opacity underline decoration-black/10 underline-offset-8 uppercase">
                     Launch Contact →
                   </a>
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
           </div>
 
           <div className="flex flex-col gap-8 w-full max-w-sm">
-            <button onClick={() => router.push(ROUTES.HOME)} className="w-full bg-foreground text-background py-5 text-[11px] tracking-mega font-black transition-all uppercase hover:opacity-90 active:scale-95">
+            <button onClick={() => router.push(ROUTES.HOME)} className="w-full bg-foreground text-background py-5 text-sm tracking-mega font-black transition-all uppercase hover:opacity-90 active:scale-95">
               {t('returnHome')}
             </button>
           </div>
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
                <div className="space-y-16">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div className="space-y-4">
-                      <label className="text-foreground/30 text-[9px] tracking-mega uppercase font-bold">{t('nameLabel')}</label>
+                      <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('nameLabel')}</label>
                       <input
                         type="text"
                         required
@@ -137,7 +137,7 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div className="space-y-4">
-                      <label className="text-foreground/30 text-[9px] tracking-mega uppercase font-bold">{t('contactLabel')}</label>
+                      <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('contactLabel')}</label>
                       <input
                         type="text"
                         required
@@ -149,7 +149,7 @@ export default function CheckoutPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-foreground/30 text-[9px] tracking-mega uppercase font-bold">{t('emailLabel')}</label>
+                    <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('emailLabel')}</label>
                     <input
                       type="email"
                       value={form.email}
@@ -159,7 +159,7 @@ export default function CheckoutPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-foreground/30 text-[9px] tracking-mega uppercase font-bold">{t('noteLabel')}</label>
+                    <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('noteLabel')}</label>
                     <textarea
                       rows={6}
                       value={form.note}
@@ -178,11 +178,11 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-foreground text-background py-6 text-[11px] tracking-mega font-black uppercase hover:opacity-90 transition-all disabled:opacity-20 active:scale-95"
+                  className="w-full bg-foreground text-background py-6 text-sm tracking-mega font-black uppercase hover:opacity-90 transition-all disabled:opacity-20 active:scale-95"
                 >
                   {loading ? t('submitting') : t('submit')}
                 </button>
-                <p className="text-[9px] text-foreground/10 text-center tracking-mega uppercase font-light">
+                <p className="text-sm text-foreground/10 text-center tracking-mega uppercase font-light">
                   {t('notice')}
                 </p>
               </div>
@@ -192,13 +192,13 @@ export default function CheckoutPage() {
           {/* Side Summary - Architectural Layout */}
           <div className="lg:col-span-5 border-l border-black/5 pl-20 hidden lg:block reveal reveal-delay-2">
             <div className="space-y-20">
-               <span className="text-foreground/20 text-[10px] tracking-mega uppercase font-bold">List of Interests</span>
+               <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">List of Interests</span>
                <div className="space-y-12">
                   {items.map((item) => (
                     <div key={item.productId} className="flex justify-between items-end group">
                       <div className="space-y-2">
-                        <p className="text-foreground text-[11px] tracking-[0.2em] uppercase font-bold group-hover:opacity-40 transition-opacity duration-500">{item.product.name}</p>
-                        <p className="text-foreground/20 text-[9px] tracking-widest italic font-bold">Vol. {item.quantity}</p>
+                        <p className="text-foreground text-sm tracking-[0.2em] uppercase font-bold group-hover:opacity-40 transition-opacity duration-500">{item.product.name}</p>
+                        <p className="text-foreground/20 text-sm tracking-widest italic font-bold">Vol. {item.quantity}</p>
                       </div>
                       <span className="text-foreground text-lg font-bold tracking-tighter">{formatPrice(item.product.price * item.quantity)}</span>
                     </div>
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
                </div>
                
                <div className="pt-16 border-t border-black/10 flex justify-between items-baseline">
-                  <span className="text-foreground/20 text-[10px] tracking-mega uppercase font-black">Valuation</span>
+                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-black">Valuation</span>
                   <span className="text-5xl font-black tracking-tighter text-foreground">{formatPrice(getTotalPrice())}</span>
                </div>
             </div>

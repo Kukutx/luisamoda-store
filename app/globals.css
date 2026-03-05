@@ -141,4 +141,8 @@
     transition-property: opacity;
     transition-duration: 1000ms;
   }
+  /* 登录页顶部径向渐变背景（规范类，避免内联任意值） */
+  .bg-login-radial {
+    background-image: radial-gradient(circle at 50% 0%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
+  }
 }

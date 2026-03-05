@@ -59,7 +59,7 @@ export default function Header() {
             <Link
               key={item.path}
               href={item.path}
-              className={`text-[9px] tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
+              className={`text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
                 pathname === item.path ? 'text-foreground' : 'text-foreground/30 hover:text-foreground'
               }`}
             >
@@ -68,7 +68,7 @@ export default function Header() {
                 <span className={`absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right ${pathname === item.path ? 'scale-x-100' : 'scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left'}`} />
               </span>
               {item.count !== undefined && item.count > 0 && (
-                <span className="w-4 h-4 rounded-full bg-foreground text-background text-[8px] flex items-center justify-center font-bold animate-fade-in">
+                <span className="w-5 h-5 rounded-full bg-foreground text-background text-xs flex items-center justify-center font-bold animate-fade-in">
                   {item.count}
                 </span>
               )}
@@ -81,7 +81,7 @@ export default function Header() {
               <button
                 key={lang.code}
                 onClick={() => router.replace(pathname as Parameters<ReturnType<typeof useRouter>['replace']>[0], { locale: lang.code })}
-                className={`text-[8px] tracking-widest transition-all ${
+                className={`text-xs tracking-widest transition-all ${
                   locale === lang.code ? 'text-foreground font-black' : 'text-foreground/20 hover:text-foreground'
                 }`}
               >
@@ -98,12 +98,12 @@ export default function Header() {
               {isAdmin && (
                 <Link 
                   href={ROUTES.ADMIN.ROOT}
-                  className="px-4 py-1.5 border border-black/10 hover:border-black text-[9px] tracking-widest uppercase transition-all"
+                  className="px-4 py-1.5 border border-black/10 hover:border-black text-sm tracking-widest uppercase transition-all"
                 >
                   {t('admin')}
                 </Link>
               )}
-              <span className="text-[9px] text-foreground/30 tracking-tight font-light uppercase">
+              <span className="text-sm text-foreground/30 tracking-tight font-light uppercase">
                 {userData?.displayName || user.email?.split('@')[0]}
               </span>
               <button 
@@ -111,7 +111,7 @@ export default function Header() {
                   await logoutUser();
                   router.push(ROUTES.HOME);
                 }}
-                className="text-[9px] text-foreground/20 hover:text-foreground tracking-widest transition-colors uppercase"
+                className="text-sm text-foreground/20 hover:text-foreground tracking-widest transition-colors uppercase"
               >
                 {t('signOut')}
               </button>
@@ -158,7 +158,7 @@ export default function Header() {
                   router.replace(pathname as Parameters<ReturnType<typeof useRouter>['replace']>[0], { locale: lang.code });
                   setIsMobileMenuOpen(false);
                 }}
-                className={`text-[10px] tracking-ultra transition-all ${
+                className={`text-sm tracking-ultra transition-all ${
                   locale === lang.code ? 'text-foreground font-black underline underline-offset-8' : 'text-foreground/20'
                 }`}
               >

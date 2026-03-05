@@ -36,7 +36,7 @@ export default function EmptyState({
       {actionText && actionHref && (
         <Link 
           href={actionHref}
-          className="group relative inline-flex items-center px-8 py-3 bg-foreground text-background text-[11px] tracking-ultra uppercase transition-all duration-700 hover:pr-12"
+          className="group relative inline-flex items-center px-8 py-3 bg-foreground text-background text-sm tracking-ultra uppercase transition-all duration-700 hover:pr-12"
         >
           <span>{actionText}</span>
           <span className="absolute right-4 opacity-0 group-hover:opacity-100 transition-all duration-700">

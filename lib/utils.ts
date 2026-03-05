@@ -1,7 +1,7 @@
 export const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat('zh-CN', {
+  return new Intl.NumberFormat('de-DE', {
     style: 'currency',
-    currency: 'CNY',
+    currency: 'EUR',
   }).format(price);
 };
 

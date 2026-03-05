@@ -11,7 +11,7 @@ export default function LoadingSpinner({ fullPage = false }: { fullPage?: boolea
         <div className="absolute inset-0 border-t border-black/10 rounded-full animate-spin" />
         <div className="absolute inset-0 border-t border-black/40 rounded-full animate-spin duration-1500" />
       </div>
-      <span className="text-[10px] tracking-mega text-foreground/40 uppercase font-light">
+      <span className="text-sm tracking-mega text-foreground/40 uppercase font-light">
         Curating Experience
       </span>
     </div>

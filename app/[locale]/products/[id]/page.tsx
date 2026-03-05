@@ -32,7 +32,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <div className="min-h-screen bg-background">
         <Header />
         <div className="flex items-center justify-center h-[70vh]">
-          <p className="text-foreground/20 text-[10px] tracking-mega uppercase italic">Piece not located</p>
+          <p className="text-foreground/20 text-sm tracking-mega uppercase italic">Piece not located</p>
         </div>
       </div>
     );

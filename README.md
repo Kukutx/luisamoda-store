@@ -170,6 +170,10 @@ luisamoda-store/
 3. **购物车**: 购物车数据存储在浏览器 localStorage 中
 4. **订单状态**: 管理员可以在管理后台更新订单状态
 
+## 部署到 Vercel
+
+推送代码到 GitHub 后，可按 [docs/VERCEL_DEPLOY.md](docs/VERCEL_DEPLOY.md) 的说明连接 Vercel 并配置环境变量，实现自动部署。仓库已包含 GitHub Actions CI 与可选的 Vercel 部署 workflow。
+
 ## 开发命令
 
 - `npm run dev` - 启动开发服务器

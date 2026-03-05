@@ -28,6 +28,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# secrets (tokens, keys - never commit)
+/secrets
+
 # vercel
 .vercel
 
