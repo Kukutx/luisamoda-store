@@ -1,0 +1,71 @@
+{
+  "Header": {
+    "index": "INDICE",
+    "inquiry": "RICHIESTA",
+    "orders": "ORDINI",
+    "signOut": "DISLOG",
+    "admin": "AMMINISTRAZIONE"
+  },
+  "Hero": {
+    "title": "LUISA",
+    "year": "2026",
+    "description": "La ricerca della luminosa purezza, dell'eleganza minimalista e della risonanza senza tempo.",
+    "collection": "COLLEZIONE"
+  },
+  "Collection": {
+    "volume": "VOLUME N. 01",
+    "title": "ESSENZA",
+    "searchPlaceholder": "TROVA UN ARTICOLO...",
+    "all": "TUTTI",
+    "noPiecesFound": "NESSUN PEZZO TROVATO",
+    "noPiecesDescription": "La nostra collezione è in continua evoluzione. Si prega di regolare i criteri o rivisitare il catalogo completo.",
+    "clearFilter": "CANCELLA FILTRO"
+  },
+  "Cart": {
+    "title": "RICHIESTA",
+    "emptyTitle": "OSSERVAZIONE COMPLETATA",
+    "emptyDescription": "La tua lista di richieste è attualmente vuota. Riscopri la collezione per trovare una risonanza senza tempo.",
+    "startDiscovery": "INIZIA LA SCOPERTA",
+    "dismiss": "RIMUOVI",
+    "clearList": "PULISCI LISTA RICHIESTE",
+    "summary": "RIEPILOGO",
+    "collectionTotal": "TOTALE COLLEZIONE",
+    "deliveryFees": "AL CONTATTO",
+    "estTotal": "TOTALE STIMATO",
+    "confirmOrder": "CONFERMA RICHIESTA",
+    "negotiationNotice": "* È richiesta una negoziazione personale per l'adempimento finale."
+  },
+  "Checkout": {
+    "title": "CHECKOUT",
+    "nameLabel": "NOME FORMALE *",
+    "contactLabel": "CONTATTO PRINCIPALE *",
+    "emailLabel": "COORDINATA EMAIL",
+    "noteLabel": "NOTE PARTICOLARI",
+    "submitting": "INVIO SEQUENZA...",
+    "submit": "INVIA RICHIESTA",
+    "notice": "Il contatto diretto verrà stabilito al momento dell'invio.",
+    "confirmedTitle": "CONFERMATO",
+    "confirmedSub": "La tua richiesta di prenotazione è stata registrata",
+    "refSequence": "SEQUENZA DI RIFERIMENTO",
+    "returnHome": "TORNA ALLA HOME"
+  },
+  "Footer": {
+    "description": "Definire l'intersezione tra lusso minimalista e risonanza luminosa. Pensato per chi apprezza la chiarezza.",
+    "nav": "NAV",
+    "legal": "LEGALE",
+    "privacy": "PRIVACY",
+    "terms": "TERMINI"
+  },
+  "Product": {
+    "archived": "ARCHIVIATO",
+    "seriesPiece": "Pezzo della Serie Luisa",
+    "addInquiry": "AGGIUNGI ALLA RICHIESTA",
+    "inquire": "RICHIEDI INFO",
+    "description": "DESCRIZIONE",
+    "details": "DETTAGLI",
+    "added": "PEZZO AGGIUNTO",
+    "concept": "CONCETTO",
+    "unit": "UNITÀ",
+    "quantity": "QUANTITÀ"
+  }
+}

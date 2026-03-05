@@ -1,0 +1,71 @@
+{
+  "Header": {
+    "index": "INDEX",
+    "inquiry": "INQUIRY",
+    "orders": "ORDERS",
+    "signOut": "SIGN OUT",
+    "admin": "ADMIN"
+  },
+  "Hero": {
+    "title": "LUISA",
+    "year": "2026",
+    "description": "The pursuit of bright purity, minimalist elegance, & timeless resonance.",
+    "collection": "COLLECTION"
+  },
+  "Collection": {
+    "volume": "VOLUME NO. 01",
+    "title": "ESSENCE",
+    "searchPlaceholder": "FIND AN ITEM...",
+    "all": "ALL",
+    "noPiecesFound": "NO PIECES FOUND",
+    "noPiecesDescription": "Our collection is constantly evolving. Please adjust your criteria or revisit the full catalog.",
+    "clearFilter": "CLEAR FILTER"
+  },
+  "Cart": {
+    "title": "INQUIRY",
+    "emptyTitle": "OBSERVATION COMPLETE",
+    "emptyDescription": "Your inquiry list is currently empty. Revisit the collection to discover timeless resonance.",
+    "startDiscovery": "START DISCOVERY",
+    "dismiss": "DISMISS",
+    "clearList": "CLEAR DISCOVERY LIST",
+    "summary": "SUMMARY",
+    "collectionTotal": "COLLECTION TOTAL",
+    "deliveryFees": "UPON CONTACT",
+    "estTotal": "EST. TOTAL",
+    "confirmOrder": "CONFIRM ORDER",
+    "negotiationNotice": "* Personal negotiation required for final fulfillment."
+  },
+  "Checkout": {
+    "title": "CHECKOUT",
+    "nameLabel": "FORMAL NAME *",
+    "contactLabel": "PRIMARY CONTACT *",
+    "emailLabel": "EMAIL COORDINATE",
+    "noteLabel": "PARTICULAR NOTES",
+    "submitting": "SUBMITTING SEQUENCE...",
+    "submit": "DISPATCH INQUIRY",
+    "notice": "Direct connection will be established upon submission.",
+    "confirmedTitle": "CONFIRMED",
+    "confirmedSub": "Your reservation request has been registered",
+    "refSequence": "REFERENCE SEQUENCE",
+    "returnHome": "RETURN HOME"
+  },
+  "Footer": {
+    "description": "Defining the intersection of minimalist luxury and bright resonance. Crafted for those who appreciate the clarity.",
+    "nav": "NAV",
+    "legal": "LEGAL",
+    "privacy": "PRIVACY",
+    "terms": "TERMS"
+  },
+  "Product": {
+    "archived": "ARCHIVED",
+    "seriesPiece": "Luisa Series Piece",
+    "addInquiry": "ADD TO INQUIRY",
+    "inquire": "INQUIRE",
+    "description": "DESCRIPTION",
+    "details": "DETAILS",
+    "added": "PIECE ADDED",
+    "concept": "CONCEPT",
+    "unit": "UNIT",
+    "quantity": "QUANTITY"
+  }
+}
