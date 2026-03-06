@@ -1,31 +1,48 @@
 {
+  "Loading": {
+    "label": "加载中"
+  },
+  "Meta": {
+    "title": "Luisa Moda · 百货 · 缝纫改衣 · 3D 打印",
+    "description": "极简实用选品与定制服务。预定后商谈，周边自提，远可快递。"
+  },
   "Header": {
-    "index": "索引",
-    "inquiry": "询价",
+    "index": "首页",
+    "products": "百货商品",
+    "sewing": "缝纫改衣",
+    "print3d": "3D 打印",
+    "inquiry": "询价单",
     "orders": "订单",
     "signOut": "登出",
-    "admin": "管理"
+    "admin": "管理",
+    "menuOpen": "打开菜单",
+    "menuClose": "关闭菜单",
+    "langZh": "简体中文",
+    "langEn": "English",
+    "langIt": "Italiano"
   },
   "Hero": {
     "title": "LUISA",
     "year": "2026",
-    "description": "追求明亮纯洁、极简优雅与永恒共鸣。",
-    "collection": "臻选系列"
+    "description": "极简 · 实用 · 可触及。",
+    "businessModel": "预定后商谈 · 周边自提 · 远可快递",
+    "collection": "进入选品",
+    "scroll": "向下滚动"
   },
   "Collection": {
     "volume": "第 01 卷",
-    "title": "本源",
-    "searchPlaceholder": "寻找单品...",
+    "title": "商品",
+    "searchPlaceholder": "搜索...",
     "all": "全部",
-    "noPiecesFound": "未找到作品",
-    "noPiecesDescription": "我们的藏品不断演进，请调整标准或重新访问完整目录。",
-    "clearFilter": "重置筛选"
+    "noPiecesFound": "暂无匹配",
+    "noPiecesDescription": "换个关键词或分类试试。",
+    "clearFilter": "清空筛选"
   },
   "Cart": {
     "title": "询价单",
-    "emptyTitle": "观察已完成",
-    "emptyDescription": "您的询价列表目前为空。请重新通过藏品发现永恒的共鸣。",
-    "startDiscovery": "开始探索",
+    "emptyTitle": "询价单是空的",
+    "emptyDescription": "选好商品或服务后加入，我们会联系您商谈。",
+    "startDiscovery": "去选品",
     "dismiss": "移除",
     "clearList": "清空询价列表",
     "summary": "概览",
@@ -33,24 +50,36 @@
     "deliveryFees": "联系后确认",
     "estTotal": "预计总计",
     "confirmOrder": "确认询价",
-    "negotiationNotice": "* 最终订单需通过私人洽谈确认。"
+    "negotiationNotice": "提交后我们会联系您确认细节。"
   },
   "Checkout": {
-    "title": "结账",
-    "nameLabel": "正式姓名 *",
-    "contactLabel": "联系方式 *",
-    "emailLabel": "电子邮箱",
-    "noteLabel": "特别说明",
+    "title": "填写联系方式",
+    "nameLabel": "姓名 *",
+    "contactLabel": "电话 / 微信 *",
+    "emailLabel": "邮箱",
+    "noteLabel": "备注",
     "submitting": "提交中...",
-    "submit": "发送询价",
-    "notice": "提交后将直接建立联系。",
-    "confirmedTitle": "已确认",
-    "confirmedSub": "您的预约请求已登记",
+    "submit": "提交询价",
+    "notice": "提交后我们会尽快联系您。",
+    "confirmedTitle": "已收到",
+    "confirmedSub": "我们会通过您留的联系方式与您商谈。",
     "refSequence": "参考编号",
-    "returnHome": "返回首页"
+    "afterSubmitNote": "周边可自提，外地可快递。",
+    "returnHome": "返回首页",
+    "nameRequired": "请填写姓名。",
+    "contactRequired": "请填写电话或微信。",
+    "emailInvalid": "请填写正确的邮箱格式。",
+    "submitFailed": "提交失败，请稍后重试。",
+    "summaryLabel": "预定清单",
+    "valuationLabel": "合计",
+    "wechatLabel": "微信",
+    "whatsappLabel": "WhatsApp",
+    "launchContact": "联系"
   },
   "Footer": {
-    "description": "定义极简奢侈与明亮共鸣的交汇点。专为鉴赏纯粹之美的人士打造。",
+    "brand": "Luisa Moda",
+    "description": "百货 · 缝纫改衣 · 3D 打印。预定商谈，周边自提，远可快递。",
+    "businessModel": "预定后商谈 · 周边自提 · 远可快递",
     "nav": "导航",
     "legal": "法律",
     "privacy": "隐私政策",
@@ -67,5 +96,71 @@
     "concept": "设计理念",
     "unit": "单价",
     "quantity": "数量"
+  },
+  "Home": {
+    "sectionProducts": "百货商品",
+    "sectionProductsDesc": "日用好物，预定后商谈取货或快递。",
+    "sectionSewing": "缝纫改衣",
+    "sectionSewingDesc": "改裤长、收腰、补洞、定制。预约后线上或到店沟通。",
+    "sectionPrint3d": "3D 打印与雕刻",
+    "sectionPrint3dDesc": "发图询价，预约后商谈。",
+    "ctaProducts": "选品",
+    "ctaSewing": "了解",
+    "ctaPrint3d": "了解"
+  },
+  "Orders": {
+    "pageTitle": "我的订单",
+    "pageStep": "我的",
+    "emptyTitle": "暂无订单",
+    "emptyDescription": "您还没有预定记录。去选品或预约服务吧。",
+    "emptyAction": "去逛逛",
+    "viewDetails": "查看详情",
+    "statusPending": "待联系",
+    "statusProcessing": "处理中",
+    "statusShipped": "已发货",
+    "statusDelivered": "已送达",
+    "statusCancelled": "已取消"
+  },
+  "OrderDetail": {
+    "backToOrders": "返回订单",
+    "title": "订单详情",
+    "sequence": "订单号",
+    "documentedAt": "下单时间",
+    "itemsHeading": "预定内容",
+    "itemQtyPrice": "数量 · 单价",
+    "recipient": "收货人",
+    "contact": "联系方式",
+    "address": "地址",
+    "total": "合计",
+    "notFoundTitle": "未找到订单",
+    "notFoundDescription": "该订单不存在或您无权限查看。",
+    "notFoundAction": "返回订单列表"
+  },
+  "Error": {
+    "heading": "出了点问题",
+    "message": "请重试或返回首页。",
+    "retry": "重试",
+    "backHome": "返回首页"
+  },
+  "NotFound": {
+    "code": "404",
+    "heading": "页面不存在",
+    "message": "该页面不存在或已移动。",
+    "backHome": "返回首页"
+  },
+  "Services": {
+    "sewing": {
+      "title": "缝纫改衣",
+      "intro": "改裤长、收腰、补洞、定制等。留联系方式后我们与您商谈细节与价格；周边自提，外地可快递。",
+      "process": "留联系方式 → 商谈 → 自提或快递",
+      "contactCta": "联系询价"
+    },
+    "print3d": {
+      "title": "3D 打印与雕刻",
+      "intro": "发图或描述需求，我们报价后与您商谈。周边自提，外地可快递。",
+      "process": "发图/描述 → 报价联系 → 自提或快递",
+      "contactCta": "联系询价"
+    },
+    "backToHome": "返回首页"
   }
 }

@@ -27,7 +27,7 @@ export default function CartPage() {
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <Header />
 
-      <main className="container mx-auto px-8 md:px-12 pt-40 pb-32">
+      <main className="container mx-auto px-6 md:px-10 pt-28 pb-20">
         <PageHeader 
           step="01 / Inquiry"
           title={t('title')}
@@ -41,9 +41,9 @@ export default function CartPage() {
             actionHref={ROUTES.HOME}
           />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 xl:gap-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-20">
             {/* List */}
-            <div className="lg:col-span-8 space-y-16 reveal reveal-delay-1">
+            <div className="lg:col-span-8 space-y-10 reveal reveal-delay-1">
               {items.map((item) => (
                 <div key={item.productId} className="flex flex-col sm:flex-row gap-12 group border-b border-black/5 pb-16 last:border-0">
                   {/* Image - Slim Portrait */}
@@ -115,7 +115,7 @@ export default function CartPage() {
             </div>
 
             {/* Summary - Minimalist Surface */}
-            <div className="lg:col-span-4 lg:sticky lg:top-48 self-start space-y-16 reveal reveal-delay-2 p-8 border border-black/3 bg-neutral-50/50 backdrop-blur-sm">
+            <div className="lg:col-span-4 lg:sticky lg:top-36 self-start space-y-10 reveal reveal-delay-2 p-6 border border-black/3 bg-neutral-50/50 backdrop-blur-sm">
               <div className="space-y-10 group/summary">
                  <span className="text-foreground/30 text-sm tracking-mega uppercase border-b border-black/10 pb-2">{t('summary')}</span>
                  <div className="space-y-6">

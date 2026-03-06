@@ -1,13 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import { ROUTES } from '@/lib/constants';
+import { Link } from '@/i18n/routing';
 
-interface EmptyStateProps {
+export type EmptyStateActionHref = React.ComponentProps<typeof Link>['href'];
+
+export interface EmptyStateProps {
   title: string;
   description: string;
   actionText?: string;
-  actionHref?: string;
+  actionHref?: EmptyStateActionHref;
   icon?: React.ReactNode;
 }
 
@@ -22,14 +23,14 @@ export default function EmptyState({
   icon,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-24 px-6 text-center animate-reveal">
+    <div className="flex flex-col items-center justify-center py-16 px-6 text-center animate-reveal">
       {icon && <div className="mb-8 text-foreground/20">{icon}</div>}
       
       <h3 className="text-xl font-serif tracking-widest text-foreground mb-4 uppercase">
         {title}
       </h3>
       
-      <p className="text-sm text-foreground/40 font-light max-w-sm mb-12 leading-relaxed">
+      <p className="text-sm text-foreground/40 font-light max-w-sm mb-8 leading-relaxed">
         {description}
       </p>
       

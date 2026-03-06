@@ -16,7 +16,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={{ pathname: '/products/[id]', params: { id: product.id } }} className="group block">
-      <div className="relative space-y-8 transition-all duration-1000">
+      <div className="relative space-y-5 transition-all duration-1000">
         {/* Image - Immersive portrait */}
         <div className="relative w-full aspect-3/4 overflow-hidden bg-surface">
           <Image

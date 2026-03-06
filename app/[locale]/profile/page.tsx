@@ -36,13 +36,13 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <Header />
-      <main className="container mx-auto px-8 md:px-12 pt-40 pb-32 max-w-4xl">
-        <div className="flex flex-col gap-6 mb-24 animate-reveal">
+      <main className="container mx-auto px-6 md:px-10 pt-28 pb-20 max-w-4xl">
+        <div className="flex flex-col gap-4 mb-14 animate-reveal">
            <span className="text-foreground/20 text-sm tracking-mega uppercase font-medium">Step 04 / Identity</span>
            <h1 className="font-serif text-6xl md:text-8xl tracking-widest uppercase italic leading-none">Profile</h1>
         </div>
 
-        <div className="animate-reveal bg-neutral-50/30 border border-black/3 p-12 md:p-20 space-y-20 shadow-premium" style={{ animationDelay: '0.2s' }}>
+        <div className="animate-reveal bg-neutral-50/30 border border-black/3 p-8 md:p-12 space-y-12 shadow-premium" style={{ animationDelay: '0.2s' }}>
           <div className="flex justify-between items-baseline border-b border-black/10 pb-8">
             <h2 className="text-sm text-foreground/40 tracking-mega uppercase font-bold">Personal Archive</h2>
             {msg && (

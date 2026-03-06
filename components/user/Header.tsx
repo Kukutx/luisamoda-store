@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { Link, usePathname, useRouter, getPathname } from '@/i18n/routing';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { logoutUser } from '@/lib/firebase/auth';
@@ -38,11 +38,11 @@ export default function Header() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         isScrolled 
-          ? 'bg-white/80 backdrop-blur-2xl border-b border-black/5 py-5' 
-          : 'bg-transparent py-10'
+          ? 'bg-white/80 backdrop-blur-2xl border-b border-black/5 py-3' 
+          : 'bg-transparent py-5'
       }`}
     >
-      <div className="container mx-auto px-8 md:px-12 flex items-center justify-between">
+      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Logo - More spacing */}
         <Link href="/" className="group relative flex items-center">
           <span className="font-serif text-2xl tracking-ultra uppercase text-foreground transition-all duration-500 group-hover:tracking-mega">
@@ -51,39 +51,78 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav - Focused & Clean */}
-        <nav className="hidden md:flex items-center gap-16">
-          {[
-            { name: t('index'), path: ROUTES.HOME },
-            { name: t('inquiry'), path: ROUTES.CART, count: items.length },
-          ].map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={`text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
-                pathname === item.path ? 'text-foreground' : 'text-foreground/30 hover:text-foreground'
-              }`}
-            >
-              <span className="relative">
-                {item.name}
-                <span className={`absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right ${pathname === item.path ? 'scale-x-100' : 'scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left'}`} />
+        <nav className="hidden md:flex items-center gap-6">
+          <Link
+            href={ROUTES.HOME}
+            className={`text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
+              pathname === ROUTES.HOME ? 'text-foreground' : 'text-foreground/30 hover:text-foreground'
+            }`}
+          >
+            <span className="relative">
+              {t('index')}
+              <span className={`absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right ${pathname === ROUTES.HOME ? 'scale-x-100' : 'scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left'}`} />
+            </span>
+          </Link>
+          <a
+            href={`${getPathname({ locale, href: ROUTES.HOME })}#products`}
+            className="text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item text-foreground/30 hover:text-foreground"
+          >
+            <span className="relative">
+              {t('products')}
+              <span className="absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left" />
+            </span>
+          </a>
+          <Link
+            href={ROUTES.SERVICES.SEWING}
+            className={`text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
+              pathname === ROUTES.SERVICES.SEWING ? 'text-foreground' : 'text-foreground/30 hover:text-foreground'
+            }`}
+          >
+            <span className="relative">
+              {t('sewing')}
+              <span className={`absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right ${pathname === ROUTES.SERVICES.SEWING ? 'scale-x-100' : 'scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left'}`} />
+            </span>
+          </Link>
+          <Link
+            href={ROUTES.SERVICES.PRINT3D}
+            className={`text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
+              pathname === ROUTES.SERVICES.PRINT3D ? 'text-foreground' : 'text-foreground/30 hover:text-foreground'
+            }`}
+          >
+            <span className="relative">
+              {t('print3d')}
+              <span className={`absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right ${pathname === ROUTES.SERVICES.PRINT3D ? 'scale-x-100' : 'scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left'}`} />
+            </span>
+          </Link>
+          <Link
+            href={ROUTES.CART}
+            className={`text-sm tracking-mega transition-all duration-500 uppercase flex items-center gap-3 group/item ${
+              pathname === ROUTES.CART ? 'text-foreground' : 'text-foreground/30 hover:text-foreground'
+            }`}
+          >
+            <span className="relative">
+              {t('inquiry')}
+              <span className={`absolute -bottom-1 left-0 w-full h-px bg-foreground transition-transform duration-500 origin-right ${pathname === ROUTES.CART ? 'scale-x-100' : 'scale-x-0 group-hover/item:scale-x-100 group-hover/item:origin-left'}`} />
+            </span>
+            {items.length > 0 && (
+              <span className="w-5 h-5 rounded-full bg-foreground text-background text-xs flex items-center justify-center font-bold animate-fade-in">
+                {items.length}
               </span>
-              {item.count !== undefined && item.count > 0 && (
-                <span className="w-5 h-5 rounded-full bg-foreground text-background text-xs flex items-center justify-center font-bold animate-fade-in">
-                  {item.count}
-                </span>
-              )}
-            </Link>
-          ))}
+            )}
+          </Link>
           
           {/* Language Switcher */}
-          <div className="flex items-center gap-4 ml-8 border-l border-black/5 pl-8">
+          <div className="flex items-center gap-4 ml-8 border-l border-black/5 pl-8" role="group" aria-label="Language">
             {languages.map((lang) => (
               <button
                 key={lang.code}
+                type="button"
                 onClick={() => router.replace(pathname as Parameters<ReturnType<typeof useRouter>['replace']>[0], { locale: lang.code })}
                 className={`text-xs tracking-widest transition-all ${
                   locale === lang.code ? 'text-foreground font-black' : 'text-foreground/20 hover:text-foreground'
                 }`}
+                aria-label={lang.code === 'zh' ? t('langZh') : lang.code === 'en' ? t('langEn') : t('langIt')}
+                aria-current={locale === lang.code ? 'true' : undefined}
               >
                 {lang.name}
               </button>
@@ -120,11 +159,14 @@ export default function Header() {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
+          type="button"
           className="md:hidden text-foreground/60 hover:text-foreground transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-expanded={isMobileMenuOpen}
+          aria-label={isMobileMenuOpen ? t('menuClose') : t('menuOpen')}
         >
-          <div className="w-6 flex flex-col gap-1.5 items-end">
+          <div className="w-6 flex flex-col gap-1.5 items-end" aria-hidden="true">
             <span className={`h-px bg-current transition-all ${isMobileMenuOpen ? 'w-6 translate-y-2 rotate-45' : 'w-6'}`} />
             <span className={`h-px bg-current transition-all ${isMobileMenuOpen ? 'opacity-0' : 'w-4'}`} />
             <span className={`h-px bg-current transition-all ${isMobileMenuOpen ? 'w-6 -translate-y-2 -rotate-45' : 'w-5'}`} />
@@ -134,26 +176,28 @@ export default function Header() {
 
       {/* Mobile Menu - Immersive Light */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-white/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center gap-12 animate-fade-in">
-          {[
-            { name: t('index'), path: ROUTES.HOME },
-            { name: t('inquiry'), path: ROUTES.CART },
-          ].map((item, idx) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal"
-              style={{ animationDelay: `${idx * 0.1}s` }}
-            >
-              {item.name}
-            </Link>
-          ))}
+        <nav className="fixed inset-0 bg-white/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center gap-12 animate-fade-in" aria-label="Main">
+          <Link href={ROUTES.HOME} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal">
+            {t('index')}
+          </Link>
+          <a href={`${getPathname({ locale, href: ROUTES.HOME })}#products`} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.1s' }}>
+            {t('products')}
+          </a>
+          <Link href={ROUTES.SERVICES.SEWING} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.2s' }}>
+            {t('sewing')}
+          </Link>
+          <Link href={ROUTES.SERVICES.PRINT3D} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.3s' }}>
+            {t('print3d')}
+          </Link>
+          <Link href={ROUTES.CART} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.4s' }}>
+            {t('inquiry')}
+          </Link>
           {/* Mobile Language Switcher */}
-          <div className="flex items-center gap-8 mt-4">
+          <div className="flex items-center gap-8 mt-4" role="group" aria-label="Language">
             {languages.map((lang) => (
               <button
                 key={lang.code}
+                type="button"
                 onClick={() => {
                   router.replace(pathname as Parameters<ReturnType<typeof useRouter>['replace']>[0], { locale: lang.code });
                   setIsMobileMenuOpen(false);
@@ -161,13 +205,14 @@ export default function Header() {
                 className={`text-sm tracking-ultra transition-all ${
                   locale === lang.code ? 'text-foreground font-black underline underline-offset-8' : 'text-foreground/20'
                 }`}
+                aria-label={lang.code === 'zh' ? t('langZh') : lang.code === 'en' ? t('langEn') : t('langIt')}
               >
                 {lang.name}
               </button>
             ))}
           </div>
-          <div className="h-px w-8 bg-foreground/10 mt-8" />
-        </div>
+          <div className="h-px w-8 bg-foreground/10 mt-8" aria-hidden="true" />
+        </nav>
       )}
     </header>
   );

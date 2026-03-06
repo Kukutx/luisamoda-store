@@ -1,31 +1,48 @@
 {
+  "Loading": {
+    "label": "Loading"
+  },
+  "Meta": {
+    "title": "Luisa Moda · Products · Sewing · 3D Print",
+    "description": "Curated goods and custom services. Reserve, we discuss; local pickup or delivery."
+  },
   "Header": {
-    "index": "INDEX",
+    "index": "HOME",
+    "products": "PRODUCTS",
+    "sewing": "SEWING",
+    "print3d": "3D PRINT",
     "inquiry": "INQUIRY",
     "orders": "ORDERS",
     "signOut": "SIGN OUT",
-    "admin": "ADMIN"
+    "admin": "ADMIN",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "langZh": "中文",
+    "langEn": "English",
+    "langIt": "Italiano"
   },
   "Hero": {
     "title": "LUISA",
     "year": "2026",
-    "description": "The pursuit of bright purity, minimalist elegance, & timeless resonance.",
-    "collection": "COLLECTION"
+    "description": "Simple · Practical · Within reach.",
+    "businessModel": "Reserve, then we discuss · Local pickup · Delivery for distant orders",
+    "collection": "BROWSE",
+    "scroll": "Scroll"
   },
   "Collection": {
-    "volume": "VOLUME NO. 01",
-    "title": "ESSENCE",
-    "searchPlaceholder": "FIND AN ITEM...",
+    "volume": "VOL. 01",
+    "title": "PRODUCTS",
+    "searchPlaceholder": "Search...",
     "all": "ALL",
-    "noPiecesFound": "NO PIECES FOUND",
-    "noPiecesDescription": "Our collection is constantly evolving. Please adjust your criteria or revisit the full catalog.",
-    "clearFilter": "CLEAR FILTER"
+    "noPiecesFound": "NO MATCHES",
+    "noPiecesDescription": "Try another keyword or category.",
+    "clearFilter": "CLEAR"
   },
   "Cart": {
     "title": "INQUIRY",
-    "emptyTitle": "OBSERVATION COMPLETE",
-    "emptyDescription": "Your inquiry list is currently empty. Revisit the collection to discover timeless resonance.",
-    "startDiscovery": "START DISCOVERY",
+    "emptyTitle": "Inquiry list is empty",
+    "emptyDescription": "Add items or services; we'll contact you to discuss.",
+    "startDiscovery": "BROWSE",
     "dismiss": "DISMISS",
     "clearList": "CLEAR DISCOVERY LIST",
     "summary": "SUMMARY",
@@ -33,24 +50,36 @@
     "deliveryFees": "UPON CONTACT",
     "estTotal": "EST. TOTAL",
     "confirmOrder": "CONFIRM ORDER",
-    "negotiationNotice": "* Personal negotiation required for final fulfillment."
+    "negotiationNotice": "We'll contact you to confirm details after you submit."
   },
   "Checkout": {
-    "title": "CHECKOUT",
-    "nameLabel": "FORMAL NAME *",
-    "contactLabel": "PRIMARY CONTACT *",
-    "emailLabel": "EMAIL COORDINATE",
-    "noteLabel": "PARTICULAR NOTES",
-    "submitting": "SUBMITTING SEQUENCE...",
-    "submit": "DISPATCH INQUIRY",
-    "notice": "Direct connection will be established upon submission.",
-    "confirmedTitle": "CONFIRMED",
-    "confirmedSub": "Your reservation request has been registered",
-    "refSequence": "REFERENCE SEQUENCE",
-    "returnHome": "RETURN HOME"
+    "title": "CONTACT INFO",
+    "nameLabel": "Name *",
+    "contactLabel": "Phone / WeChat *",
+    "emailLabel": "Email",
+    "noteLabel": "Notes",
+    "submitting": "Submitting...",
+    "submit": "SUBMIT INQUIRY",
+    "notice": "We'll get in touch soon.",
+    "confirmedTitle": "RECEIVED",
+    "confirmedSub": "We'll contact you to discuss.",
+    "refSequence": "REFERENCE",
+    "afterSubmitNote": "Local pickup or delivery available.",
+    "returnHome": "BACK TO HOME",
+    "nameRequired": "Please enter your name.",
+    "contactRequired": "Please enter phone or WeChat.",
+    "emailInvalid": "Please enter a valid email.",
+    "submitFailed": "Submission failed. Please try again.",
+    "summaryLabel": "Items",
+    "valuationLabel": "Total",
+    "wechatLabel": "WeChat",
+    "whatsappLabel": "WhatsApp",
+    "launchContact": "Contact"
   },
   "Footer": {
-    "description": "Defining the intersection of minimalist luxury and bright resonance. Crafted for those who appreciate the clarity.",
+    "brand": "Luisa Moda",
+    "description": "Products · Sewing · 3D print. Reserve, discuss, pickup or delivery.",
+    "businessModel": "Reserve then discuss · Local pickup · Delivery for distant",
     "nav": "NAV",
     "legal": "LEGAL",
     "privacy": "PRIVACY",
@@ -67,5 +96,71 @@
     "concept": "CONCEPT",
     "unit": "UNIT",
     "quantity": "QUANTITY"
+  },
+  "Home": {
+    "sectionProducts": "PRODUCTS",
+    "sectionProductsDesc": "Daily goods. Reserve, then we discuss pickup or delivery.",
+    "sectionSewing": "SEWING & ALTERATIONS",
+    "sectionSewingDesc": "Hemming, waist, repairs, custom. Book then we discuss online or in store.",
+    "sectionPrint3d": "3D PRINT & ENGRAVING",
+    "sectionPrint3dDesc": "Send file or idea; we quote and discuss.",
+    "ctaProducts": "BROWSE",
+    "ctaSewing": "LEARN MORE",
+    "ctaPrint3d": "LEARN MORE"
+  },
+  "Orders": {
+    "pageTitle": "Orders",
+    "pageStep": "My",
+    "emptyTitle": "No orders yet",
+    "emptyDescription": "You have no reservations. Browse or book a service.",
+    "emptyAction": "Browse",
+    "viewDetails": "View details",
+    "statusPending": "Pending",
+    "statusProcessing": "Processing",
+    "statusShipped": "Shipped",
+    "statusDelivered": "Delivered",
+    "statusCancelled": "Cancelled"
+  },
+  "OrderDetail": {
+    "backToOrders": "Back to orders",
+    "title": "Order details",
+    "sequence": "Order no.",
+    "documentedAt": "Placed",
+    "itemsHeading": "Items",
+    "itemQtyPrice": "Qty · Price",
+    "recipient": "Recipient",
+    "contact": "Contact",
+    "address": "Address",
+    "total": "Total",
+    "notFoundTitle": "Order not found",
+    "notFoundDescription": "This order doesn't exist or you don't have access.",
+    "notFoundAction": "Back to orders"
+  },
+  "Error": {
+    "heading": "Something went wrong",
+    "message": "You can try again or go back home.",
+    "retry": "Retry",
+    "backHome": "Back to home"
+  },
+  "NotFound": {
+    "code": "404",
+    "heading": "Page not found",
+    "message": "This page doesn’t exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "Services": {
+    "sewing": {
+      "title": "SEWING & ALTERATIONS",
+      "intro": "Hemming, waist, repairs, custom. Leave your contact; we'll discuss details and price. Local pickup or delivery.",
+      "process": "Leave contact → We discuss → Pickup or delivery",
+      "contactCta": "CONTACT TO INQUIRE"
+    },
+    "print3d": {
+      "title": "3D PRINT & ENGRAVING",
+      "intro": "Send file or describe your idea; we quote and discuss. Local pickup or delivery.",
+      "process": "File/description → We quote and contact → Pickup or delivery",
+      "contactCta": "CONTACT TO INQUIRE"
+    },
+    "backToHome": "BACK TO HOME"
   }
 }

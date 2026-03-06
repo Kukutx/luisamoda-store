@@ -17,7 +17,7 @@ export default function PageHeader({
   className = "" 
 }: PageHeaderProps) {
   return (
-    <div className={`mb-16 space-y-6 animate-reveal ${className}`}>
+    <div className={`mb-10 space-y-4 animate-reveal ${className}`}>
       {step && (
         <span className="text-sm tracking-mega text-brand/30 uppercase font-medium">
           Step {step}

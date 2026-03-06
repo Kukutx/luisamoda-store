@@ -1,10 +1,12 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 /**
- * A standardized loading spinner for the application.
- * Follows the minimalist "reveal" aesthetic.
+ * Standardized loading spinner. Label is localized.
  */
 export default function LoadingSpinner({ fullPage = false }: { fullPage?: boolean }) {
+  const t = useTranslations('Loading');
   const spinner = (
     <div className="flex flex-col items-center justify-center gap-6 animate-reveal">
       <div className="relative w-12 h-12">
@@ -12,7 +14,7 @@ export default function LoadingSpinner({ fullPage = false }: { fullPage?: boolea
         <div className="absolute inset-0 border-t border-black/40 rounded-full animate-spin duration-1500" />
       </div>
       <span className="text-sm tracking-mega text-foreground/40 uppercase font-light">
-        Curating Experience
+        {t('label')}
       </span>
     </div>
   );

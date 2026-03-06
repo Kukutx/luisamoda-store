@@ -28,10 +28,17 @@ export default function CheckoutPage() {
     email: '',
     note: '',
   });
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; contact?: string; email?: string }>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.contact) return;
+    const errors: { name?: string; contact?: string; email?: string } = {};
+    if (!form.name.trim()) errors.name = t('nameRequired');
+    if (!form.contact.trim()) errors.contact = t('contactRequired');
+    const emailTrim = form.email.trim();
+    if (emailTrim && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim)) errors.email = t('emailInvalid');
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
 
     setLoading(true);
     setSubmitError(null);
@@ -65,7 +72,7 @@ export default function CheckoutPage() {
       setSubmitted(true);
     } catch (error) {
       console.error('Error creating order:', error);
-      setSubmitError(error instanceof Error ? error.message : 'Failed to submit order. Please try again.');
+      setSubmitError(t('submitFailed'));
     } finally {
       setLoading(false);
     }
@@ -75,7 +82,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
         <Header />
-        <div className="container mx-auto px-8 py-48 max-w-2xl text-center flex flex-col items-center reveal">
+        <div className="container mx-auto px-6 py-24 max-w-2xl text-center flex flex-col items-center reveal">
           <div className="w-24 h-px bg-black/10 mb-20" />
           
           <h1 className="font-serif text-6xl md:text-8xl tracking-widest uppercase italic mb-8">{t('confirmedTitle')}</h1>
@@ -87,15 +94,19 @@ export default function CheckoutPage() {
                 <p className="font-mono text-sm text-foreground/50 tracking-widest font-bold">{orderId.toUpperCase()}</p>
              </div>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+             <p className="text-foreground/40 text-sm tracking-widest uppercase font-light leading-relaxed">
+               {t('afterSubmitNote')}
+             </p>
+
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-6">
-                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">WeChat ID</span>
+                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">{t('wechatLabel')}</span>
                   <p className="text-foreground font-serif text-2xl tracking-widest italic">{CONTACT.WECHAT}</p>
                 </div>
                 <div className="space-y-6">
-                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">WhatsApp</span>
-                  <a href={CONTACT.WHATSAPP} target="_blank" rel="noopener noreferrer" className="block text-foreground hover:opacity-50 text-xs tracking-[0.3em] font-extrabold transition-opacity underline decoration-black/10 underline-offset-8 uppercase">
-                    Launch Contact →
+                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">{t('whatsappLabel')}</span>
+                  <a href={CONTACT.WHATSAPP} target="_blank" rel="noopener noreferrer" className="block text-foreground hover:opacity-50 text-xs tracking-[0.3em] font-extrabold transition-opacity underline decoration-black/10 underline-offset-8 uppercase" aria-label={t('launchContact')}>
+                    {t('launchContact')} →
                   </a>
                 </div>
              </div>
@@ -114,48 +125,59 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <Header />
-      <main className="container mx-auto px-8 md:px-12 pt-40 pb-32 max-w-360">
+      <main className="container mx-auto px-6 md:px-10 pt-28 pb-20 max-w-360">
         <PageHeader 
           step="02 / Negotiation"
           title={t('title')}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 xl:gap-32">
-          {/* Form - Deep Minimalist */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-20">
           <div className="lg:col-span-7 reveal reveal-delay-1">
-            <form onSubmit={handleSubmit} className="space-y-20">
-               <div className="space-y-16">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <form onSubmit={handleSubmit} className="space-y-12">
+               <div className="space-y-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-4">
-                      <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('nameLabel')}</label>
+                      <label htmlFor="checkout-name" className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('nameLabel')}</label>
                       <input
+                        id="checkout-name"
                         type="text"
                         required
                         value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        onChange={(e) => { setForm({ ...form, name: e.target.value }); setFieldErrors((prev) => ({ ...prev, name: undefined })); }}
                         className="w-full bg-transparent border-b border-black/10 text-foreground placeholder-black/10 py-4 text-sm focus:outline-none focus:border-black transition-colors tracking-widest font-bold"
+                        aria-invalid={!!fieldErrors.name}
+                        aria-describedby={fieldErrors.name ? 'checkout-name-err' : undefined}
                       />
+                      {fieldErrors.name && <p id="checkout-name-err" className="text-sm text-red-600 font-medium" role="alert">{fieldErrors.name}</p>}
                     </div>
                     <div className="space-y-4">
-                      <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('contactLabel')}</label>
+                      <label htmlFor="checkout-contact" className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('contactLabel')}</label>
                       <input
+                        id="checkout-contact"
                         type="text"
                         required
                         value={form.contact}
-                        onChange={(e) => setForm({ ...form, contact: e.target.value })}
+                        onChange={(e) => { setForm({ ...form, contact: e.target.value }); setFieldErrors((prev) => ({ ...prev, contact: undefined })); }}
                         className="w-full bg-transparent border-b border-black/10 text-foreground placeholder-black/10 py-4 text-sm focus:outline-none focus:border-black transition-colors tracking-widest font-bold"
+                        aria-invalid={!!fieldErrors.contact}
+                        aria-describedby={fieldErrors.contact ? 'checkout-contact-err' : undefined}
                       />
+                      {fieldErrors.contact && <p id="checkout-contact-err" className="text-sm text-red-600 font-medium" role="alert">{fieldErrors.contact}</p>}
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('emailLabel')}</label>
+                    <label htmlFor="checkout-email" className="text-foreground/30 text-sm tracking-mega uppercase font-bold">{t('emailLabel')}</label>
                     <input
+                      id="checkout-email"
                       type="email"
                       value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      onChange={(e) => { setForm({ ...form, email: e.target.value }); setFieldErrors((prev) => ({ ...prev, email: undefined })); }}
                       className="w-full bg-transparent border-b border-black/10 text-foreground placeholder-black/10 py-4 text-sm focus:outline-none focus:border-black transition-colors tracking-widest"
+                      aria-invalid={!!fieldErrors.email}
+                      aria-describedby={fieldErrors.email ? 'checkout-email-err' : undefined}
                     />
+                    {fieldErrors.email && <p id="checkout-email-err" className="text-sm text-red-600 font-medium" role="alert">{fieldErrors.email}</p>}
                   </div>
 
                   <div className="space-y-4">
@@ -190,9 +212,9 @@ export default function CheckoutPage() {
           </div>
 
           {/* Side Summary - Architectural Layout */}
-          <div className="lg:col-span-5 border-l border-black/5 pl-20 hidden lg:block reveal reveal-delay-2">
+          <div className="lg:col-span-5 border-l border-black/5 pl-20 hidden lg:block reveal reveal-delay-2" aria-label={t('summaryLabel')}>
             <div className="space-y-20">
-               <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">List of Interests</span>
+               <span className="text-foreground/20 text-sm tracking-mega uppercase font-bold">{t('summaryLabel')}</span>
                <div className="space-y-12">
                   {items.map((item) => (
                     <div key={item.productId} className="flex justify-between items-end group">
@@ -206,7 +228,7 @@ export default function CheckoutPage() {
                </div>
                
                <div className="pt-16 border-t border-black/10 flex justify-between items-baseline">
-                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-black">Valuation</span>
+                  <span className="text-foreground/20 text-sm tracking-mega uppercase font-black">{t('valuationLabel')}</span>
                   <span className="text-5xl font-black tracking-tighter text-foreground">{formatPrice(getTotalPrice())}</span>
                </div>
             </div>

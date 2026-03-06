@@ -41,7 +41,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
         <span className="text-foreground/40">{product.name}</span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 xl:gap-32">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 xl:gap-20">
         <div className="lg:col-span-7 bg-neutral-50 flex items-center justify-center overflow-hidden animate-reveal">
           <div className="relative w-full aspect-3/4">
             <Image
@@ -56,7 +56,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
           </div>
         </div>
 
-        <div className="lg:col-span-5 flex flex-col justify-start space-y-16 animate-reveal" style={{ animationDelay: '0.2s' }}>
+        <div className="lg:col-span-5 flex flex-col justify-start space-y-10 animate-reveal" style={{ animationDelay: '0.2s' }}>
           <div className="space-y-8 pb-16 border-b border-black/5">
             {product.categoryName && (
               <p className="text-foreground/20 text-sm tracking-mega uppercase font-medium">{product.categoryName} Series</p>
@@ -77,7 +77,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             </div>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-10">
              <div className="space-y-6">
                 <span className="text-sm text-foreground/40 tracking-mega uppercase font-bold">{t('concept')}</span>
                 <p className="text-foreground/50 text-sm leading-relaxed font-light max-w-md">
