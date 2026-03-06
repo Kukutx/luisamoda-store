@@ -32,7 +32,20 @@ NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
 
 ---
 
-## 二、在 Firebase 控制台需要做的设置
+## 二、项目里已经帮您准备好的文件
+
+以下文件已经在项目根目录准备好，可直接用于发布规则：
+
+- `firestore.rules`
+- `storage.rules`
+- `firebase.json`
+- `.firebaserc`
+
+当前 `.firebaserc` 已指向您的 Firebase 项目：`luisa-moda`。
+
+---
+
+## 三、在 Firebase 控制台需要做的设置
 
 ### 1. 创建项目
 
@@ -68,63 +81,121 @@ NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
 
 首次通过本站「管理后台」添加商品/分类、或用户注册/下单时，Firestore 会自动创建这些集合。
 
-### 5. 配置 Firestore 安全规则（必做）
+### 5. 发布 Firestore 安全规则（必做）
 
-在 Firestore → **规则** 里，至少保证：
+项目里已经有适配本站逻辑的 `firestore.rules`，规则特点如下：
 
 - 未登录用户：可读 `products`、`categories`（前台展示）。
-- 已登录用户：可读/写自己的 `orders`、可读/写自己的 `users` 文档。
-- 仅 admin 可写 `products`、`categories`、可读所有 `orders`。
+- 游客：可创建 `anonymous` 询价订单（适合不注册直接提交询价）。
+- 已登录用户：可读取自己的订单，可读/改自己的用户资料，但不能把自己改成 admin。
+- 仅 admin 可写 `products`、`categories`、可读所有 `orders`、可管理所有 `users`。
 
-示例（需按您的 `projectId` 和 admin 逻辑调整）：
+发布方式二选一：
 
-```text
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /products { allow read: if true; allow write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'; }
-    match /categories { allow read: if true; allow write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'; }
-    match /orders {
-      allow read, write: if request.auth != null && (resource == null ? request.auth.uid == request.resource.data.userId : resource.data.userId == request.auth.uid || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
-    }
-    match /users/{userId} { allow read, write: if request.auth != null && request.auth.uid == userId; }
-  }
-}
+**方式 A：在 Firebase 控制台手动粘贴**
+
+1. 打开 **Firestore Database** → **规则**
+2. 把项目根目录里的 `firestore.rules` 内容全部复制进去
+3. 点击「发布」
+
+**方式 B：用项目命令直接发布**
+
+```bash
+npm run firebase:login
+npm run firebase:rules:deploy:firestore
 ```
 
-发布规则后，前台和管理端才能按预期读写。
+如果您想看规则内容，直接打开项目根目录的 `firestore.rules` 即可。
 
 ### 6. 启用 Storage（商品图片上传）
 
 1. 左侧 **Storage** → **开始使用**。
 2. 选择安全规则（测试模式或生产模式），选与 Firestore 相同或就近区域。
 
-**Storage 规则建议：**
+项目里已经有适配本站后台商品上传的 `storage.rules`，规则特点如下：
 
-- 仅已登录用户可上传；仅 admin 可删/覆盖；所有人可读（用于展示商品图）。  
-  具体规则可在 Storage → **规则** 中按需编写。
+- `products/**` 下图片：所有人可读
+- 只有 admin 可上传、覆盖、删除
+- 仅允许图片类型
+- 单文件大小限制 5MB
 
-本站上传商品图时会写入 `products/xxx` 之类路径，您只要保证该路径允许 admin 写、所有人可读即可。
+发布方式同样二选一：
+
+**方式 A：控制台粘贴**
+
+1. 打开 **Storage** → **规则**
+2. 把项目根目录里的 `storage.rules` 内容复制进去
+3. 点击「发布」
+
+**方式 B：项目命令**
+
+```bash
+npm run firebase:login
+npm run firebase:rules:deploy:storage
+```
 
 ---
 
-## 三、可选：第一个管理员账号
+## 四、第一个管理员账号怎么设
+
+这是当前项目最适合的方式，因为本站的管理员权限来自 `users/{uid}.role`：
 
 1. 在网站前台用 **注册** 功能注册一个账号（邮箱+密码）。
-2. 在 Firestore **users** 集合中，找到对应该用户 uid 的文档，增加字段：`role: 'admin'`。
-3. 该账号登录后即可访问 `/zh/admin`（或对应语言的 `/admin`）管理商品、分类、订单。
+2. 注册完成后，打开 **Firestore Database** → **数据**
+3. 进入 `users` 集合
+4. 找到刚注册用户的文档，文档 ID 就是该用户的 `uid`
+5. 编辑字段，把 `role` 从 `user` 改成 `admin`
+6. 保存后重新登录网站
+7. 现在该账号就可以访问 `/zh/admin`（或对应语言的 `/admin`）
+
+### 管理员文档建议长这样
+
+```json
+{
+  "email": "your-admin@example.com",
+  "displayName": "Luisa Admin",
+  "role": "admin"
+}
+```
+
+### 重要说明
+
+- 普通用户注册时，代码会自动创建 `users/{uid}`，并默认写入 `role: 'user'`
+- Firestore 规则已经阻止普通用户自行把 `role` 改成 `admin`
+- 所以首个管理员必须由您在 Firebase 控制台里手动改一次
 
 ---
 
-## 四、总结清单
+## 五、一键发布命令
+
+项目里已经补好了这些 npm 命令：
+
+```bash
+npm run firebase:login
+npm run firebase:rules:deploy
+npm run firebase:rules:deploy:firestore
+npm run firebase:rules:deploy:storage
+```
+
+首次使用时建议顺序：
+
+```bash
+npm run firebase:login
+npm run firebase:rules:deploy
+```
+
+---
+
+## 六、总结清单
 
 | 您需要做的 | 说明 |
 |------------|------|
 | 提供 6 个环境变量 | 从 Firebase 控制台「项目设置 → 常规 → 您的应用」复制到 `.env.local` |
 | 启用 邮箱/密码 登录 | Authentication → Sign-in method |
 | 创建 Firestore | Firestore Database → 创建数据库 |
-| 配置 Firestore 规则 | 保证公开读 products/categories，用户写自己的 orders/users，admin 可写商品/分类、可读订单 |
-| 启用并配置 Storage | Storage → 开始使用；规则允许上传与公开读图 |
+| 发布 Firestore 规则 | 已提供 `firestore.rules`，发布即可 |
+| 启用并发布 Storage 规则 | 已提供 `storage.rules`，发布即可 |
+| 手动设置第一个管理员 | 到 `users/{uid}` 把 `role` 改成 `admin` |
 
 **不需要提供给我：**  
 您只需在**自己电脑**的 `.env.local` 里填写上述 6 个变量，并在 Firebase 控制台完成上述设置。代码里已经按这些变量和集合结构写好，无需把 API Key 或私钥发给我。

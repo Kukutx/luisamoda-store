@@ -1,4 +1,4 @@
-import { type Metadata } from 'next';
+import { type Metadata, type Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations, getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -28,6 +28,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -43,7 +47,6 @@ export async function generateMetadata({
     description,
     metadataBase: new URL(canonical),
     manifest: '/manifest.json',
-    themeColor: '#ffffff',
     openGraph: {
       type: 'website',
       locale: locale === 'zh' ? 'zh_CN' : locale === 'it' ? 'it_IT' : 'en_US',

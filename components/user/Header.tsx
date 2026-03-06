@@ -27,22 +27,50 @@ export default function Header() {
   }, []);
 
   const isAdmin = userData?.role === 'admin';
-
   const languages = [
     { code: 'zh', name: '中' },
     { code: 'en', name: 'EN' },
     { code: 'it', name: 'IT' },
   ];
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        isScrolled 
-          ? 'bg-white/80 backdrop-blur-2xl border-b border-black/5 py-3' 
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
+    <>
+      <header 
+        className={`fixed top-0 left-0 right-0 ${isMobileMenuOpen ? 'z-80' : 'z-50'} transition-all duration-700 ${
+          isScrolled 
+            ? 'bg-white/80 backdrop-blur-2xl border-b border-black/5 py-3' 
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Logo - More spacing */}
         <Link href="/" className="group relative flex items-center">
           <span className="font-serif text-2xl tracking-ultra uppercase text-foreground transition-all duration-500 group-hover:tracking-mega">
@@ -165,6 +193,7 @@ export default function Header() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-label={isMobileMenuOpen ? t('menuClose') : t('menuOpen')}
+          aria-controls="mobile-navigation-panel"
         >
           <div className="w-6 flex flex-col gap-1.5 items-end" aria-hidden="true">
             <span className={`h-px bg-current transition-all ${isMobileMenuOpen ? 'w-6 translate-y-2 rotate-45' : 'w-6'}`} />
@@ -172,48 +201,99 @@ export default function Header() {
             <span className={`h-px bg-current transition-all ${isMobileMenuOpen ? 'w-6 -translate-y-2 -rotate-45' : 'w-5'}`} />
           </div>
         </button>
-      </div>
+        </div>
+      </header>
 
-      {/* Mobile Menu - Immersive Light */}
       {isMobileMenuOpen && (
-        <nav className="fixed inset-0 bg-white/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center gap-12 animate-fade-in" aria-label="Main">
-          <Link href={ROUTES.HOME} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal">
-            {t('index')}
-          </Link>
-          <a href={`${getPathname({ locale, href: ROUTES.HOME })}#products`} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.1s' }}>
-            {t('products')}
-          </a>
-          <Link href={ROUTES.SERVICES.SEWING} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.2s' }}>
-            {t('sewing')}
-          </Link>
-          <Link href={ROUTES.SERVICES.PRINT3D} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.3s' }}>
-            {t('print3d')}
-          </Link>
-          <Link href={ROUTES.CART} onClick={() => setIsMobileMenuOpen(false)} className="font-serif text-4xl tracking-widest text-foreground hover:opacity-50 transition-opacity reveal" style={{ animationDelay: '0.4s' }}>
-            {t('inquiry')}
-          </Link>
-          {/* Mobile Language Switcher */}
-          <div className="flex items-center gap-8 mt-4" role="group" aria-label="Language">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                type="button"
-                onClick={() => {
-                  router.replace(pathname as Parameters<ReturnType<typeof useRouter>['replace']>[0], { locale: lang.code });
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`text-sm tracking-ultra transition-all ${
-                  locale === lang.code ? 'text-foreground font-black underline underline-offset-8' : 'text-foreground/20'
-                }`}
-                aria-label={lang.code === 'zh' ? t('langZh') : lang.code === 'en' ? t('langEn') : t('langIt')}
-              >
-                {lang.name}
-              </button>
-            ))}
-          </div>
-          <div className="h-px w-8 bg-foreground/10 mt-8" aria-hidden="true" />
-        </nav>
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-60 bg-white/72 backdrop-blur-md md:hidden"
+            aria-label={t('menuClose')}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <nav
+            id="mobile-navigation-panel"
+            className="fixed inset-x-4 top-20 bottom-4 z-70 rounded-4xl border border-black/6 bg-white/95 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden overflow-y-auto overscroll-contain animate-fade-in"
+            aria-label="Main"
+          >
+            <div className="flex min-h-full flex-col">
+              <div className="flex-1 px-5 py-7">
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href={ROUTES.HOME}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group reveal rounded-2xl bg-black/2 px-5 py-4 text-foreground transition-opacity hover:opacity-60"
+                  >
+                    <span className="font-serif text-[1.7rem] tracking-[0.05em] leading-none">{t('index')}</span>
+                  </Link>
+                  <a
+                    href={`${getPathname({ locale, href: ROUTES.HOME })}#products`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group reveal rounded-2xl bg-black/2 px-5 py-4 text-foreground transition-opacity hover:opacity-60"
+                    style={{ animationDelay: '0.05s' }}
+                  >
+                    <span className="font-serif text-[1.7rem] tracking-[0.05em] leading-none">{t('products')}</span>
+                  </a>
+                  <Link
+                    href={ROUTES.SERVICES.SEWING}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group reveal rounded-2xl bg-black/2 px-5 py-4 text-foreground transition-opacity hover:opacity-60"
+                    style={{ animationDelay: '0.1s' }}
+                  >
+                    <span className="font-serif text-[1.7rem] tracking-[0.05em] leading-none">{t('sewing')}</span>
+                  </Link>
+                  <Link
+                    href={ROUTES.SERVICES.PRINT3D}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group reveal rounded-2xl bg-black/2 px-5 py-4 text-foreground transition-opacity hover:opacity-60"
+                    style={{ animationDelay: '0.15s' }}
+                  >
+                    <span className="font-serif text-[1.7rem] tracking-[0.05em] leading-none">{t('print3d')}</span>
+                  </Link>
+                  <Link
+                    href={ROUTES.CART}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group reveal rounded-2xl bg-black/2 px-5 py-4 text-foreground transition-opacity hover:opacity-60"
+                    style={{ animationDelay: '0.2s' }}
+                  >
+                    <span className="font-serif text-[1.7rem] tracking-[0.05em] leading-none">{t('inquiry')}</span>
+                    {items.length > 0 && (
+                      <span className="ml-3 inline-flex min-w-7 h-7 items-center justify-center rounded-full bg-foreground px-2 text-xs font-bold text-background">
+                        {items.length}
+                      </span>
+                    )}
+                  </Link>
+                </div>
+              </div>
+
+              <div className="px-6 pb-7 pt-3 border-t border-black/5">
+                <p className="mb-4 text-[11px] tracking-[0.35em] uppercase text-foreground/25">Language</p>
+                <div className="flex items-center gap-3" role="group" aria-label="Language">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      type="button"
+                      onClick={() => {
+                        router.replace(pathname as Parameters<ReturnType<typeof useRouter>['replace']>[0], { locale: lang.code });
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`inline-flex min-w-12 items-center justify-center rounded-full border px-4 py-2 text-sm tracking-widest transition-all ${
+                        locale === lang.code
+                          ? 'border-foreground bg-foreground text-background'
+                          : 'border-black/10 text-foreground/50 hover:border-black/20 hover:text-foreground'
+                      }`}
+                      aria-label={lang.code === 'zh' ? t('langZh') : lang.code === 'en' ? t('langEn') : t('langIt')}
+                    >
+                      {lang.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </nav>
+        </>
       )}
-    </header>
+    </>
   );
 }
