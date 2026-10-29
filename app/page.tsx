@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { LZMonogram } from '@/components/lz-monogram';
 import { site } from '@/lib/site';
 
 // Preserve the existing monochrome editorial layout; the brand is now LZ FORTUNA.
 const t = {
     home: 'HOME', services: 'SERVIZI', stores: 'NEGOZI', contact: 'CONTATTI',
-    heroDescription: 'SARTORIA E SERVIZI PER IL TUO STILE',
     heroDetail: 'COLOGNO MONZESE · CALUSCO',
     discover: 'SCOPRI', scroll: 'SCORRI',
     servicesTitle: 'I NOSTRI SERVIZI', servicesCaption: 'VOL. 01',
@@ -58,11 +56,15 @@ export default function HomePage() {
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 py-4 backdrop-blur-2xl">
         <div className="container mx-auto flex items-center justify-between gap-4 px-6 md:px-10">
-          <a href="#top" className="group flex shrink-0 items-center gap-2.5" aria-label="LZ FORTUNA - Home">
-            <LZMonogram className="h-9 w-10 shrink-0 transition-opacity group-hover:opacity-65" />
-            <span className="font-serif text-xl tracking-[0.11em] uppercase text-foreground transition-opacity group-hover:opacity-65 sm:text-2xl">
-              LZ <span className="font-light italic">FORTUNA</span>
-            </span>
+          <a href="#top" className="group flex shrink-0 items-center" aria-label="LZ FORTUNA - Home">
+            <Image
+              src="/brand/lz-wordmark.png"
+              alt="LZ FORTUNA"
+              width={781}
+              height={98}
+              priority
+              className="h-auto w-[min(19rem,calc(100vw-7rem))] object-contain transition-opacity group-hover:opacity-65"
+            />
           </a>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation">
             {nav.map((item) => (
@@ -91,12 +93,16 @@ export default function HomePage() {
             <div className="absolute -top-1/4 h-[80vw] w-[80vw] rounded-full border border-black/3" />
           </div>
           <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-7">
-            <h1 className="font-serif text-[clamp(2.8rem,8vw,6rem)] font-light leading-none tracking-[0.12em] text-foreground sm:tracking-[0.18em]">
-              <span className="block md:inline">LZ</span>{' '}
-              <span className="block font-light italic md:inline">FORTUNA</span>
+            <h1>
+              <Image
+                src="/brand/lz-lockup.png"
+                alt="LZ FORTUNA — Sartoria e servizi per il tuo stile"
+                width={781}
+                height={153}
+                priority
+                className="mx-auto h-auto w-[min(48rem,86vw)]"
+              />
             </h1>
-            <div className="mx-auto h-px w-24 bg-foreground/15" />
-            <p className="max-w-lg text-sm font-light uppercase leading-relaxed tracking-[0.35em] text-foreground/55">{t.heroDescription}</p>
             <p className="max-w-xl text-xs font-light uppercase leading-7 tracking-[0.22em] text-foreground/50">{t.heroDetail}</p>
             <a href="#services" className="group bg-foreground px-12 py-4 text-sm font-extrabold uppercase tracking-[0.35em] text-background transition-opacity hover:opacity-80">
               {t.discover}
@@ -170,10 +176,13 @@ export default function HomePage() {
       <footer className="border-t border-black/5 bg-neutral-50/30 py-16 md:py-20">
         <div className="container mx-auto flex flex-col justify-between gap-10 px-6 md:flex-row md:px-10">
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <LZMonogram className="h-10 w-11" />
-              <p className="font-serif text-2xl uppercase tracking-[0.18em]">LZ <span className="italic">FORTUNA</span></p>
-            </div>
+            <Image
+              src="/brand/lz-wordmark.png"
+              alt="LZ FORTUNA"
+              width={781}
+              height={98}
+              className="h-auto w-60"
+            />
             <p className="text-sm uppercase tracking-[0.18em] text-foreground/55">{t.footerDesc}</p>
             <p className="text-sm tracking-widest text-foreground/50">LZFortuna-store · Cologno Monzese / Luisa Moda · Calusco</p>
           </div>

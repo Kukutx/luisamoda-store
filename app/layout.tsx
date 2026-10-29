@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     locale: 'it_IT',
     type: 'website',
   },
-  icons: { icon: '/icon.svg' },
+  icons: { icon: '/brand/icon.png' },
   robots: { index: true, follow: true },
 };
 

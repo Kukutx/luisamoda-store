@@ -2,7 +2,7 @@
 
 意大利本地裁缝/改衣服务介绍网站。**保留 Next.js + React + TypeScript + Tailwind CSS**，以静态方式构建，没有购物车、订单、会员、管理后台或数据库。
 
-品牌主名称采用 **LZ FORTUNA**。页面沿用原有黑白极简设计，新标志由 `components/lz-monogram.tsx`（页面上的 LZ 图形）、`app/icon.svg`（浏览器图标）和 `public/lz-fortuna-logo.svg`（可独立使用的 SVG 横版 Logo）组成。**Luisa Moda** 仅保留为 Calusco 老店的实际门店名称。
+品牌主名称采用 **LZ FORTUNA**。页面使用从确认的原始 Logo 参考图直接提取的 PNG 素材，而不是用字体或自绘 SVG 模仿：`public/brand/lz-wordmark.png`（字标）、`public/brand/lz-lockup.png`（完整标志）、`public/brand/icon.png`（浏览器图标）。原始素材是图片，**不是矢量文件**；放大至任意尺寸可能不如原生矢量清晰。**Luisa Moda** 仅保留为 Calusco 老店的实际门店名称。
 
 ## 两家门店
 

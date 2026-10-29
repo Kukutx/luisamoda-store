@@ -43,25 +43,26 @@ test('old language and service URLs redirect to Italian static content', () => {
 test('LZ FORTUNA brand uses the original monochrome editorial visual style', () => {
   const page = read('app/page.tsx');
   const css = read('app/globals.css');
-  assert.ok(page.includes('<LZMonogram'), 'The page must display the LZ mark');
+  assert.ok(page.includes('/brand/lz-wordmark.png'), 'Header must use the approved original wordmark image');
   const hero = page.split('{/* Original centred editorial composition, updated to the LZ identity. */}')[1]?.split('{/* Retain the original photographic cards and editorial proportions. */}')[0] ?? '';
   assert.ok(hero.includes('<h1'), 'The hero wordmark must remain');
-  assert.doesNotMatch(hero, /<LZMonogram/, 'The hero must not repeat the header monogram');
-  assert.ok(page.includes('FORTUNA</span>'), 'LZ FORTUNA wordmark must be visible');
+  assert.ok(hero.includes('/brand/lz-lockup.png'), 'Hero must use the approved original lockup');
+  assert.doesNotMatch(hero, /<LZMonogram/, 'The hero must not repeat a separate monogram');
   assert.doesNotMatch(page, /LUISA <span|aria-label="Luisa Moda"/);
   assert.ok(page.includes('photo-1558171813-4c088753af8f'), 'Original sewing image must remain');
   assert.ok(css.includes('--color-foreground: #050505'), 'Original monochrome palette must remain');
   assert.doesNotMatch(page, /hero-art|art-script/, 'Do not replace the hero with a new decorative brand card');
 });
 
-test('LZ monogram and scalable logo exist, with no old brand mark', () => {
-  const icon = read('app/icon.svg');
-  const logo = read('public/lz-fortuna-logo.svg');
-  const mark = read('components/lz-monogram.tsx');
-  assert.match(icon, /<svg/);
-  assert.match(mark, /<svg/);
-  assert.match(logo, /LZ FORTUNA/);
-  assert.doesNotMatch(icon, /#1c4b3c|#e9b99e/);
+test('approved original logo image assets are installed, no substitute vector', () => {
+  for (const file of ['lz-wordmark.png', 'lz-lockup.png', 'lz-monogram.png', 'icon.png']) {
+    const url = new URL('../public/brand/' + file, import.meta.url);
+    assert.ok(existsSync(url), 'Approved original asset is missing: ' + file);
+    assert.ok(readFileSync(url).subarray(0, 8).equals(Buffer.from('89504e470d0a1a0a', 'hex')));
+  }
+  assert.ok(!existsSync(new URL('../app/icon.svg', import.meta.url)));
+  assert.ok(!existsSync(new URL('../public/lz-fortuna-logo.svg', import.meta.url)));
+  assert.match(read('app/layout.tsx'), /icons: \{ icon: '\/brand\/icon\.png' \}/);
   assert.ok(read('lib/site.ts').includes("name: 'LZ FORTUNA'"));
   assert.ok(read('app/layout.tsx').includes("const title = 'LZ FORTUNA"));
 });
