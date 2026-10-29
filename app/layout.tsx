@@ -14,9 +14,9 @@ const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
 });
 
-const title = 'LZFortuna-store e Luisa Moda | Sartoria e riparazioni';
+const title = 'LZ FORTUNA | Sartoria e servizi locali';
 const description =
-  'Servizi di sartoria, riparazioni e modifiche a Cologno Monzese e Calusco. Contatta LZFortuna-store su WhatsApp o per telefono.';
+  'LZ FORTUNA: sartoria, riparazioni, modifiche e servizi locali a Cologno Monzese e Calusco. Contattaci su WhatsApp o per telefono.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     locale: 'it_IT',
     type: 'website',
   },
+  icons: { icon: '/icon.svg' },
   robots: { index: true, follow: true },
 };
 

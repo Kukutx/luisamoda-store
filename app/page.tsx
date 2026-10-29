@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { LZMonogram } from '@/components/lz-monogram';
 import { site } from '@/lib/site';
 
-// Only copy and shop information changes. The composition, typography, imagery,
-// and monochrome styling follow the original 8d3fbcb storefront.
+// Preserve the existing monochrome editorial layout; the brand is now LZ FORTUNA.
 const t = {
     home: 'HOME', services: 'SERVIZI', stores: 'NEGOZI', contact: 'CONTATTI',
-    year: '2026', heroDescription: 'MINIMAL · PRATICO · VICINO A TE',
-    heroDetail: 'SARTORIA E SERVIZI LOCALI · COLOGNO MONZESE · CALUSCO',
+    heroDescription: 'SARTORIA E SERVIZI PER IL TUO STILE',
+    heroDetail: 'COLOGNO MONZESE · CALUSCO',
     discover: 'SCOPRI', scroll: 'SCORRI',
     servicesTitle: 'I NOSTRI SERVIZI', servicesCaption: 'VOL. 01',
     products: 'PRODOTTI', productsDesc: 'ARTICOLI E PICCOLE NECESSITÀ, CHIEDICI INFORMAZIONI.',
@@ -58,9 +58,10 @@ export default function HomePage() {
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 py-4 backdrop-blur-2xl">
         <div className="container mx-auto flex items-center justify-between gap-4 px-6 md:px-10">
-          <a href="#top" className="group flex shrink-0 items-center" aria-label="Luisa Moda">
-            <span className="font-serif text-2xl tracking-[0.24em] uppercase text-foreground transition-opacity hover:opacity-60">
-              Luisa <span className="font-light italic opacity-40">Moda</span>
+          <a href="#top" className="group flex shrink-0 items-center gap-2.5" aria-label="LZ FORTUNA - Home">
+            <LZMonogram className="h-9 w-10 shrink-0 transition-opacity group-hover:opacity-65" />
+            <span className="font-serif text-xl tracking-[0.11em] uppercase text-foreground transition-opacity group-hover:opacity-65 sm:text-2xl">
+              LZ <span className="font-light italic">FORTUNA</span>
             </span>
           </a>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation">
@@ -82,7 +83,7 @@ export default function HomePage() {
       </header>
 
       <main id="top">
-        {/* Preserve the original centred LUISA / year hero and monochrome motifs. */}
+        {/* Original centred editorial composition, updated to the LZ identity. */}
         <section className="relative flex min-h-[72vh] items-center justify-center overflow-hidden px-6 pb-24 pt-40 text-center">
           <div className="pointer-events-none absolute inset-0 bg-radial-[circle_at_50%_0%] from-black/2 to-transparent to-50%" />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10">
@@ -90,8 +91,10 @@ export default function HomePage() {
             <div className="absolute -top-1/4 h-[80vw] w-[80vw] rounded-full border border-black/3" />
           </div>
           <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-7">
-            <h1 className="font-serif text-6xl font-light leading-none tracking-widest text-foreground md:text-8xl">
-              LUISA <span className="font-light italic opacity-10">{t.year}</span>
+            <LZMonogram className="h-16 w-[4.5rem] text-foreground" />
+            <h1 className="font-serif text-[clamp(2.8rem,8vw,6rem)] font-light leading-none tracking-[0.12em] text-foreground sm:tracking-[0.18em]">
+              <span className="block md:inline">LZ</span>{' '}
+              <span className="block font-light italic md:inline">FORTUNA</span>
             </h1>
             <div className="mx-auto h-px w-24 bg-foreground/15" />
             <p className="max-w-lg text-sm font-light uppercase leading-relaxed tracking-[0.35em] text-foreground/55">{t.heroDescription}</p>
@@ -106,7 +109,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Same three photographic tiles and editorial card proportions as the original. */}
+        {/* Retain the original photographic cards and editorial proportions. */}
         <section id="services" className="container mx-auto scroll-mt-20 border-t border-black/5 px-6 py-14 md:px-10 md:py-20">
           <div className="mb-10">
             <span className="text-xs uppercase tracking-[0.4em] text-foreground/40">{t.servicesCaption}</span>
@@ -168,7 +171,10 @@ export default function HomePage() {
       <footer className="border-t border-black/5 bg-neutral-50/30 py-16 md:py-20">
         <div className="container mx-auto flex flex-col justify-between gap-10 px-6 md:flex-row md:px-10">
           <div className="space-y-4">
-            <p className="font-serif text-2xl uppercase tracking-[0.3em]">Luisa Moda</p>
+            <div className="flex items-center gap-2">
+              <LZMonogram className="h-10 w-11" />
+              <p className="font-serif text-2xl uppercase tracking-[0.18em]">LZ <span className="italic">FORTUNA</span></p>
+            </div>
             <p className="text-sm uppercase tracking-[0.18em] text-foreground/55">{t.footerDesc}</p>
             <p className="text-sm tracking-widest text-foreground/50">LZFortuna-store · Cologno Monzese / Luisa Moda · Calusco</p>
           </div>
