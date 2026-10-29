@@ -54,7 +54,7 @@ test('LZ FORTUNA brand uses the original monochrome editorial visual style', () 
   assert.ok(hero.includes('/brand/lz-lockup.png'), 'Hero must use the approved original lockup');
   assert.doesNotMatch(hero, /<LZMonogram/, 'The hero must not repeat a separate monogram');
   assert.doesNotMatch(page, /LUISA <span|aria-label="Luisa Moda"/);
-  assert.ok(page.includes('photo-1558171813-4c088753af8f'), 'Original sewing image must remain');
+  assert.ok(page.includes('/images/sartoria.jpg'), 'Original sewing image must remain');
   assert.ok(css.includes('--color-foreground: #050505'), 'Original monochrome palette must remain');
   assert.doesNotMatch(page, /hero-art|art-script/, 'Do not replace the hero with a new decorative brand card');
 });
@@ -78,12 +78,11 @@ test('only goods and tailoring service cards remain', () => {
   assert.match(page, /sewing: 'CUCITO E MODIFICHE'/);
   assert.doesNotMatch(page, /STAMPA 3D|INCISIONE|print3d|photo-1612815154858-60aa4c59eaa6/);
   assert.match(page, /md:grid-cols-2 md:gap-10/);
-  assert.match(page, /href: '\/sartoria\/'/);
-  assert.match(page, /href: '\/prodotti\/'/);
-  assert.match(page, /\/images\/emporio-illustrativo\.jpg/);
-  assert.match(page, /Foto illustrativa/);
+  assert.match(page, /href="\/sartoria\/"/);
+  assert.match(page, /href="\/prodotti\/"/);
+  assert.match(page, /merchandiseCategories\.map/);
+  assert.doesNotMatch(page, /emporio-illustrativo|Foto illustrativa/);
   assert.match(page, /WHATSAPP ↗/);
-  assert.match(page, /Da oltre vent’anni il nostro negozio storico/);
   const exported = read('out/index.html');
   assert.ok(exported.includes('PRODOTTI PER TUTTI I GIORNI') && exported.includes('CUCITO E MODIFICHE'));
   assert.ok(!exported.includes('STAMPA 3D') && !exported.includes('INCISIONE'));
@@ -101,19 +100,30 @@ test('assortment page describes all advertised goods, without prices or checkout
     assert.ok(data.includes(category), 'Missing product group: ' + category);
     assert.ok(html.includes(category), 'Missing page category: ' + category);
   }
-  assert.ok(html.includes('oltre vent’anni'));
+  assert.ok(html.includes('L’assortimento cambia nel tempo'));
   assert.ok(html.includes('https://wa.me/393668927486'));
   assert.doesNotMatch(html, /€\s*\d|checkout|Acquista ora/);
 });
 
-test('homepage image and sewing WhatsApp have independent links', () => {
+test('homepage service areas use truthful categories with no photo overlays', () => {
   const html = read('out/index.html');
   assert.ok(html.includes('href="/prodotti/"'));
   assert.ok(html.includes('href="/sartoria/"'));
-  assert.ok(html.includes('Foto illustrativa'));
-  assert.match(read('app/page.tsx'), /absolute bottom-4 left-4 inline-flex min-h-12 items-center justify-center bg-black/);
+  const page = read('app/page.tsx');
+  const cards = page.split('<article className="flex flex-col overflow-hidden border border-black/10">');
+  assert.equal(cards.length, 3, 'Exactly two separately authored service cards expected');
+  const products = cards[1].split('</article>')[0];
+  const sewing = cards[2].split('</article>')[0];
+  assert.match(products, /merchandiseCategories\.map/, 'Display the actual assortment in the first card');
+  assert.doesNotMatch(products, /<Image|emporio-illustrativo|Foto illustrativa/, 'Do not invent a store photograph');
+  assert.match(sewing, /src=\{sewingImage\}/, 'Keep the original tailoring image');
+  assert.ok(existsSync(new URL('../public/images/sartoria.jpg', import.meta.url)), 'Serve the tailoring photo locally');
+  const belowPhoto = sewing.split('className="flex flex-1 flex-col border-t border-black/10')[1] ?? '';
+  assert.match(belowPhoto, /href=\{site\.whatsapp\}/, 'Place WhatsApp below the photo');
+  assert.match(belowPhoto, /bg-black/, 'Keep the WhatsApp button black');
+  assert.doesNotMatch(sewing.split('className="flex flex-1 flex-col border-t border-black/10')[0], /WHATSAPP|bg-black/, 'No controls on photos');
   assert.ok(html.includes('https://wa.me/393668927486'));
-  assert.ok(existsSync(new URL('../public/images/emporio-illustrativo.jpg', import.meta.url)));
+  assert.ok(!existsSync(new URL('../public/images/emporio-illustrativo.jpg', import.meta.url)));
 });
 
 test('static Next.js export contains both stores without the old number', () => {

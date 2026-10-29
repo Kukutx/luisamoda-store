@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { site } from '@/lib/site';
+import { merchandiseCategories } from '@/lib/merchandise';
 
 // Preserve the existing monochrome editorial layout; the brand is now LZ FORTUNA.
 const t = {
@@ -11,7 +12,7 @@ const t = {
     discover: 'SCOPRI', scroll: 'SCORRI',
     servicesTitle: 'I NOSTRI SERVIZI', servicesCaption: 'VOL. 01',
     products: 'PRODOTTI PER TUTTI I GIORNI',
-    productsDesc: 'Abbigliamento, articoli per la casa, cucina, scuola, cosmetici, giocattoli e molto altro.',
+    productsDesc: 'Abbigliamento, mobili, articoli per la casa e la cucina, scuola, cosmetici, giocattoli e molto altro.',
     sewing: 'CUCITO E MODIFICHE',
     sewingDesc: 'Orli, riparazioni e modifiche sartoriali. Consulta il listino e chiedici informazioni.',
     inquire: 'CHIEDI INFO',
@@ -26,10 +27,7 @@ const t = {
 };
 
 
-const images = {
-  products: '/images/emporio-illustrativo.jpg',
-  sewing: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?auto=format&fit=crop&q=80&w=800',
-} as const;
+const sewingImage = '/images/sartoria.jpg';
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,11 +47,6 @@ export default function HomePage() {
     { href: '#stores', label: t.stores },
     { href: '#contact', label: t.contact },
   ];
-  const serviceCards = [
-    { key: 'products', title: t.products, description: t.productsDesc, image: images.products, href: '/prodotti/', action: 'SCOPRI LE CATEGORIE' },
-    { key: 'sewing', title: t.sewing, description: t.sewingDesc, image: images.sewing, href: '/sartoria/', action: 'VEDI IL LISTINO' },
-  ];
-
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 py-4 backdrop-blur-2xl">
@@ -116,51 +109,70 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Retain the original photographic cards and editorial proportions. */}
-        <section id="services" className="container mx-auto scroll-mt-20 border-t border-black/5 px-6 py-14 md:px-10 md:py-20">
+        {/* Services: a truthful category-led emporio panel and an uncluttered tailoring photo. */}
+        <section id="services" className="container mx-auto scroll-mt-28 border-t border-black/5 px-6 py-14 md:px-10 md:py-20">
           <div className="mb-10">
             <span className="text-xs uppercase tracking-[0.4em] text-foreground/40">{t.servicesCaption}</span>
             <h2 className="mt-3 font-serif text-4xl italic uppercase tracking-[0.16em] md:text-5xl">{t.servicesTitle}</h2>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
-            {serviceCards.map((item) => (
-              <article key={item.key} className="group overflow-hidden border border-black/10 transition-colors hover:border-black/30">
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
-                  <a href={item.href} className="absolute inset-0" aria-label={`Scopri: ${item.title}`}>
-                    <Image src={item.image}
-                      alt={item.key === 'products' ? 'Articoli per la casa e accessori in un emporio, immagine illustrativa' : 'Lavoro di cucito e modifiche sartoriali'}
-                      fill unoptimized sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+          <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10">
+            <article className="flex flex-col overflow-hidden border border-black/10">
+              <div className="flex min-h-[21rem] flex-1 flex-col justify-center bg-neutral-50 px-6 py-8 sm:px-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/65">EMPORIO DI QUARTIERE</p>
+                <p className="mb-5 mt-3 font-serif text-3xl italic leading-tight sm:text-4xl">Un po’ di tutto, per tutti i giorni.</p>
+                <ul className="grid grid-cols-2 gap-x-4 gap-y-0" aria-label="Categorie di prodotti">
+                  {merchandiseCategories.map((category) => (
+                    <li key={category.title} className="border-t border-black/15 py-2.5 text-[0.92rem] leading-5 text-foreground/85 sm:text-[1.05rem]">
+                      {category.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border-t border-black/10 p-5 text-left md:p-7">
+                <h3 className="mb-3 font-serif text-2xl italic uppercase tracking-[0.04em]">{t.products}</h3>
+                <p className="mb-5 text-base leading-7 text-foreground/80">{t.productsDesc}</p>
+                <a href="/prodotti/" className="inline-flex min-h-12 items-center text-sm font-bold uppercase tracking-[0.13em] hover:underline">
+                  SCOPRI LE CATEGORIE →
+                </a>
+              </div>
+            </article>
+
+            <article className="flex flex-col overflow-hidden border border-black/10">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
+                <Image
+                  src={sewingImage}
+                  alt="Lavori di cucito e modifiche di abbigliamento"
+                  fill
+                  unoptimized
+                  loading="eager"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-1 flex-col border-t border-black/10 p-5 text-left md:p-7">
+                <h3 className="mb-3 font-serif text-2xl italic uppercase tracking-[0.04em]">{t.sewing}</h3>
+                <p className="mb-5 text-base leading-7 text-foreground/80">{t.sewingDesc}</p>
+                <div className="mt-auto flex flex-wrap items-center gap-4">
+                  <a href="/sartoria/" className="inline-flex min-h-12 items-center text-sm font-bold uppercase tracking-[0.13em] hover:underline">
+                    VEDI IL LISTINO →
                   </a>
-                  {item.key === 'products' ? (
-                    <span className="pointer-events-none absolute bottom-3 right-3 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-black/75">
-                      Foto illustrativa
-                    </span>
-                  ) : (
-                    <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
-                      className="absolute bottom-4 left-4 inline-flex min-h-12 items-center justify-center bg-black px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-lg transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
-                      WHATSAPP ↗
-                    </a>
-                  )}
+                  <a
+                    href={site.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-12 items-center justify-center bg-black px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    WHATSAPP ↗
+                  </a>
                 </div>
-                <div className="p-5 text-center md:p-6 md:text-left">
-                  <h3 className="mb-3 font-serif text-xl italic uppercase tracking-[0.08em] md:text-2xl">{item.title}</h3>
-                  <p className="mb-5 text-base leading-7 text-foreground/80">{item.description}</p>
-                  <a href={item.href} className="inline-flex min-h-11 items-center text-sm font-bold uppercase tracking-[0.13em] text-foreground/85 hover:underline">{item.action} →</a>
-                </div>
-              </article>
-            ))}
+              </div>
+            </article>
           </div>
         </section>
 
         <section id="stores" className="container mx-auto scroll-mt-20 border-t border-black/5 px-6 py-16 md:px-10 md:py-24">
           <span className="text-xs uppercase tracking-[0.4em] text-foreground/40">{t.storesCaption}</span>
           <h2 className="mb-12 mt-3 font-serif text-4xl italic uppercase tracking-[0.16em] md:text-5xl">{t.storesTitle}</h2>
-          <p className="mb-10 max-w-3xl text-lg leading-8 text-foreground/75">
-            Da oltre vent’anni il nostro negozio storico è al servizio della comunità.
-            Oggi questa esperienza continua, tra articoli per la vita quotidiana e servizi
-            di sartoria, con la stessa attenzione alle persone.
-          </p>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {site.stores.map((store) => (
               <article key={store.id} className="border border-black/10 p-7 md:p-10">

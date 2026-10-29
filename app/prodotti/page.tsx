@@ -36,10 +36,6 @@ export default function ProdottiPage() {
             Dall’abbigliamento agli articoli per la casa, dalla scuola alla cucina:
             un assortimento di prodotti utili, accessori e piccole scoperte per tutta la famiglia.
           </p>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-foreground/70">
-            Il nostro negozio storico accompagna la comunità da oltre vent’anni.
-            Continuiamo ad accoglierti con semplicità, attenzione e un servizio di vicinato.
-          </p>
         </section>
 
         <section className="container mx-auto px-6 py-14 md:px-10 md:py-20" aria-labelledby="categorie-heading">
