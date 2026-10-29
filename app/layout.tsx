@@ -14,17 +14,30 @@ const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
 });
 
+const title = 'LZFortuna-store e Luisa Moda | Sartoria e riparazioni';
+const description =
+  'Servizi di sartoria, riparazioni e modifiche a Cologno Monzese e Calusco. Contatta LZFortuna-store su WhatsApp o per telefono.';
+
 export const metadata: Metadata = {
-  title: 'LZFortuna-store e Luisa Moda | Sartoria e riparazioni',
-  description:
-    'Servizi di sartoria, riparazioni e modifiche a Cologno Monzese e Calusco. Contatta LZFortuna-store su WhatsApp o per telefono.',
+  metadataBase: new URL(site.url),
+  title,
+  description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title,
+    description,
+    url: site.url,
+    siteName: site.name,
+    locale: 'it_IT',
+    type: 'website',
+  },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#1c4b3c',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -36,7 +49,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       '@type': 'ContactPoint',
       telephone: site.phone,
       contactType: 'customer service',
-      availableLanguage: ['Italian', 'Chinese', 'English'],
+      availableLanguage: ['Italian'],
     },
     subOrganization: site.stores.map((store) => ({
       '@type': 'LocalBusiness',

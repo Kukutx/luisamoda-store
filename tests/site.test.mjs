@@ -20,10 +20,23 @@ test('both shops and their opening times are maintained together', () => {
   assert.equal((config.match(/09:00–19:30/g) || []).length, 2);
 });
 
-test('Italian, Chinese and English are available', () => {
+test('Italian is the only public UI language', () => {
   const page = read('app/page.tsx');
-  for (const locale of ['it:', 'zh:', 'en:']) {
-    assert.ok(page.includes(locale), 'Missing translation ' + locale);
+  assert.ok(page.includes("home: 'HOME'"));
+  assert.ok(page.includes("services: 'SERVIZI'"));
+  assert.doesNotMatch(page, /setLocale|changeLocale|langZh|langEn|langIt/);
+  assert.ok(read('app/layout.tsx').includes('<html lang="it"'));
+});
+
+test('old language and service URLs redirect to Italian static content', () => {
+  const { hosting } = JSON.parse(read('firebase.json'));
+  assert.equal(hosting.public, 'out');
+  for (const route of ['/zh', '/en', '/it']) {
+    assert.ok(hosting.redirects.some(({ source, destination }) => source === route && destination === '/'));
+    assert.ok(hosting.redirects.some(({ source, destination }) => source === route + '/**' && destination === '/'));
+  }
+  for (const route of ['/services/sewing', '/services/3d']) {
+    assert.ok(hosting.redirects.some(({ source, destination }) => source === route && destination === '/#services'));
   }
 });
 
@@ -43,4 +56,12 @@ test('static Next.js export contains both stores without the old number', () => 
     assert.ok(html.includes(name), 'Missing in exported HTML: ' + name);
   }
   assert.ok(html.includes('https://wa.me/393668927486'));
+});
+
+test('static HTML has Italian locale and a canonical public URL', () => {
+  const html = read('out/index.html');
+  assert.match(html, /<html lang="it"/);
+  assert.ok(html.includes('https://lzfortuna-store-cologno.web.app/'));
+  assert.ok(html.includes('og:locale'));
+  assert.ok(html.includes('it_IT'));
 });

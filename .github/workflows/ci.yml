@@ -16,9 +16,10 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - run: npm run audit
       - run: npm run lint
-      - run: npm run typecheck
       - run: npm run build
+      - run: npm run typecheck
       - run: npm test
       - name: Check exported static site
         run: test -f out/index.html

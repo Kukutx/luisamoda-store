@@ -4,12 +4,9 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { site } from '@/lib/site';
 
-type Locale = 'it' | 'zh' | 'en';
-
 // Only copy and shop information changes. The composition, typography, imagery,
 // and monochrome styling follow the original 8d3fbcb storefront.
-const messages = {
-  it: {
+const t = {
     home: 'HOME', services: 'SERVIZI', stores: 'NEGOZI', contact: 'CONTATTI',
     year: '2026', heroDescription: 'MINIMAL · PRATICO · VICINO A TE',
     heroDetail: 'SARTORIA E SERVIZI LOCALI · COLOGNO MONZESE · CALUSCO',
@@ -27,46 +24,8 @@ const messages = {
     contactDesc: 'SCRIVICI SU WHATSAPP O CHIAMACI DIRETTAMENTE. NESSUNA REGISTRAZIONE, NESSUN ORDINE ONLINE.',
     whats: 'WHATSAPP', call: 'CHIAMA',
     footerDesc: 'CUCITO · RIPARAZIONI · SERVIZI LOCALI',
-  },
-  zh: {
-    home: '首页', services: '服务', stores: '门店', contact: '联系',
-    year: '2026', heroDescription: '简约 · 实用 · 就在您身边',
-    heroDetail: '本地裁缝与便民服务 · COLOGNO MONZESE · CALUSCO',
-    discover: '了解服务', scroll: '向下浏览',
-    servicesTitle: '我们的服务', servicesCaption: '第 01 部分',
-    products: '日用百货', productsDesc: '日常用品，可直接联系我们咨询。',
-    sewing: '缝纫与改衣', sewingDesc: '改裤脚、修补衣服与其他裁缝服务，欢迎到店咨询。',
-    print3d: '3D 打印与雕刻', print3dDesc: '告诉我们您的想法，直接联系咨询。',
-    inquire: '联系咨询',
-    storesTitle: '我们的门店', storesCaption: '第 02 部分',
-    oldStore: '老店', newStore: '新店',
-    hours: '营业时间', addressPending: '具体地址请联系我们',
-    storesNote: '两家门店的咨询及预约均请联系新店 LZFortuna-store。',
-    contactTitle: '直接联系我们', contactCaption: '第 03 部分',
-    contactDesc: '通过 WhatsApp 或电话联系我们，无需注册或网上下单。',
-    whats: 'WHATSAPP 联系', call: '拨打电话',
-    footerDesc: '缝纫 · 改衣 · 本地服务',
-  },
-  en: {
-    home: 'HOME', services: 'SERVICES', stores: 'SHOPS', contact: 'CONTACT',
-    year: '2026', heroDescription: 'MINIMAL · PRACTICAL · CLOSE TO HOME',
-    heroDetail: 'LOCAL TAILORING · COLOGNO MONZESE · CALUSCO',
-    discover: 'DISCOVER', scroll: 'SCROLL',
-    servicesTitle: 'OUR SERVICES', servicesCaption: 'VOL. 01',
-    products: 'GOODS', productsDesc: 'EVERYDAY ITEMS. ASK US FOR MORE INFORMATION.',
-    sewing: 'TAILORING & ALTERATIONS', sewingDesc: 'HEMS, REPAIRS, ADJUSTMENTS AND OTHER CLOTHING REQUESTS.',
-    print3d: '3D PRINTING & ENGRAVING', print3dDesc: 'TELL US YOUR IDEA AND GET IN TOUCH.',
-    inquire: 'ASK US',
-    storesTitle: 'FIND OUR SHOPS', storesCaption: 'VOL. 02',
-    oldStore: 'ESTABLISHED SHOP', newStore: 'NEW SHOP',
-    hours: 'HOURS', addressPending: 'PLEASE ASK FOR THE EXACT ADDRESS',
-    storesNote: 'PLEASE CONTACT LZFORTUNA-STORE FOR BOTH SHOPS AND APPOINTMENTS.',
-    contactTitle: 'GET IN TOUCH', contactCaption: 'VOL. 03',
-    contactDesc: 'MESSAGE US ON WHATSAPP OR CALL DIRECTLY. NO REGISTRATION OR ONLINE CHECKOUT.',
-    whats: 'WHATSAPP', call: 'CALL US',
-    footerDesc: 'TAILORING · REPAIRS · LOCAL SERVICES',
-  },
-} as const;
+};
+
 
 const images = [
   'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&q=80&w=800',
@@ -75,11 +34,16 @@ const images = [
 ] as const;
 
 export default function HomePage() {
-  const [locale, setLocale] = useState<Locale>('it');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const t = messages[locale];
 
-  useEffect(() => { document.documentElement.lang = locale; }, [locale]);
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [mobileMenuOpen]);
 
   const nav = [
     { href: '#top', label: t.home },
@@ -106,16 +70,6 @@ export default function HomePage() {
             {nav.map((item) => (
               <a key={item.href} href={item.href} className="text-xs tracking-[0.24em] uppercase text-foreground/65 transition-colors hover:text-foreground">{item.label}</a>
             ))}
-            <div className="ml-2 flex items-center gap-4 border-l border-black/10 pl-6" aria-label="Language">
-              {(['zh', 'en', 'it'] as const).map((value) => (
-                <button key={value} type="button" onClick={() => setLocale(value)}
-                  aria-label={value === 'zh' ? '中文' : value === 'it' ? 'Italiano' : 'English'}
-                  aria-pressed={locale === value}
-                  className={`text-xs tracking-widest ${locale === value ? 'font-black text-foreground' : 'text-foreground/40 hover:text-foreground'}`}>
-                  {value === 'zh' ? '中' : value.toUpperCase()}
-                </button>
-              ))}
-            </div>
           </nav>
           <button type="button" className="flex min-h-11 min-w-11 items-center justify-center border border-black/15 text-xl md:hidden"
             aria-controls="mobile-menu" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -126,14 +80,6 @@ export default function HomePage() {
             {nav.map((item) => (
               <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} className="py-3 text-base tracking-widest uppercase">{item.label}</a>
             ))}
-            <div className="flex gap-6 border-t border-black/10 pt-5">
-              {(['zh', 'en', 'it'] as const).map((value) => (
-                <button type="button" key={value} onClick={() => { setLocale(value); setMobileMenuOpen(false); }}
-                  className={`min-h-11 text-sm tracking-widest ${locale === value ? 'font-bold' : 'opacity-45'}`}>
-                  {value === 'zh' ? '中文' : value.toUpperCase()}
-                </button>
-              ))}
-            </div>
           </nav>
         )}
       </header>

@@ -14,7 +14,8 @@
 ## 日常维护
 
 - 仅修改 **`lib/site.ts`** 中的电话号码、门店名称、地址和时间。
-- 文案及中/意/英三种语言在 `app/page.tsx` 中修改，默认意大利语。
+- 当前前台仅保留意大利语。文案在 `app/page.tsx` 中修改，不包含多语言切换或额外国际化运行时依赖。
+- 旧语言入口（`/zh/`、`/en/`、`/it/`）和旧服务链接通过 `firebase.json` 重定向到意大利语网站，避免旧二维码或收藏链接在当前域名下失效。
 - `npm install` 安装依赖；`npm run dev` 本地预览。
 - `npm run lint` 检查代码；`npm run typecheck` 检查类型；`npm run build` 生成静态版 **`out/`**；`npm test` 验证导出的网页及联系方式。
 - TypeScript 采用当前 ESLint/Next.js 工具链兼容的最新 5.9；ESLint 使用兼容的 9.x，避免强制安装不兼容的主版本。
@@ -24,7 +25,7 @@
 **推荐 Firebase Hosting 静态托管**。虽然品牌使用 Firebase Hosting，但**不使用 Firebase Authentication、Firestore、Storage，也不运行服务端代码**。
 
 1. Firebase 项目：`lzfortuna-store-cologno`（配置见 `.firebaserc`）。
-2. `npm run build`，然后 `npx firebase-tools deploy --only hosting`，或 `npm run deploy`。
+2. 先执行 `npm run build`，再执行 `npm run deploy`（初次使用需先执行 `npx --yes firebase-tools@15.34.2 login` 登录自己的 Firebase 账户）。
 3. `firebase.json` 的 `hosting.public` 为 `out`。
 
 已部署的网站地址：<https://lzfortuna-store-cologno.web.app/>。
