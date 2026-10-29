@@ -1,48 +1,30 @@
 {
-  "name": "luisa-moda",
-  "version": "0.1.0",
+  "name": "lzfortuna-store",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "firebase:login": "npx firebase-tools login",
-    "firebase:rules:deploy": "npx firebase-tools deploy --only firestore:rules,storage",
-    "firebase:rules:deploy:firestore": "npx firebase-tools deploy --only firestore:rules",
-    "firebase:rules:deploy:storage": "npx firebase-tools deploy --only storage"
+    "test": "node --test tests/*.test.mjs",
+    "deploy": "npx firebase-tools deploy --only hosting"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.6.1",
-    "antd": "^5.24.2",
-    "dayjs": "^1.11.13",
-    "firebase": "^11.3.1",
-    "next": "^15.2.0-canary.0",
-    "next-intl": "^4.8.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
-    "@types/node": "^22.13.5",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.21.0",
-    "eslint-config-next": "^15.2.0-canary.0",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.9",
-    "typescript": "^5.7.3"
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
   },
-  "description": "一个功能完整的精品时尚网站，包含用户端和管理端，使用 Next.js、TypeScript、Tailwind CSS、Ant Design 和 Firebase 构建。",
-  "main": "next.config.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "description": "Two local tailoring shops in Cologno Monzese and Calusco; a lightweight Next.js static website."
 }
