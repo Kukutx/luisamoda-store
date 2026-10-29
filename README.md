@@ -27,4 +27,6 @@
 2. `npm run build`，然后 `npx firebase-tools deploy --only hosting`，或 `npm run deploy`。
 3. `firebase.json` 的 `hosting.public` 为 `out`。
 
+已部署的网站地址：<https://lzfortuna-store-cologno.web.app/>。
+
 GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。GitHub 仍用于存放代码。旧 Vercel 集成不再需要。
