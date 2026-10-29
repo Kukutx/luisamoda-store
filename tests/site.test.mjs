@@ -48,25 +48,19 @@ test('old language and service URLs redirect to Italian static content', () => {
 test('LZ FORTUNA brand uses the original monochrome editorial visual style', () => {
   const page = read('app/page.tsx');
   const css = read('app/globals.css');
-  assert.ok(page.includes('/brand/lz-wordmark.png'), 'Header must use the approved original wordmark image');
-  const hero = page.split('{/* Original centred editorial composition, updated to the LZ identity. */}')[1]?.split('{/* Retain the original photographic cards and editorial proportions. */}')[0] ?? '';
-  assert.ok(hero.includes('<h1'), 'The hero wordmark must remain');
-  assert.ok(hero.includes('/brand/lz-lockup.png'), 'Hero must use the approved original lockup');
-  assert.doesNotMatch(hero, /<LZMonogram/, 'The hero must not repeat a separate monogram');
+  assert.match(page, /<h1 className="font-serif[^"]*">\s*LZ <span className="italic">FORTUNA<\/span>/, 'The logo title must be actual HTML text');
+  assert.ok(page.includes('Sartoria e servizi per il tuo stile'), 'Subtitle must be editable HTML, not part of an image');
+  for (const file of ['app/page.tsx', 'app/sartoria/page.tsx', 'app/prodotti/page.tsx']) {
+    assert.doesNotMatch(read(file), /\/brand\/lz-(lockup|wordmark)\.png/, 'Do not render rasterized wordmarks: ' + file);
+  }
   assert.doesNotMatch(page, /LUISA <span|aria-label="Luisa Moda"/);
   assert.ok(page.includes('/images/sartoria.jpg'), 'Original sewing image must remain');
   assert.ok(css.includes('--color-foreground: #050505'), 'Original monochrome palette must remain');
   assert.doesNotMatch(page, /hero-art|art-script/, 'Do not replace the hero with a new decorative brand card');
 });
 
-test('approved original logo image assets are installed, no substitute vector', () => {
-  for (const file of ['lz-wordmark.png', 'lz-lockup.png', 'lz-monogram.png', 'icon.png']) {
-    const url = new URL('../public/brand/' + file, import.meta.url);
-    assert.ok(existsSync(url), 'Approved original asset is missing: ' + file);
-    assert.ok(readFileSync(url).subarray(0, 8).equals(Buffer.from('89504e470d0a1a0a', 'hex')));
-  }
-  assert.ok(!existsSync(new URL('../app/icon.svg', import.meta.url)));
-  assert.ok(!existsSync(new URL('../public/lz-fortuna-logo.svg', import.meta.url)));
+test('browser icon remains separate from real HTML wordmark', () => {
+  assert.ok(existsSync(new URL('../public/brand/icon.png', import.meta.url)));
   assert.match(read('app/layout.tsx'), /icons: \{ icon: '\/brand\/icon\.png' \}/);
   assert.ok(read('lib/site.ts').includes("name: 'LZ FORTUNA'"));
   assert.ok(read('app/layout.tsx').includes("const title = 'LZ FORTUNA"));
@@ -80,9 +74,9 @@ test('only goods and tailoring service cards remain', () => {
   assert.match(page, /md:grid-cols-2 md:gap-10/);
   assert.match(page, /href="\/sartoria\/"/);
   assert.match(page, /href="\/prodotti\/"/);
-  assert.match(page, /merchandiseCategories\.map/);
+  assert.match(page, /\/images\/assortimento-prodotti\.jpg/);
   assert.doesNotMatch(page, /emporio-illustrativo|Foto illustrativa/);
-  assert.match(page, /WHATSAPP ↗/);
+  assert.ok(page.includes('WHATSAPP') || page.includes('WhatsApp'));
   const exported = read('out/index.html');
   assert.ok(exported.includes('PRODOTTI PER TUTTI I GIORNI') && exported.includes('CUCITO E MODIFICHE'));
   assert.ok(!exported.includes('STAMPA 3D') && !exported.includes('INCISIONE'));
@@ -105,7 +99,7 @@ test('assortment page describes all advertised goods, without prices or checkout
   assert.doesNotMatch(html, /€\s*\d|checkout|Acquista ora/);
 });
 
-test('homepage service areas use truthful categories with no photo overlays', () => {
+test('both service cards use actual images and WhatsApp exists only in the AppBar', () => {
   const html = read('out/index.html');
   assert.ok(html.includes('href="/prodotti/"'));
   assert.ok(html.includes('href="/sartoria/"'));
@@ -114,14 +108,16 @@ test('homepage service areas use truthful categories with no photo overlays', ()
   assert.equal(cards.length, 3, 'Exactly two separately authored service cards expected');
   const products = cards[1].split('</article>')[0];
   const sewing = cards[2].split('</article>')[0];
-  assert.match(products, /merchandiseCategories\.map/, 'Display the actual assortment in the first card');
-  assert.doesNotMatch(products, /<Image|emporio-illustrativo|Foto illustrativa/, 'Do not invent a store photograph');
+  assert.match(products, /<Image/, 'First card needs a real product image, not text in place of a photo');
+  assert.match(products, /\/images\/assortimento-prodotti\.jpg/);
+  assert.ok(existsSync(new URL('../public/images/assortimento-prodotti.jpg', import.meta.url)));
+  assert.doesNotMatch(products, /photo-1604719312566|emporio-illustrativo|Foto illustrativa/, 'Do not restore rejected photos');
   assert.match(sewing, /src=\{sewingImage\}/, 'Keep the original tailoring image');
   assert.ok(existsSync(new URL('../public/images/sartoria.jpg', import.meta.url)), 'Serve the tailoring photo locally');
-  const belowPhoto = sewing.split('className="flex flex-1 flex-col border-t border-black/10')[1] ?? '';
-  assert.match(belowPhoto, /href=\{site\.whatsapp\}/, 'Place WhatsApp below the photo');
-  assert.match(belowPhoto, /bg-black/, 'Keep the WhatsApp button black');
-  assert.doesNotMatch(sewing.split('className="flex flex-1 flex-col border-t border-black/10')[0], /WHATSAPP|bg-black/, 'No controls on photos');
+  assert.doesNotMatch(products + sewing, /href=\{site\.whatsapp\}|WHATSAPP ↗/, 'No WhatsApp controls on either service card');
+  const appbar = page.split('<header className=')[1]?.split('</header>')[0] ?? '';
+  assert.match(appbar, /href=\{site\.whatsapp\}/, 'WhatsApp belongs in the header AppBar');
+  assert.match(appbar, /bg-black/, 'AppBar WhatsApp should be black');
   assert.ok(html.includes('https://wa.me/393668927486'));
   assert.ok(!existsSync(new URL('../public/images/emporio-illustrativo.jpg', import.meta.url)));
 });

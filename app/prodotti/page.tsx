@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { merchandiseCategories } from '@/lib/merchandise';
 import { site } from '@/lib/site';
@@ -15,14 +14,20 @@ export default function ProdottiPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-black/10 bg-white">
-        <div className="container mx-auto flex min-h-20 items-center justify-between gap-4 px-6 py-3 md:px-10">
-          <Link href="/" aria-label="LZ FORTUNA — Torna alla home" className="shrink-0">
-            <Image src="/brand/lz-wordmark.png" alt="LZ FORTUNA" width={781} height={98}
-              priority className="h-auto w-[min(17rem,calc(100vw-8rem))]" />
+        <div className="container mx-auto flex min-h-20 items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-6 md:px-10">
+          <Link href="/" aria-label="LZ FORTUNA — Torna alla home"
+            className="shrink-0 font-serif text-[clamp(1.1rem,3vw,2rem)] tracking-[0.04em] sm:tracking-[0.065em]">
+            LZ <span className="italic">FORTUNA</span>
           </Link>
-          <Link href="/" className="shrink-0 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-foreground/75 hover:text-foreground">
-            ← HOME
-          </Link>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-5">
+            <Link href="/" className="py-3 text-xs font-semibold uppercase tracking-[0.15em] text-foreground/75 hover:text-foreground">
+              ← <span className="hidden sm:inline">HOME</span>
+            </Link>
+            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center justify-center bg-black px-2 text-[10px] font-bold uppercase text-white hover:bg-neutral-800 sm:px-5 sm:text-xs">
+              WHATSAPP <span className="hidden sm:inline">↗</span>
+            </a>
+          </div>
         </div>
       </header>
 

@@ -2,7 +2,7 @@
 
 意大利本地裁缝/改衣服务介绍网站。**保留 Next.js + React + TypeScript + Tailwind CSS**，以静态方式构建，没有购物车、订单、会员、管理后台或数据库。
 
-品牌主名称采用 **LZ FORTUNA**。页面使用从确认的原始 Logo 参考图直接提取的 PNG 素材，而不是用字体或自绘 SVG 模仿：`public/brand/lz-wordmark.png`（字标）、`public/brand/lz-lockup.png`（完整标志）、`public/brand/icon.png`（浏览器图标）。原始素材是图片，**不是矢量文件**；放大至任意尺寸可能不如原生矢量清晰。**Luisa Moda** 仅保留为 Calusco 老店的实际门店名称。
+品牌主名称采用 **LZ FORTUNA**。主标题、顶部及页脚品牌名使用 **Cormorant Garamond 字体与 HTML/CSS**（真实文字、可复制、缩放清晰），副标题也是独立 HTML；不再把裁剪的 PNG 当作页面文字。浏览器图标保留 `public/brand/icon.png`。**Luisa Moda** 仅保留为 Calusco 老店的实际门店名称。
 
 ## 两家门店
 
@@ -36,6 +36,6 @@
 
 百货品类在 `lib/merchandise.ts` 中维护；`/prodotti/` 仅展示类别及说明，**不显示价格或虚构库存**。
 
-首页百货卡片采用与网站风格一致的**纯文字分类展示**，不使用未经证实的门店示意照片。顾客可以通过 `/prodotti/` 查看完整类别；裁缝卡片图片上不放按钮，WhatsApp 入口位于下方文字区。
+首页两张卡片恢复**图片在上、文字在下**的原版结构。百货配图 `public/images/assortimento-prodotti.jpg` 用几种商品类别的免费图像拼成，不代表门店实拍或实时库存；使用的照片素材来自 Unsplash（服装 photo-1573612664822-d7d347da7b80，厨房 photo-1556911220-bff31c812dba，文具 photo-1513542789411-b6a5d4f31634，玩具 photo-1566576912321-d58ddd7a6088）。裁缝卡片没有 WhatsApp 按钮，黑色 WhatsApp 按钮只在顶部导航栏以及原有联系区域。收到真实门店照片后可替换百货配图。
 
 GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。GitHub 仍用于存放代码。旧 Vercel 集成不再需要。

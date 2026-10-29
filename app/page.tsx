@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { site } from '@/lib/site';
-import { merchandiseCategories } from '@/lib/merchandise';
 
 // Preserve the existing monochrome editorial layout; the brand is now LZ FORTUNA.
 const t = {
@@ -50,25 +49,24 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 py-4 backdrop-blur-2xl">
-        <div className="container mx-auto flex items-center justify-between gap-4 px-6 md:px-10">
-          <a href="#top" className="group flex shrink-0 items-center" aria-label="LZ FORTUNA - Home">
-            <Image
-              src="/brand/lz-wordmark.png"
-              alt="LZ FORTUNA"
-              width={781}
-              height={98}
-              priority
-              className="h-auto w-[min(19rem,calc(100vw-7rem))] object-contain transition-opacity group-hover:opacity-65"
-            />
+        <div className="container mx-auto flex items-center justify-between gap-1.5 px-3 sm:gap-4 sm:px-6 md:px-10">
+          <a href="#top" className="group shrink-0 font-serif text-[clamp(1.1rem,3vw,2rem)] tracking-[0.04em] text-foreground transition-opacity hover:opacity-65 sm:tracking-[0.065em]" aria-label="LZ FORTUNA - Home">
+            LZ <span className="italic">FORTUNA</span>
           </a>
-          <nav className="hidden items-center gap-7 md:flex" aria-label="Navigation">
-            {nav.map((item) => (
-              <a key={item.href} href={item.href} className="text-xs tracking-[0.24em] uppercase text-foreground/65 transition-colors hover:text-foreground">{item.label}</a>
-            ))}
-          </nav>
-          <button type="button" className="flex min-h-11 min-w-11 items-center justify-center border border-black/15 text-xl md:hidden"
-            aria-controls="mobile-menu" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? '×' : '☰'}</button>
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-4">
+            <nav className="hidden items-center gap-3 lg:gap-7 md:flex" aria-label="Navigation">
+              {nav.map((item) => (
+                <a key={item.href} href={item.href} className="text-[11px] tracking-[0.13em] uppercase text-foreground/65 transition-colors hover:text-foreground lg:text-xs lg:tracking-[0.2em]">{item.label}</a>
+              ))}
+            </nav>
+            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center bg-black px-2 text-[10px] font-bold uppercase tracking-[0.02em] text-white hover:bg-neutral-800 sm:px-5 sm:text-xs sm:tracking-[0.08em]">
+              WhatsApp <span className="hidden sm:inline">↗</span>
+            </a>
+            <button type="button" className="flex min-h-11 min-w-11 items-center justify-center border border-black/15 text-xl md:hidden"
+              aria-controls="mobile-menu" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? '×' : '☰'}</button>
+          </div>
         </div>
         {mobileMenuOpen && (
           <nav id="mobile-menu" className="flex flex-col gap-2 border-t border-black/5 bg-white px-6 py-5 md:hidden" aria-label="Mobile navigation">
@@ -88,16 +86,14 @@ export default function HomePage() {
             <div className="absolute -top-1/4 h-[80vw] w-[80vw] rounded-full border border-black/3" />
           </div>
           <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-7">
-            <h1>
-              <Image
-                src="/brand/lz-lockup.png"
-                alt="LZ FORTUNA — Sartoria e servizi per il tuo stile"
-                width={781}
-                height={153}
-                priority
-                className="mx-auto h-auto w-[min(48rem,86vw)]"
-              />
+            <h1 className="font-serif text-[clamp(3.2rem,10vw,7.5rem)] font-light leading-[0.95] tracking-[0.07em] text-foreground">
+              LZ <span className="italic">FORTUNA</span>
             </h1>
+            <p className="flex w-full max-w-[42rem] items-center justify-center gap-3 text-center text-[clamp(0.65rem,1.5vw,0.9rem)] font-medium uppercase leading-relaxed tracking-[0.13em] text-foreground/70 sm:gap-5 sm:tracking-[0.25em]">
+              <span aria-hidden="true" className="h-px min-w-6 flex-1 bg-foreground/25" />
+              <span>Sartoria e servizi per il tuo stile</span>
+              <span aria-hidden="true" className="h-px min-w-6 flex-1 bg-foreground/25" />
+            </p>
             <p className="max-w-xl text-xs font-light uppercase leading-7 tracking-[0.22em] text-foreground/50">{t.heroDetail}</p>
             <a href="#services" className="group bg-foreground px-12 py-4 text-sm font-extrabold uppercase tracking-[0.35em] text-background transition-opacity hover:opacity-80">
               {t.discover}
@@ -109,7 +105,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Services: a truthful category-led emporio panel and an uncluttered tailoring photo. */}
+        {/* Original image-led service cards: pictures only illustrate products, never replace live text. */}
         <section id="services" className="container mx-auto scroll-mt-28 border-t border-black/5 px-6 py-14 md:px-10 md:py-20">
           <div className="mb-10">
             <span className="text-xs uppercase tracking-[0.4em] text-foreground/40">{t.servicesCaption}</span>
@@ -117,21 +113,19 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10">
             <article className="flex flex-col overflow-hidden border border-black/10">
-              <div className="flex min-h-[21rem] flex-1 flex-col justify-center bg-neutral-50 px-6 py-8 sm:px-9">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/65">EMPORIO DI QUARTIERE</p>
-                <p className="mb-5 mt-3 font-serif text-3xl italic leading-tight sm:text-4xl">Un po’ di tutto, per tutti i giorni.</p>
-                <ul className="grid grid-cols-2 gap-x-4 gap-y-0" aria-label="Categorie di prodotti">
-                  {merchandiseCategories.map((category) => (
-                    <li key={category.title} className="border-t border-black/15 py-2.5 text-[0.92rem] leading-5 text-foreground/85 sm:text-[1.05rem]">
-                      {category.title}
-                    </li>
-                  ))}
-                </ul>
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
+                <Image
+                  src="/images/assortimento-prodotti.jpg"
+                  alt="Assortimento illustrativo: abbigliamento e accessori, casa e cucina, cartoleria e giocattoli"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
               </div>
-              <div className="border-t border-black/10 p-5 text-left md:p-7">
+              <div className="flex flex-1 flex-col border-t border-black/10 p-5 text-left md:p-7">
                 <h3 className="mb-3 font-serif text-2xl italic uppercase tracking-[0.04em]">{t.products}</h3>
                 <p className="mb-5 text-base leading-7 text-foreground/80">{t.productsDesc}</p>
-                <a href="/prodotti/" className="inline-flex min-h-12 items-center text-sm font-bold uppercase tracking-[0.13em] hover:underline">
+                <a href="/prodotti/" className="mt-auto inline-flex min-h-12 items-center text-sm font-bold uppercase tracking-[0.13em] hover:underline">
                   SCOPRI LE CATEGORIE →
                 </a>
               </div>
@@ -155,14 +149,6 @@ export default function HomePage() {
                 <div className="mt-auto flex flex-wrap items-center gap-4">
                   <a href="/sartoria/" className="inline-flex min-h-12 items-center text-sm font-bold uppercase tracking-[0.13em] hover:underline">
                     VEDI IL LISTINO →
-                  </a>
-                  <a
-                    href={site.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-12 items-center justify-center bg-black px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    WHATSAPP ↗
                   </a>
                 </div>
               </div>
@@ -208,13 +194,7 @@ export default function HomePage() {
       <footer className="border-t border-black/5 bg-neutral-50/30 py-16 md:py-20">
         <div className="container mx-auto flex flex-col justify-between gap-10 px-6 md:flex-row md:px-10">
           <div className="space-y-4">
-            <Image
-              src="/brand/lz-wordmark.png"
-              alt="LZ FORTUNA"
-              width={781}
-              height={98}
-              className="h-auto w-60"
-            />
+            <p className="font-serif text-3xl tracking-[0.08em]">LZ <span className="italic">FORTUNA</span></p>
             <p className="text-sm uppercase tracking-[0.18em] text-foreground/55">{t.footerDesc}</p>
             <p className="text-sm tracking-widest text-foreground/50">LZ Fortuna · Cologno Monzese / Luisa Moda · Calusco</p>
           </div>
