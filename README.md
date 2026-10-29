@@ -30,6 +30,8 @@
 2. 先执行 `npm run build`，再执行 `npm run deploy`（初次使用需先执行 `npx --yes firebase-tools@15.34.2 login` 登录自己的 Firebase 账户）。
 3. `firebase.json` 的 `hosting.public` 为 `out`。
 
-已部署的网站地址：<https://lzfortuna-store-cologno.web.app/>。
+正式网站地址：<https://lzfortuna.web.app/>（旧地址自动跳转）。
+
+裁缝服务价目表维护在 `lib/tailoring.ts`，网站页面为 `/sartoria/`。价目表源于提供的门店照片，展示参考价格，不代表未经确认的最终报价。
 
 GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。GitHub 仍用于存放代码。旧 Vercel 集成不再需要。

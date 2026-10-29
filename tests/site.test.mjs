@@ -30,13 +30,18 @@ test('Italian is the only public UI language', () => {
 
 test('old language and service URLs redirect to Italian static content', () => {
   const { hosting } = JSON.parse(read('firebase.json'));
-  assert.equal(hosting.public, 'out');
+  assert.equal(hosting.length, 2, 'The new and former domains both need Hosting configuration');
+  const main = hosting.find(({ site }) => site === 'lzfortuna');
+  const legacy = hosting.find(({ site }) => site === 'lzfortuna-store-cologno');
+  assert.equal(main.public, 'out');
+  assert.equal(legacy.redirects[0].destination, 'https://lzfortuna.web.app');
   for (const route of ['/zh', '/en', '/it']) {
-    assert.ok(hosting.redirects.some(({ source, destination }) => source === route && destination === '/'));
-    assert.ok(hosting.redirects.some(({ source, destination }) => source === route + '/**' && destination === '/'));
+    assert.ok(main.redirects.some(({ source, destination }) => source === route && destination === '/'));
+    assert.ok(main.redirects.some(({ source, destination }) => source === route + '/**' && destination === '/'));
   }
   for (const route of ['/services/sewing', '/services/3d']) {
-    assert.ok(hosting.redirects.some(({ source, destination }) => source === route && destination === '/#services'));
+    const destination = route === '/services/sewing' ? '/sartoria/' : '/#services';
+    assert.ok(main.redirects.some((rule) => rule.source === route && rule.destination === destination));
   }
 });
 
@@ -73,6 +78,7 @@ test('only goods and tailoring service cards remain', () => {
   assert.match(page, /sewing: 'CUCITO E MODIFICHE'/);
   assert.doesNotMatch(page, /STAMPA 3D|INCISIONE|print3d|photo-1612815154858-60aa4c59eaa6/);
   assert.match(page, /md:grid-cols-2 md:gap-10/);
+  assert.match(page, /href: '\/sartoria\/'/);
   const exported = read('out/index.html');
   assert.ok(exported.includes('PRODOTTI') && exported.includes('CUCITO E MODIFICHE'));
   assert.ok(!exported.includes('STAMPA 3D') && !exported.includes('INCISIONE'));
@@ -90,7 +96,18 @@ test('static Next.js export contains both stores without the old number', () => 
 test('static HTML has Italian locale and a canonical public URL', () => {
   const html = read('out/index.html');
   assert.match(html, /<html lang="it"/);
-  assert.ok(html.includes('https://lzfortuna-store-cologno.web.app/'));
+  assert.ok(html.includes('https://lzfortuna.web.app/'));
   assert.ok(html.includes('og:locale'));
   assert.ok(html.includes('it_IT'));
+});
+
+test('tailoring price page is statically exported, with WhatsApp and no checkout', () => {
+  const html = read('out/sartoria/index.html');
+  for (const group of ['Pantaloni e jeans', 'Camicie', 'Gonne e vestiti', 'Giacche e cappotti', 'Riparazione tende']) {
+    assert.ok(html.includes(group), `Missing price section: ${group}`);
+  }
+  assert.ok(html.includes('https://wa.me/393668927486'));
+  assert.ok(html.includes('tel:+393668927486'));
+  assert.ok(html.includes('Prezzi indicativi'));
+  assert.equal((read('lib/tailoring.ts').match(/service:/g) || []).length, 34); // includes type declaration, 33 rows
 });

@@ -48,8 +48,8 @@ export default function HomePage() {
     { href: '#contact', label: t.contact },
   ];
   const serviceCards = [
-    { key: 'products', title: t.products, description: t.productsDesc, image: images[0] },
-    { key: 'sewing', title: t.sewing, description: t.sewingDesc, image: images[1] },
+    { key: 'products', title: t.products, description: t.productsDesc, image: images[0], href: '#contact', action: t.inquire },
+    { key: 'sewing', title: t.sewing, description: t.sewingDesc, image: images[1], href: '/sartoria/', action: 'VEDI IL LISTINO' },
   ];
 
   return (
@@ -122,7 +122,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
             {serviceCards.map((item) => (
-              <a key={item.key} href="#contact" className="group block overflow-hidden border border-black/5 transition-all duration-500 hover:border-black/20">
+              <a key={item.key} href={item.href} className="group block overflow-hidden border border-black/5 transition-all duration-500 hover:border-black/20">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
                   <Image src={item.image} alt={item.title} fill unoptimized sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover opacity-90 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100" />
@@ -131,7 +131,7 @@ export default function HomePage() {
                 <div className="p-5 text-center md:p-6 md:text-left">
                   <h3 className="mb-3 font-serif text-xl italic uppercase tracking-widest md:text-2xl">{item.title}</h3>
                   <p className="mb-5 text-sm font-light uppercase leading-relaxed tracking-[0.13em] text-foreground/60">{item.description}</p>
-                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/70 group-hover:text-foreground">{t.inquire} →</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/70 group-hover:text-foreground">{item.action} →</span>
                 </div>
               </a>
             ))}

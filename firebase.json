@@ -1,124 +1,143 @@
 {
-  "hosting": {
-    "public": "out",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "redirects": [
-      {
-        "source": "/zh/services/sewing",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/zh/services/sewing/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/en/services/sewing",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/en/services/sewing/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/it/services/sewing",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/it/services/sewing/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/zh/services/3d",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/zh/services/3d/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/en/services/3d",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/en/services/3d/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/it/services/3d",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/it/services/3d/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/services/sewing",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/services/sewing/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/services/3d",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/services/3d/**",
-        "destination": "/#services",
-        "type": 301
-      },
-      {
-        "source": "/zh",
-        "destination": "/",
-        "type": 301
-      },
-      {
-        "source": "/zh/**",
-        "destination": "/",
-        "type": 301
-      },
-      {
-        "source": "/en",
-        "destination": "/",
-        "type": 301
-      },
-      {
-        "source": "/en/**",
-        "destination": "/",
-        "type": 301
-      },
-      {
-        "source": "/it",
-        "destination": "/",
-        "type": 301
-      },
-      {
-        "source": "/it/**",
-        "destination": "/",
-        "type": 301
-      }
-    ],
-    "cleanUrls": true,
-    "trailingSlash": true
-  }
+  "hosting": [
+    {
+      "public": "out",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "redirects": [
+        {
+          "source": "/zh/services/sewing",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/zh/services/sewing/**",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/en/services/sewing",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/en/services/sewing/**",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/it/services/sewing",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/it/services/sewing/**",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/zh/services/3d",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/zh/services/3d/**",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/en/services/3d",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/en/services/3d/**",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/it/services/3d",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/it/services/3d/**",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/services/sewing",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/services/sewing/**",
+          "destination": "/sartoria/",
+          "type": 301
+        },
+        {
+          "source": "/services/3d",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/services/3d/**",
+          "destination": "/#services",
+          "type": 301
+        },
+        {
+          "source": "/zh",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/zh/**",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/en",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/en/**",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/it",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/it/**",
+          "destination": "/",
+          "type": 301
+        }
+      ],
+      "cleanUrls": true,
+      "trailingSlash": true,
+      "site": "lzfortuna"
+    },
+    {
+      "site": "lzfortuna-store-cologno",
+      "public": "legacy-hosting",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "redirects": [
+        {
+          "source": "**",
+          "destination": "https://lzfortuna.web.app",
+          "type": 301
+        }
+      ]
+    }
+  ]
 }
