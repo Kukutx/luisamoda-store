@@ -34,4 +34,8 @@
 
 裁缝服务价目表维护在 `lib/tailoring.ts`，网站页面为 `/sartoria/`。价目表源于提供的门店照片，展示参考价格，不代表未经确认的最终报价。
 
+百货品类在 `lib/merchandise.ts` 中维护；`/prodotti/` 仅展示类别及说明，**不显示价格或虚构库存**。
+
+首页百货配图 `public/images/emporio-illustrativo.jpg` 为示意素材，并非真实店内照片。图片来源：[Unsplash / Tan Tony](https://unsplash.com/photos/bohemian-shop-interior-with-woven-decor-and-clothing-s73xfyAwPvs)，有门店实拍后建议替换。
+
 GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。GitHub 仍用于存放代码。旧 Vercel 集成不再需要。

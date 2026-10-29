@@ -14,9 +14,9 @@ const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
 });
 
-const title = 'LZ FORTUNA | Sartoria e servizi locali';
+const title = 'LZ FORTUNA | Emporio di quartiere e sartoria';
 const description =
-  'LZ FORTUNA: sartoria, riparazioni, modifiche e servizi locali a Cologno Monzese e Calusco. Contattaci su WhatsApp o per telefono.';
+  'LZ FORTUNA: abbigliamento, casa, cucina, cartoleria, cosmetici, giocattoli e sartoria. Oltre vent’anni di esperienza nel negozio storico. Contattaci su WhatsApp.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

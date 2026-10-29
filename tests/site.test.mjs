@@ -74,14 +74,46 @@ test('approved original logo image assets are installed, no substitute vector', 
 
 test('only goods and tailoring service cards remain', () => {
   const page = read('app/page.tsx');
-  assert.match(page, /products: 'PRODOTTI'/);
+  assert.match(page, /products: 'PRODOTTI PER TUTTI I GIORNI'/);
   assert.match(page, /sewing: 'CUCITO E MODIFICHE'/);
   assert.doesNotMatch(page, /STAMPA 3D|INCISIONE|print3d|photo-1612815154858-60aa4c59eaa6/);
   assert.match(page, /md:grid-cols-2 md:gap-10/);
   assert.match(page, /href: '\/sartoria\/'/);
+  assert.match(page, /href: '\/prodotti\/'/);
+  assert.match(page, /\/images\/emporio-illustrativo\.jpg/);
+  assert.match(page, /Foto illustrativa/);
+  assert.match(page, /WHATSAPP ↗/);
+  assert.match(page, /Da oltre vent’anni il nostro negozio storico/);
   const exported = read('out/index.html');
-  assert.ok(exported.includes('PRODOTTI') && exported.includes('CUCITO E MODIFICHE'));
+  assert.ok(exported.includes('PRODOTTI PER TUTTI I GIORNI') && exported.includes('CUCITO E MODIFICHE'));
   assert.ok(!exported.includes('STAMPA 3D') && !exported.includes('INCISIONE'));
+});
+
+test('assortment page describes all advertised goods, without prices or checkout', () => {
+  const data = read('lib/merchandise.ts');
+  const html = read('out/prodotti/index.html');
+  const groups = [
+    'Abbigliamento e accessori', 'Mobili e arredamento', 'Casa e pulizia',
+    'Cucina e tavola', 'Scuola e cartoleria', 'Cosmetici e cura personale',
+    'Giochi e giocattoli', 'Tessili e articoli vari',
+  ];
+  for (const category of groups) {
+    assert.ok(data.includes(category), 'Missing product group: ' + category);
+    assert.ok(html.includes(category), 'Missing page category: ' + category);
+  }
+  assert.ok(html.includes('oltre vent’anni'));
+  assert.ok(html.includes('https://wa.me/393668927486'));
+  assert.doesNotMatch(html, /€\s*\d|checkout|Acquista ora/);
+});
+
+test('homepage image and sewing WhatsApp have independent links', () => {
+  const html = read('out/index.html');
+  assert.ok(html.includes('href="/prodotti/"'));
+  assert.ok(html.includes('href="/sartoria/"'));
+  assert.ok(html.includes('Foto illustrativa'));
+  assert.match(read('app/page.tsx'), /absolute bottom-4 left-4 inline-flex min-h-12 items-center justify-center bg-black/);
+  assert.ok(html.includes('https://wa.me/393668927486'));
+  assert.ok(existsSync(new URL('../public/images/emporio-illustrativo.jpg', import.meta.url)));
 });
 
 test('static Next.js export contains both stores without the old number', () => {

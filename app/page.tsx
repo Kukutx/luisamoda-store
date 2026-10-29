@@ -10,24 +10,26 @@ const t = {
     heroDetail: 'COLOGNO MONZESE · CALUSCO',
     discover: 'SCOPRI', scroll: 'SCORRI',
     servicesTitle: 'I NOSTRI SERVIZI', servicesCaption: 'VOL. 01',
-    products: 'PRODOTTI', productsDesc: 'ARTICOLI E PICCOLE NECESSITÀ, CHIEDICI INFORMAZIONI.',
-    sewing: 'CUCITO E MODIFICHE', sewingDesc: 'ORLI, RIPARAZIONI, MODIFICHE E LAVORI DA DISCUTERE IN NEGOZIO.',
+    products: 'PRODOTTI PER TUTTI I GIORNI',
+    productsDesc: 'Abbigliamento, articoli per la casa, cucina, scuola, cosmetici, giocattoli e molto altro.',
+    sewing: 'CUCITO E MODIFICHE',
+    sewingDesc: 'Orli, riparazioni e modifiche sartoriali. Consulta il listino e chiedici informazioni.',
     inquire: 'CHIEDI INFO',
     storesTitle: 'DOVE TROVARCI', storesCaption: 'VOL. 02',
     oldStore: 'NEGOZIO STORICO', newStore: 'NUOVO NEGOZIO',
     hours: 'ORARIO', addressPending: 'INDIRIZZO DISPONIBILE SU RICHIESTA',
-    storesNote: 'PER INFO E APPUNTAMENTI CONTATTACI AL NUMERO DI LZ FORTUNA.',
+    storesNote: 'Per entrambi i negozi, contattaci direttamente su WhatsApp o al numero 366 892 7486.',
     contactTitle: 'PARLIAMONE', contactCaption: 'VOL. 03',
-    contactDesc: 'SCRIVICI SU WHATSAPP O CHIAMACI DIRETTAMENTE. NESSUNA REGISTRAZIONE, NESSUN ORDINE ONLINE.',
+    contactDesc: 'Hai una domanda o cerchi un prodotto? Scrivici su WhatsApp o chiamaci direttamente: saremo felici di aiutarti.',
     whats: 'WHATSAPP', call: 'CHIAMA',
     footerDesc: 'CUCITO · RIPARAZIONI · SERVIZI LOCALI',
 };
 
 
-const images = [
-  'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1558171813-4c088753af8f?auto=format&fit=crop&q=80&w=800',
-] as const;
+const images = {
+  products: '/images/emporio-illustrativo.jpg',
+  sewing: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?auto=format&fit=crop&q=80&w=800',
+} as const;
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -48,8 +50,8 @@ export default function HomePage() {
     { href: '#contact', label: t.contact },
   ];
   const serviceCards = [
-    { key: 'products', title: t.products, description: t.productsDesc, image: images[0], href: '#contact', action: t.inquire },
-    { key: 'sewing', title: t.sewing, description: t.sewingDesc, image: images[1], href: '/sartoria/', action: 'VEDI IL LISTINO' },
+    { key: 'products', title: t.products, description: t.productsDesc, image: images.products, href: '/prodotti/', action: 'SCOPRI LE CATEGORIE' },
+    { key: 'sewing', title: t.sewing, description: t.sewingDesc, image: images.sewing, href: '/sartoria/', action: 'VEDI IL LISTINO' },
   ];
 
   return (
@@ -122,18 +124,31 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
             {serviceCards.map((item) => (
-              <a key={item.key} href={item.href} className="group block overflow-hidden border border-black/5 transition-all duration-500 hover:border-black/20">
+              <article key={item.key} className="group overflow-hidden border border-black/10 transition-colors hover:border-black/30">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
-                  <Image src={item.image} alt={item.title} fill unoptimized sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover opacity-90 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100" />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-transparent" />
+                  <a href={item.href} className="absolute inset-0" aria-label={`Scopri: ${item.title}`}>
+                    <Image src={item.image}
+                      alt={item.key === 'products' ? 'Articoli per la casa e accessori in un emporio, immagine illustrativa' : 'Lavoro di cucito e modifiche sartoriali'}
+                      fill unoptimized sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                  </a>
+                  {item.key === 'products' ? (
+                    <span className="pointer-events-none absolute bottom-3 right-3 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-black/75">
+                      Foto illustrativa
+                    </span>
+                  ) : (
+                    <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
+                      className="absolute bottom-4 left-4 inline-flex min-h-12 items-center justify-center bg-black px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-lg transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+                      WHATSAPP ↗
+                    </a>
+                  )}
                 </div>
                 <div className="p-5 text-center md:p-6 md:text-left">
-                  <h3 className="mb-3 font-serif text-xl italic uppercase tracking-widest md:text-2xl">{item.title}</h3>
-                  <p className="mb-5 text-sm font-light uppercase leading-relaxed tracking-[0.13em] text-foreground/60">{item.description}</p>
-                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/70 group-hover:text-foreground">{item.action} →</span>
+                  <h3 className="mb-3 font-serif text-xl italic uppercase tracking-[0.08em] md:text-2xl">{item.title}</h3>
+                  <p className="mb-5 text-base leading-7 text-foreground/80">{item.description}</p>
+                  <a href={item.href} className="inline-flex min-h-11 items-center text-sm font-bold uppercase tracking-[0.13em] text-foreground/85 hover:underline">{item.action} →</a>
                 </div>
-              </a>
+              </article>
             ))}
           </div>
         </section>
@@ -141,6 +156,11 @@ export default function HomePage() {
         <section id="stores" className="container mx-auto scroll-mt-20 border-t border-black/5 px-6 py-16 md:px-10 md:py-24">
           <span className="text-xs uppercase tracking-[0.4em] text-foreground/40">{t.storesCaption}</span>
           <h2 className="mb-12 mt-3 font-serif text-4xl italic uppercase tracking-[0.16em] md:text-5xl">{t.storesTitle}</h2>
+          <p className="mb-10 max-w-3xl text-lg leading-8 text-foreground/75">
+            Da oltre vent’anni il nostro negozio storico è al servizio della comunità.
+            Oggi questa esperienza continua, tra articoli per la vita quotidiana e servizi
+            di sartoria, con la stessa attenzione alle persone.
+          </p>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {site.stores.map((store) => (
               <article key={store.id} className="border border-black/10 p-7 md:p-10">
