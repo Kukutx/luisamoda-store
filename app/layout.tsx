@@ -1,7 +1,18 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
+import { Inter, Cormorant_Garamond } from 'next/font/google';
 import { site } from '@/lib/site';
 import './globals.css';
+
+// Restore the original storefront's two font families.
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-cormorant',
+});
 
 export const metadata: Metadata = {
   title: 'LZFortuna-store e Luisa Moda | Sartoria e riparazioni',
@@ -38,7 +49,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     })),
   };
   return (
-    <html lang="it">
+    <html lang="it" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
         <script
           type="application/ld+json"

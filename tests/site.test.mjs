@@ -27,6 +27,15 @@ test('Italian, Chinese and English are available', () => {
   }
 });
 
+test('preserves the original LUISA editorial visual identity', () => {
+  const page = read('app/page.tsx');
+  const css = read('app/globals.css');
+  assert.ok(page.includes('LUISA <span'), 'Original centered LUISA hero must remain');
+  assert.ok(page.includes('photo-1558171813-4c088753af8f'), 'Original sewing image must remain');
+  assert.ok(css.includes('--color-foreground: #050505'), 'Original monochrome palette must remain');
+  assert.doesNotMatch(page, /hero-art|art-script/, 'Do not replace the hero with a new decorative brand card');
+});
+
 test('static Next.js export contains both stores without the old number', () => {
   assert.ok(existsSync(new URL('../out/index.html', import.meta.url)), 'Build the site before running tests');
   const html = read('out/index.html');
