@@ -23,7 +23,7 @@
 
 **推荐 Firebase Hosting 静态托管**。虽然品牌使用 Firebase Hosting，但**不使用 Firebase Authentication、Firestore、Storage，也不运行服务端代码**。
 
-1. Firebase 项目：`luisa-moda`（配置见 `.firebaserc`）。
+1. Firebase 项目：`lzfortuna-store-cologno`（配置见 `.firebaserc`）。
 2. `npm run build`，然后 `npx firebase-tools deploy --only hosting`，或 `npm run deploy`。
 3. `firebase.json` 的 `hosting.public` 为 `out`。
 
