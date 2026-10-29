@@ -16,7 +16,7 @@ const t = {
     storesTitle: 'DOVE TROVARCI', storesCaption: 'VOL. 02',
     oldStore: 'NEGOZIO STORICO', newStore: 'NUOVO NEGOZIO',
     hours: 'ORARIO', addressPending: 'INDIRIZZO DISPONIBILE SU RICHIESTA',
-    storesNote: 'PER INFO E APPUNTAMENTI CONTATTACI AL NUMERO DI LZFORTUNA-STORE.',
+    storesNote: 'PER INFO E APPUNTAMENTI CONTATTACI AL NUMERO DI LZ FORTUNA.',
     contactTitle: 'PARLIAMONE', contactCaption: 'VOL. 03',
     contactDesc: 'SCRIVICI SU WHATSAPP O CHIAMACI DIRETTAMENTE. NESSUNA REGISTRAZIONE, NESSUN ORDINE ONLINE.',
     whats: 'WHATSAPP', call: 'CHIAMA',
@@ -184,7 +184,7 @@ export default function HomePage() {
               className="h-auto w-60"
             />
             <p className="text-sm uppercase tracking-[0.18em] text-foreground/55">{t.footerDesc}</p>
-            <p className="text-sm tracking-widest text-foreground/50">LZFortuna-store · Cologno Monzese / Luisa Moda · Calusco</p>
+            <p className="text-sm tracking-widest text-foreground/50">LZ Fortuna · Cologno Monzese / Luisa Moda · Calusco</p>
           </div>
           <nav className="flex flex-col gap-4 text-sm uppercase tracking-widest text-foreground/50" aria-label="Footer navigation">
             {nav.map((item) => (<a href={item.href} key={item.href} className="hover:text-foreground">{item.label}</a>))}

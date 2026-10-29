@@ -1,4 +1,4 @@
-# LZFortuna-store & Luisa Moda
+# LZ Fortuna & Luisa Moda
 
 意大利本地裁缝/改衣服务介绍网站。**保留 Next.js + React + TypeScript + Tailwind CSS**，以静态方式构建，没有购物车、订单、会员、管理后台或数据库。
 
@@ -8,7 +8,7 @@
 
 | 门店 | 地区 | 营业时间 | 联系方式 |
 |---|---|---|---|
-| LZFortuna-store（新店） | Cologno Monzese | 09:00–19:30 | **366 892 7486** |
+| LZ Fortuna（新店） | Cologno Monzese | 09:00–19:30 | **366 892 7486** |
 | Luisa Moda（老店） | Calusco | 09:00–19:30 | **统一联系新店** |
 
 两店的街道地址、每周营业日尚未提供；页面只展示已确认信息。**不要在网站代码中公开老店号码。** WhatsApp 和拨号都使用新店号码。

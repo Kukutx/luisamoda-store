@@ -8,7 +8,7 @@ export const site = {
   stores: [
     {
       id: 'new',
-      name: 'LZFortuna-store',
+      name: 'LZ Fortuna',
       city: 'Cologno Monzese',
       address: '',
       hours: '09:00–19:30',

@@ -14,7 +14,7 @@ test('only the new shop phone number is public', () => {
 
 test('both shops and their opening times are maintained together', () => {
   const config = read('lib/site.ts');
-  for (const name of ['LZFortuna-store', 'Luisa Moda', 'Cologno Monzese', 'Calusco']) {
+  for (const name of ['LZ Fortuna', 'Luisa Moda', 'Cologno Monzese', 'Calusco']) {
     assert.ok(config.includes(name), 'Missing ' + name);
   }
   assert.equal((config.match(/09:00–19:30/g) || []).length, 2);
@@ -87,7 +87,7 @@ test('only goods and tailoring service cards remain', () => {
 test('static Next.js export contains both stores without the old number', () => {
   assert.ok(existsSync(new URL('../out/index.html', import.meta.url)), 'Build the site before running tests');
   const html = read('out/index.html');
-  for (const name of ['LZFortuna-store', 'Luisa Moda', 'Cologno Monzese', 'Calusco', '366 892 7486']) {
+  for (const name of ['LZ Fortuna', 'Luisa Moda', 'Cologno Monzese', 'Calusco', '366 892 7486']) {
     assert.ok(html.includes(name), 'Missing in exported HTML: ' + name);
   }
   assert.ok(html.includes('https://wa.me/393668927486'));
