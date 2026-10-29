@@ -49,6 +49,17 @@ test('preserves the original LUISA editorial visual identity', () => {
   assert.doesNotMatch(page, /hero-art|art-script/, 'Do not replace the hero with a new decorative brand card');
 });
 
+test('only goods and tailoring service cards remain', () => {
+  const page = read('app/page.tsx');
+  assert.match(page, /products: 'PRODOTTI'/);
+  assert.match(page, /sewing: 'CUCITO E MODIFICHE'/);
+  assert.doesNotMatch(page, /STAMPA 3D|INCISIONE|print3d|photo-1612815154858-60aa4c59eaa6/);
+  assert.match(page, /md:grid-cols-2 md:gap-10/);
+  const exported = read('out/index.html');
+  assert.ok(exported.includes('PRODOTTI') && exported.includes('CUCITO E MODIFICHE'));
+  assert.ok(!exported.includes('STAMPA 3D') && !exported.includes('INCISIONE'));
+});
+
 test('static Next.js export contains both stores without the old number', () => {
   assert.ok(existsSync(new URL('../out/index.html', import.meta.url)), 'Build the site before running tests');
   const html = read('out/index.html');

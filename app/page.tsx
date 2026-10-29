@@ -14,7 +14,6 @@ const t = {
     servicesTitle: 'I NOSTRI SERVIZI', servicesCaption: 'VOL. 01',
     products: 'PRODOTTI', productsDesc: 'ARTICOLI E PICCOLE NECESSITÀ, CHIEDICI INFORMAZIONI.',
     sewing: 'CUCITO E MODIFICHE', sewingDesc: 'ORLI, RIPARAZIONI, MODIFICHE E LAVORI DA DISCUTERE IN NEGOZIO.',
-    print3d: 'STAMPA 3D E INCISIONE', print3dDesc: 'DESCRIVICI LA TUA IDEA E CHIEDI INFORMAZIONI.',
     inquire: 'CHIEDI INFO',
     storesTitle: 'DOVE TROVARCI', storesCaption: 'VOL. 02',
     oldStore: 'NEGOZIO STORICO', newStore: 'NUOVO NEGOZIO',
@@ -30,7 +29,6 @@ const t = {
 const images = [
   'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&q=80&w=800',
   'https://images.unsplash.com/photo-1558171813-4c088753af8f?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=800',
 ] as const;
 
 export default function HomePage() {
@@ -54,7 +52,6 @@ export default function HomePage() {
   const serviceCards = [
     { key: 'products', title: t.products, description: t.productsDesc, image: images[0] },
     { key: 'sewing', title: t.sewing, description: t.sewingDesc, image: images[1] },
-    { key: 'print3d', title: t.print3d, description: t.print3dDesc, image: images[2] },
   ];
 
   return (
@@ -115,7 +112,7 @@ export default function HomePage() {
             <span className="text-xs uppercase tracking-[0.4em] text-foreground/40">{t.servicesCaption}</span>
             <h2 className="mt-3 font-serif text-4xl italic uppercase tracking-[0.16em] md:text-5xl">{t.servicesTitle}</h2>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
             {serviceCards.map((item) => (
               <a key={item.key} href="#contact" className="group block overflow-hidden border border-black/5 transition-all duration-500 hover:border-black/20">
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
