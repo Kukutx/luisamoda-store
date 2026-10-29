@@ -44,6 +44,9 @@ test('LZ FORTUNA brand uses the original monochrome editorial visual style', () 
   const page = read('app/page.tsx');
   const css = read('app/globals.css');
   assert.ok(page.includes('<LZMonogram'), 'The page must display the LZ mark');
+  const hero = page.split('{/* Original centred editorial composition, updated to the LZ identity. */}')[1]?.split('{/* Retain the original photographic cards and editorial proportions. */}')[0] ?? '';
+  assert.ok(hero.includes('<h1'), 'The hero wordmark must remain');
+  assert.doesNotMatch(hero, /<LZMonogram/, 'The hero must not repeat the header monogram');
   assert.ok(page.includes('FORTUNA</span>'), 'LZ FORTUNA wordmark must be visible');
   assert.doesNotMatch(page, /LUISA <span|aria-label="Luisa Moda"/);
   assert.ok(page.includes('photo-1558171813-4c088753af8f'), 'Original sewing image must remain');

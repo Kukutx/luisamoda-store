@@ -91,7 +91,6 @@ export default function HomePage() {
             <div className="absolute -top-1/4 h-[80vw] w-[80vw] rounded-full border border-black/3" />
           </div>
           <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-7">
-            <LZMonogram className="h-16 w-[4.5rem] text-foreground" />
             <h1 className="font-serif text-[clamp(2.8rem,8vw,6rem)] font-light leading-none tracking-[0.12em] text-foreground sm:tracking-[0.18em]">
               <span className="block md:inline">LZ</span>{' '}
               <span className="block font-light italic md:inline">FORTUNA</span>
