@@ -133,7 +133,7 @@ export default function HomePage() {
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
                 <Image
                   src="/images/assortimento-prodotti.jpg"
-                  alt="Assortimento illustrativo: abbigliamento e accessori, casa e cucina, cartoleria e giocattoli"
+                  alt="Assortimento illustrativo: abbigliamento e accessori, casa e cucina, cartoleria"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
