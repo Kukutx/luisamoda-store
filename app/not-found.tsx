@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 // Italian 404 with the same monochrome style; Firebase Hosting serves out/404.html.
 export default function NotFound() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-7 bg-background px-6 text-center text-foreground">
+    <main id="contenuto" className="flex min-h-screen flex-col items-center justify-center gap-7 bg-background px-6 text-center text-foreground">
       <Link href="/" className="font-serif text-3xl tracking-[0.065em]" aria-label="LZ FORTUNA — Torna alla home">
         LZ <span className="italic">FORTUNA</span>
       </Link>

@@ -205,3 +205,13 @@ test('hashed build assets are cached long-term on Firebase Hosting', () => {
   const rule = main.headers.find(({ source }) => source === '/_next/static/**');
   assert.ok(rule.headers.some(({ value }) => value.includes('immutable')));
 });
+
+test('keyboard visitors can skip to the content on every page', () => {
+  for (const file of ['out/index.html', 'out/sartoria/index.html', 'out/prodotti/index.html', 'out/404.html']) {
+    const html = read(file);
+    assert.ok(html.includes('href="#contenuto"') && html.includes('id="contenuto"'), file);
+  }
+  const css = read('app/globals.css');
+  assert.match(css, /prefers-reduced-motion: reduce/);
+  assert.match(css, /text-wrap: balance/);
+});
