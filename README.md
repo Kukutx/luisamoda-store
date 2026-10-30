@@ -1,8 +1,19 @@
-# LZ Fortuna & Luisa Moda
+# LZ FORTUNA
 
 意大利本地裁缝/改衣服务介绍网站。**保留 Next.js + React + TypeScript + Tailwind CSS**，以静态方式构建，没有购物车、订单、会员、管理后台或数据库。
 
 品牌主名称采用 **LZ FORTUNA**。主标题、顶部及页脚品牌名使用 **Cormorant Garamond 字体与 HTML/CSS**（真实文字、可复制、缩放清晰），副标题也是独立 HTML；不再把裁剪的 PNG 当作页面文字。浏览器图标保留 `public/brand/icon.png`。**Luisa Moda** 仅保留为 Calusco 老店的实际门店名称。
+
+## 命名约定
+
+| 场合 | 写法 |
+|---|---|
+| 品牌标识（Logo、标题、`<title>`、`site.name`） | **LZ FORTUNA** |
+| 正文和门店名 | **LZ Fortuna**（Cologno Monzese 新店） |
+| 代码标识、包名、域名、仓库名 | **`lzfortuna`**（包名 `lzfortuna-store`，网址 `lzfortuna.web.app`） |
+| Calusco 老店 | **Luisa Moda**（实际门店名，只用于老店本身） |
+
+不要写成 Lzfortuna、LZFortuna、LZ-Fortuna、Fortuna 单独使用或 lzfurtuna。Firebase 项目 ID `lzfortuna-store-cologno` 创建后无法改名，只承担旧地址跳转，保持不变。
 
 ## 两家门店
 

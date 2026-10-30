@@ -27,5 +27,5 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3"
   },
-  "description": "Two local tailoring shops in Cologno Monzese and Calusco; a lightweight Next.js static website."
+  "description": "LZ FORTUNA: neighbourhood store and tailoring in Cologno Monzese, with the Luisa Moda shop in Calusco; a lightweight Next.js static website."
 }
