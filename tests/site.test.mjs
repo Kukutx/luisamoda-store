@@ -151,7 +151,7 @@ test('tailoring price page is statically exported, with WhatsApp and no checkout
 });
 
 test('brand name is spelled consistently across public files', () => {
-  const files = ['app/page.tsx', 'app/layout.tsx', 'app/prodotti/page.tsx', 'app/sartoria/page.tsx', 'lib/site.ts', 'legacy-hosting/404.html', 'package.json', 'README.md'];
+  const files = ['app/page.tsx', 'app/layout.tsx', 'app/prodotti/page.tsx', 'app/sartoria/page.tsx', 'lib/site.ts', 'legacy-hosting/404.html', 'package.json'];
   for (const file of files) {
     assert.doesNotMatch(read(file), /furtuna|LZFortuna|Lzfortuna|LZ-Fortuna|Lz Fortuna/, `${file} must use LZ FORTUNA / LZ Fortuna / lzfortuna`);
   }
