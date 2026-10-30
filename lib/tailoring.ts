@@ -1,5 +1,5 @@
 /**
- * Prezzi trascritti dal listino fotografato fornito dal proprietario.
+ * Prezzi copiati dal listino fotografato fornito dal proprietario.
  * Sono valori di riferimento, non un preventivo automatico.
  * Per aggiornare il listino si modifica soltanto questo file.
  */
@@ -21,11 +21,7 @@ export const tailoringCategories: TailoringCategory[] = [
     title: 'Pantaloni e jeans',
     items: [
       { service: 'Orlo a macchina', price: '€ 4,00' },
-      {
-        service: 'Orlo con impuntura',
-        price: '€ 3,00 / € 5,00',
-        note: 'Due importi sul listino originale: da confermare',
-      },
+      { service: 'Orlo con impuntura', price: '€ 3,00 – 5,00' },
       { service: 'Orlo invisibile', price: '€ 5,00' },
       { service: 'Orlo jeans originale', price: '€ 6,00' },
       { service: 'Stringere la gamba', price: '€ 5,00' },

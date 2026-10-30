@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SubpageHeader, SubpageFooter } from '@/components/subpage-chrome';
-import { site, whatsappWith } from '@/lib/site';
+import { site, fullAddress, hoursLine, whatsappWith } from '@/lib/site';
 import { tailoringCategories, otherTailoringServices } from '@/lib/tailoring';
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function SartoriaPage() {
       <main id="contenuto">
         <section className="container mx-auto border-b border-black/10 px-6 pb-14 pt-16 md:px-10 md:pb-20 md:pt-24">
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.14em] text-foreground/75">
-            SARTORIA · SERVIZI
+            Sartoria
           </p>
           <h1 className="max-w-4xl font-serif text-[clamp(2.8rem,7vw,5.7rem)] font-light italic leading-[1.05] tracking-[0.03em]">
             Riparazioni e modifiche
@@ -73,6 +73,7 @@ export default function SartoriaPage() {
                       ? 'Orli e piccole riparazioni, da lasciare e ritirare in negozio.'
                       : 'Il laboratorio di sartoria: riparazioni e modifiche anche più impegnative.'}
                   </p>
+                  <p className="mt-2 text-base leading-7 text-foreground/75">{fullAddress(store) || store.city}</p>
                 </div>
               ))}
             </div>
@@ -82,7 +83,7 @@ export default function SartoriaPage() {
         <section className="container mx-auto px-6 py-14 md:px-10 md:py-20" aria-labelledby="listino-heading">
           <div className="mb-11 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground/75">LISTINO · RIFERIMENTO</span>
+              <span className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground/75">Listino prezzi</span>
               <h2 id="listino-heading" className="mt-3 font-serif text-4xl italic tracking-[0.08em] md:text-5xl">
                 Prezzi indicativi
               </h2>
@@ -130,9 +131,9 @@ export default function SartoriaPage() {
             ))}
           </section>
           <p className="mt-10 max-w-3xl border-l-2 border-black/70 pl-5 text-lg leading-8 text-foreground/75">
-            <strong>Nota sui prezzi.</strong> Importi trascritti da un listino esistente e pubblicati
-            come riferimento. Il costo può variare in base al tessuto e al lavoro necessario.
-            Chiedi sempre conferma prima della riparazione.
+            <strong>Nota sui prezzi.</strong> Sono prezzi indicativi: il costo può cambiare in base
+            al tessuto e al lavoro necessario. Ti diciamo sempre il prezzo prima di iniziare.
+            Orari per lasciare e ritirare i capi: {hoursLine(site.stores[0])}.
           </p>
         </section>
 

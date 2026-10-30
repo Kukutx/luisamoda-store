@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { MobileMenu } from '@/components/mobile-menu';
+import { OpenNow } from '@/components/open-now';
 import { site, fullAddress, mapsUrl, whatsappWith, hoursLine } from '@/lib/site';
 
 // Monochrome editorial identity, written for local customers of every age:
@@ -17,12 +18,12 @@ const t = {
     sewing: 'CUCITO E MODIFICHE',
     sewingDesc: 'Orli, riparazioni e modifiche sartoriali. Consulta il listino e chiedici informazioni.',
     storesTitle: 'Dove trovarci',
-    storesIntro: 'Due negozi di famiglia, con lo stesso numero per entrambi.',
+    storesIntro: `Due negozi di famiglia, aperti dal lunedì al sabato. Un solo numero per tutti e due: ${site.displayPhone}.`,
     oldStore: 'Negozio storico', newStore: 'Nuovo negozio',
     findHere: 'Cosa trovi', hours: 'Orario', address: 'Indirizzo', addressPending: 'Indirizzo disponibile su richiesta',
     directions: 'Indicazioni', inquire: 'Scrivici',
     contactTitle: 'Parliamone',
-    contactDesc: 'Hai una domanda, cerchi un prodotto o vuoi passare in negozio? Scrivici su WhatsApp o chiamaci: ti rispondiamo noi.',
+    contactDesc: 'Hai una domanda, cerchi un prodotto o vuoi passare in negozio? Scrivici su WhatsApp o chiamaci: ti risponde direttamente la nostra famiglia.',
     tiktok: 'Seguici su TikTok',
     footerDesc: 'Emporio di quartiere e sartoria',
 };
@@ -194,6 +195,7 @@ export default function HomePage() {
                         <p key={time.opens} className="text-2xl leading-9 tabular-nums">{time.opens}–{time.closes}</p>
                       ))}
                       <p className="mt-1 text-lg font-semibold leading-7">{store.hours.closed}</p>
+                      <OpenNow times={store.hours.times} />
                     </dd>
                   </div>
                   <div>

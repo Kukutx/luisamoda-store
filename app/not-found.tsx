@@ -16,16 +16,16 @@ export default function NotFound() {
       </Link>
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-foreground/70">Errore 404</p>
       <h1 className="font-serif text-4xl italic md:text-5xl">Pagina non trovata</h1>
-      <p className="max-w-md text-base leading-7 text-foreground/70">
+      <p className="max-w-md text-lg leading-8 text-foreground/80">
         L’indirizzo potrebbe essere cambiato. Torna alla home oppure scrivici su WhatsApp.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link href="/" className="inline-flex min-h-12 items-center bg-foreground px-8 text-sm font-bold uppercase tracking-[0.2em] text-background hover:opacity-80">
+        <Link href="/" className="inline-flex min-h-14 items-center bg-foreground px-8 text-lg font-semibold text-background hover:bg-neutral-800">
           Torna alla home
         </Link>
         <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
-          className="inline-flex min-h-12 items-center border border-foreground px-8 text-sm font-bold uppercase tracking-[0.2em] hover:bg-black/5">
-          WhatsApp ↗
+          className="inline-flex min-h-14 items-center border-2 border-foreground px-8 text-lg font-semibold hover:bg-black/5">
+          Scrivici su WhatsApp
         </a>
       </div>
     </main>

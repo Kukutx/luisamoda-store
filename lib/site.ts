@@ -1,11 +1,12 @@
 // 店铺资料只需维护这一个文件。老店的私人号码不要写到公开网站中。
 // address 留空时页面显示“地址可询问”，不生成地图链接。
+import type { OpenInterval } from './hours';
 
 /** Weekly opening times; both stores keep the same hours and close on Sunday. */
 type Hours = {
   days: string;
   /** Open intervals on those days, morning and afternoon. */
-  times: { opens: string; closes: string }[];
+  times: OpenInterval[];
   closed: string;
 };
 
