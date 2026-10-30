@@ -199,9 +199,10 @@ test('link previews use the approved lockup and unused artwork is not published'
   }
 });
 
-test('homepage ships as static HTML with only the mobile menu as a client component', () => {
+test('homepage ships as static HTML with only the menu and open-now badge as client components', () => {
   assert.doesNotMatch(read('app/page.tsx'), /^'use client'/);
   assert.match(read('components/mobile-menu.tsx'), /^'use client'/);
+  assert.match(read('components/open-now.tsx'), /^'use client'/);
   const css = read('app/globals.css');
   assert.doesNotMatch(css, /grain-overlay|bg-login-radial|soft-glow|\.glass/, 'Unused CSS from old templates must stay removed');
 });
@@ -241,4 +242,28 @@ test('public text stays readable: no tiny labels or faint grey text', () => {
     assert.doesNotMatch(source, /text-\[(9|10|11)px\]|\btext-xs\b/, 'Text smaller than 14px in ' + file);
     assert.doesNotMatch(source, /text-foreground\/(30|40|50|55|60)\b/, 'Low-contrast text in ' + file);
   }
+});
+
+test('open-now badge follows Italian time, lunch break, Sunday and holidays', async () => {
+  const { openStatus } = await import('../lib/hours.ts');
+  const times = [{ opens: '09:00', closes: '13:00' }, { opens: '14:30', closes: '19:30' }];
+  // Instants in UTC; Italy is UTC+1 in winter and UTC+2 in summer.
+  const at = (iso) => openStatus(times, new Date(iso));
+  assert.deepEqual(at('2026-11-02T09:30:00Z'), { open: true, text: 'Aperto ora · chiude alle 13:00' }); // Mon 10:30
+  assert.deepEqual(at('2026-11-02T12:30:00Z'), { open: false, text: 'Chiuso ora · apre alle 14:30' }); // Mon 13:30
+  assert.deepEqual(at('2026-11-02T13:30:00Z'), { open: true, text: 'Aperto ora · chiude alle 19:30' }); // Mon 14:30
+  assert.deepEqual(at('2026-11-02T18:30:00Z'), { open: false, text: 'Chiuso ora · riapre domani alle 09:00' }); // Mon 19:30
+  assert.deepEqual(at('2026-11-02T06:00:00Z'), { open: false, text: 'Chiuso ora · apre alle 09:00' }); // Mon 07:00
+  assert.deepEqual(at('2026-11-07T19:00:00Z'), { open: false, text: 'Chiuso ora · riapre lunedì alle 09:00' }); // Sat 20:00
+  assert.deepEqual(at('2026-11-08T10:00:00Z'), { open: false, text: 'Oggi chiuso · riapre lunedì alle 09:00' }); // Sun
+  assert.deepEqual(at('2026-07-06T07:30:00Z'), { open: true, text: 'Aperto ora · chiude alle 13:00' }); // summer Mon 09:30
+  assert.equal(at('2026-12-25T10:00:00Z'), null, 'No guess on national holidays');
+});
+
+test('customer-facing copy has no internal or legalistic notes', () => {
+  const pages = ['app/page.tsx', 'app/sartoria/page.tsx', 'app/prodotti/page.tsx', 'lib/tailoring.ts'].map(read).join('\n');
+  assert.doesNotMatch(pages, /da confermare|trascritti|non costituiscono|tempo reale/);
+  const footer = read('components/subpage-chrome.tsx');
+  assert.match(footer, /fullAddress/, 'Inner pages show the store addresses');
+  assert.match(footer, /hoursLine/, 'Inner pages show the opening hours');
 });

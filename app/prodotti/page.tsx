@@ -59,9 +59,6 @@ export default function ProdottiPage() {
               </article>
             ))}
           </div>
-          <p className="mt-7 text-base leading-7 text-foreground/75">
-            Le categorie sono indicative e non costituiscono un catalogo con disponibilità in tempo reale.
-          </p>
         </section>
 
         <section className="border-t border-black/10 bg-neutral-50 px-6 py-16 text-center md:py-20">

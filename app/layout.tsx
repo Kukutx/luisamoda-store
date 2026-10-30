@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Cormorant_Garamond } from 'next/font/google';
 import { ContactBar } from '@/components/contact-bar';
-import { site, fullAddress } from '@/lib/site';
+import { site, fullAddress, mapsUrl } from '@/lib/site';
 import './globals.css';
 
 // Restore the original storefront's two font families.
@@ -15,9 +15,9 @@ const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
 });
 
-const title = 'LZ FORTUNA | Emporio di quartiere e sartoria';
+const title = 'LZ FORTUNA | Emporio e sartoria a Cologno Monzese e Calusco d’Adda';
 const description =
-  'LZ FORTUNA: abbigliamento, casa, cucina, cartoleria, cosmetici, giocattoli e sartoria. Oltre vent’anni di esperienza nel negozio storico. Contattaci su WhatsApp.';
+  'Due negozi di famiglia a Cologno Monzese e Calusco d’Adda: abbigliamento, casa, cucina, cartoleria, giocattoli e sartoria. Aperti dal lunedì al sabato. Scrivici su WhatsApp.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -48,6 +48,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: site.name,
+    url: site.url,
+    logo: new URL('/brand/icon.png', site.url).toString(),
+    sameAs: [site.tiktok],
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: site.phone,
@@ -57,7 +60,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     subOrganization: site.stores.map((store) => ({
       '@type': 'LocalBusiness',
       name: store.name,
+      url: site.url,
+      image: new URL('/brand/og-image.png', site.url).toString(),
       telephone: site.phone,
+      ...(mapsUrl(store) && { hasMap: mapsUrl(store) }),
       ...(store.tiktok && { sameAs: [store.tiktok.url] }),
       openingHoursSpecification: store.hours.times.map((time) => ({
         '@type': 'OpeningHoursSpecification',
