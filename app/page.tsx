@@ -50,11 +50,11 @@ export default function HomePage() {
     <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 py-4 backdrop-blur-2xl">
         <div className="container mx-auto flex items-center justify-between gap-1.5 px-3 sm:gap-4 sm:px-6 md:px-10">
-          <a href="#top" className="group shrink-0 font-serif text-[clamp(1.1rem,3vw,2rem)] tracking-[0.04em] text-foreground transition-opacity hover:opacity-65 sm:tracking-[0.065em]" aria-label="LZ FORTUNA - Home">
+          <a href="#top" className="group shrink-0 font-serif text-[clamp(1.1rem,3vw,2rem)] tracking-[0.04em] text-foreground transition-opacity hover:opacity-65 sm:tracking-[0.065em]" aria-label="LZ FORTUNA — Inizio pagina">
             LZ <span className="italic">FORTUNA</span>
           </a>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-4">
-            <nav className="hidden items-center gap-3 lg:gap-7 md:flex" aria-label="Navigation">
+            <nav className="hidden items-center gap-3 lg:gap-7 md:flex" aria-label="Navigazione principale">
               {nav.map((item) => (
                 <a key={item.href} href={item.href} className="text-[11px] tracking-[0.13em] uppercase text-foreground/65 transition-colors hover:text-foreground lg:text-xs lg:tracking-[0.2em]">{item.label}</a>
               ))}
@@ -64,12 +64,12 @@ export default function HomePage() {
               WhatsApp <span className="hidden sm:inline">↗</span>
             </a>
             <button type="button" className="flex min-h-11 min-w-11 items-center justify-center border border-black/15 text-xl md:hidden"
-              aria-controls="mobile-menu" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-controls="mobile-menu" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Chiudi il menu' : 'Apri il menu'}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? '×' : '☰'}</button>
           </div>
         </div>
         {mobileMenuOpen && (
-          <nav id="mobile-menu" className="flex flex-col gap-2 border-t border-black/5 bg-white px-6 py-5 md:hidden" aria-label="Mobile navigation">
+          <nav id="mobile-menu" className="flex flex-col gap-2 border-t border-black/5 bg-white px-6 py-5 md:hidden" aria-label="Navigazione mobile">
             {nav.map((item) => (
               <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} className="py-3 text-base tracking-widest uppercase">{item.label}</a>
             ))}
@@ -198,7 +198,7 @@ export default function HomePage() {
             <p className="text-sm uppercase tracking-[0.18em] text-foreground/55">{t.footerDesc}</p>
             <p className="text-sm tracking-widest text-foreground/50">LZ Fortuna · Cologno Monzese / Luisa Moda · Calusco</p>
           </div>
-          <nav className="flex flex-col gap-4 text-sm uppercase tracking-widest text-foreground/50" aria-label="Footer navigation">
+          <nav className="flex flex-col gap-4 text-sm uppercase tracking-widest text-foreground/50" aria-label="Navigazione a piè di pagina">
             {nav.map((item) => (<a href={item.href} key={item.href} className="hover:text-foreground">{item.label}</a>))}
           </nav>
         </div>

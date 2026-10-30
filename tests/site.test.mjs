@@ -156,3 +156,19 @@ test('brand name is spelled consistently across public files', () => {
     assert.doesNotMatch(read(file), /furtuna|LZFortuna|Lzfortuna|LZ-Fortuna|Lz Fortuna/, `${file} must use LZ FORTUNA / LZ Fortuna / lzfortuna`);
   }
 });
+
+test('static export ships an Italian 404, robots.txt and sitemap', () => {
+  const notFound = read('out/404.html');
+  assert.ok(notFound.includes('Pagina non trovata'));
+  assert.doesNotMatch(notFound, /could not be found/);
+  assert.ok(read('out/robots.txt').includes('Sitemap: https://lzfortuna.web.app/sitemap.xml'));
+  const sitemap = read('out/sitemap.xml');
+  for (const path of ['/', '/prodotti/', '/sartoria/']) {
+    assert.ok(sitemap.includes(`<loc>https://lzfortuna.web.app${path}</loc>`), path);
+  }
+});
+
+test('accessible labels on the Italian homepage are in Italian', () => {
+  const page = read('app/page.tsx');
+  assert.doesNotMatch(page, /'(Open|Close) menu'|aria-label="(Mobile |Footer )?[Nn]avigation"/);
+});
