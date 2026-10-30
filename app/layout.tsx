@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Cormorant_Garamond } from 'next/font/google';
-import { site } from '@/lib/site';
+import { site, fullAddress } from '@/lib/site';
 import './globals.css';
 
 // Restore the original storefront's two font families.
@@ -30,8 +30,9 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: 'it_IT',
     type: 'website',
+    images: [{ url: '/brand/og-image.png', width: 1200, height: 630, alt: 'LZ FORTUNA — Sartoria e servizi per il tuo stile' }],
   },
-  icons: { icon: '/brand/icon.png' },
+  icons: { icon: '/brand/icon.png', apple: '/brand/apple-touch-icon.png' },
   robots: { index: true, follow: true },
 };
 
@@ -55,9 +56,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     subOrganization: site.stores.map((store) => ({
       '@type': 'LocalBusiness',
       name: store.name,
+      telephone: site.phone,
       address: {
         '@type': 'PostalAddress',
+        ...(fullAddress(store) && { streetAddress: store.address, postalCode: store.postalCode }),
         addressLocality: store.city,
+        addressRegion: store.province,
         addressCountry: 'IT',
       },
     })),

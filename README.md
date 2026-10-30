@@ -1,8 +1,14 @@
 # LZ FORTUNA
 
-意大利本地裁缝/改衣服务介绍网站。**保留 Next.js + React + TypeScript + Tailwind CSS**，以静态方式构建，没有购物车、订单、会员、管理后台或数据库。
+意大利本地百货和裁缝门店的介绍网站。**保留 Next.js + React + TypeScript + Tailwind CSS**，以静态方式构建，没有购物车、订单、会员、管理后台或数据库。
 
-品牌主名称采用 **LZ FORTUNA**。主标题、顶部及页脚品牌名使用 **Cormorant Garamond 字体与 HTML/CSS**（真实文字、可复制、缩放清晰），副标题也是独立 HTML；不再把裁剪的 PNG 当作页面文字。浏览器图标保留 `public/brand/icon.png`。**Luisa Moda** 仅保留为 Calusco 老店的实际门店名称。
+品牌主名称采用 **LZ FORTUNA**。主标题、顶部及页脚品牌名使用 **Cormorant Garamond 字体与 HTML/CSS**（真实文字、可复制、缩放清晰），副标题也是独立 HTML；不再把裁剪的 PNG 当作页面文字。**Luisa Moda** 仅保留为 Calusco d’Adda 老店的实际门店名称。
+
+品牌图片：
+
+- `public/brand/icon.png`、`apple-touch-icon.png`：浏览器和手机桌面图标（LZ 字母组合）。
+- `public/brand/og-image.png`：在 WhatsApp、Facebook 等分享链接时显示的预览图，由批准的标志组合图生成。
+- `design/brand/`：批准的原稿（标志组合、字标、字母组合）。不对外发布，也不要在页面里当文字用。
 
 ## 命名约定
 
@@ -17,17 +23,17 @@
 
 ## 两家门店
 
-| 门店 | 地区 | 营业时间 | 联系方式 |
+| 门店 | 地址 | 营业时间 | 联系方式 |
 |---|---|---|---|
-| LZ Fortuna（新店） | Cologno Monzese | 09:00–19:30 | **366 892 7486** |
-| Luisa Moda（老店） | Calusco | 09:00–19:30 | **统一联系新店** |
+| LZ Fortuna（新店） | Cologno Monzese（街道地址待补） | 09:00–19:30 | **366 892 7486** |
+| Luisa Moda（老店） | Piazza S. Rocco, 51, 24033 Calusco d’Adda (BG) | 09:00–19:30 | **统一联系新店** |
 
-两店的街道地址、每周营业日尚未提供；页面只展示已确认信息。**不要在网站代码中公开老店号码。** WhatsApp 和拨号都使用新店号码。
+新店街道地址和两店每周营业日尚未提供；页面只展示已确认信息，新店地址留空时显示“地址可询问”，有地址的门店会自动显示 Google 地图链接，并写进结构化数据。**不要在网站代码中公开老店号码。** WhatsApp 和拨号都使用新店号码。
 
 ## 日常维护
 
-- 仅修改 **`lib/site.ts`** 中的电话号码、门店名称、地址和时间。
-- 当前前台仅保留意大利语。文案在 `app/page.tsx` 中修改，不包含多语言切换或额外国际化运行时依赖。
+- 仅修改 **`lib/site.ts`** 中的电话号码、门店名称、地址（`address`、`postalCode`、`province`）和时间。
+- 当前前台仅保留意大利语。首页文案在 `app/page.tsx` 中修改；子页面共用的页眉页脚在 `components/subpage-chrome.tsx`，不包含多语言切换或额外国际化运行时依赖。
 - 旧语言入口（`/zh/`、`/en/`、`/it/`）和旧服务链接通过 `firebase.json` 重定向到意大利语网站，避免旧二维码或收藏链接在当前域名下失效。
 - `npm install` 安装依赖；`npm run dev` 本地预览。
 - `npm run lint` 检查代码；`npm run typecheck` 检查类型；`npm run build` 生成静态版 **`out/`**；`npm test` 验证导出的网页及联系方式。
@@ -51,4 +57,4 @@
 
 构建时会生成意大利语 404 页（`app/not-found.tsx`）、`robots.txt` 和 `sitemap.xml`（`app/robots.ts`、`app/sitemap.ts`）；新增页面时记得加进 sitemap。
 
-GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。GitHub 仍用于存放代码。旧 Vercel 集成不再需要。
+GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。

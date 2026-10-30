@@ -31,9 +31,6 @@ yarn-error.log*
 # secrets (tokens, keys - never commit)
 /secrets
 
-# vercel
-.vercel
-
 # Firebase Hosting deployment cache
 .firebase/
 
@@ -43,7 +40,3 @@ next-env.d.ts
 
 # logs / reports
 *.log
-build_log*.txt
-eslint-report.json
-
-
