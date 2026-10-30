@@ -49,4 +49,6 @@
 
 首页两张卡片恢复**图片在上、文字在下**的原版结构。百货配图 `public/images/assortimento-prodotti.jpg` 用几种商品类别的免费图像拼成，不代表门店实拍或实时库存；使用的照片素材来自 Unsplash（服装 photo-1573612664822-d7d347da7b80，厨房 photo-1556911220-bff31c812dba，文具 photo-1513542789411-b6a5d4f31634，玩具 photo-1566576912321-d58ddd7a6088）。裁缝卡片没有 WhatsApp 按钮，黑色 WhatsApp 按钮只在顶部导航栏以及原有联系区域。收到真实门店照片后可替换百货配图。
 
+构建时会生成意大利语 404 页（`app/not-found.tsx`）、`robots.txt` 和 `sitemap.xml`（`app/robots.ts`、`app/sitemap.ts`）；新增页面时记得加进 sitemap。
+
 GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。GitHub 仍用于存放代码。旧 Vercel 集成不再需要。
