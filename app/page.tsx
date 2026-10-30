@@ -1,13 +1,11 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { site } from '@/lib/site';
+import { MobileMenu } from '@/components/mobile-menu';
+import { site, fullAddress, mapsUrl } from '@/lib/site';
 
 // Preserve the existing monochrome editorial layout; the brand is now LZ FORTUNA.
 const t = {
     home: 'HOME', services: 'SERVIZI', stores: 'NEGOZI', contact: 'CONTATTI',
-    heroDetail: 'COLOGNO MONZESE · CALUSCO',
+    heroDetail: 'COLOGNO MONZESE · CALUSCO D’ADDA',
     discover: 'SCOPRI', scroll: 'SCORRI',
     servicesTitle: 'I NOSTRI SERVIZI', servicesCaption: 'VOL. 01',
     products: 'PRODOTTI PER TUTTI I GIORNI',
@@ -17,7 +15,7 @@ const t = {
     inquire: 'CHIEDI INFO',
     storesTitle: 'DOVE TROVARCI', storesCaption: 'VOL. 02',
     oldStore: 'NEGOZIO STORICO', newStore: 'NUOVO NEGOZIO',
-    hours: 'ORARIO', addressPending: 'INDIRIZZO DISPONIBILE SU RICHIESTA',
+    hours: 'ORARIO', address: 'INDIRIZZO', addressPending: 'INDIRIZZO DISPONIBILE SU RICHIESTA', directions: 'INDICAZIONI',
     storesNote: 'Per entrambi i negozi, contattaci direttamente su WhatsApp o al numero 366 892 7486.',
     contactTitle: 'PARLIAMONE', contactCaption: 'VOL. 03',
     contactDesc: 'Hai una domanda o cerchi un prodotto? Scrivici su WhatsApp o chiamaci direttamente: saremo felici di aiutarti.',
@@ -29,17 +27,6 @@ const t = {
 const sewingImage = '/images/sartoria.jpg';
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
-    const onEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMobileMenuOpen(false);
-    };
-    window.addEventListener('keydown', onEscape);
-    return () => window.removeEventListener('keydown', onEscape);
-  }, [mobileMenuOpen]);
-
   const nav = [
     { href: '#top', label: t.home },
     { href: '#services', label: t.services },
@@ -63,18 +50,9 @@ export default function HomePage() {
               className="inline-flex min-h-11 shrink-0 items-center justify-center bg-black px-2 text-[10px] font-bold uppercase tracking-[0.02em] text-white hover:bg-neutral-800 sm:px-5 sm:text-xs sm:tracking-[0.08em]">
               WhatsApp <span className="hidden sm:inline">↗</span>
             </a>
-            <button type="button" className="flex min-h-11 min-w-11 items-center justify-center border border-black/15 text-xl md:hidden"
-              aria-controls="mobile-menu" aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? 'Chiudi il menu' : 'Apri il menu'}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? '×' : '☰'}</button>
+            <MobileMenu items={nav} />
           </div>
         </div>
-        {mobileMenuOpen && (
-          <nav id="mobile-menu" className="flex flex-col gap-2 border-t border-black/5 bg-white px-6 py-5 md:hidden" aria-label="Navigazione mobile">
-            {nav.map((item) => (
-              <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} className="py-3 text-base tracking-widest uppercase">{item.label}</a>
-            ))}
-          </nav>
-        )}
       </header>
 
       <main id="top">
@@ -137,8 +115,6 @@ export default function HomePage() {
                   src={sewingImage}
                   alt="Lavori di cucito e modifiche di abbigliamento"
                   fill
-                  unoptimized
-                  loading="eager"
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
@@ -168,10 +144,21 @@ export default function HomePage() {
                 <div className="border-t border-black/10 pt-6">
                   <p className="mb-2 text-xs uppercase tracking-[0.3em] text-foreground/50">{t.hours}</p>
                   <p className="mb-4 text-2xl tracking-widest">{store.hours}</p>
-                  <p className="text-sm leading-7 tracking-[0.1em] text-foreground/60">{store.address || t.addressPending}</p>
+                  <p className="mb-2 text-xs uppercase tracking-[0.3em] text-foreground/50">{t.address}</p>
+                  {fullAddress(store) ? (
+                    <address className="text-base not-italic leading-7 tracking-[0.06em] text-foreground/80">{fullAddress(store)}</address>
+                  ) : (
+                    <p className="text-sm leading-7 tracking-[0.1em] text-foreground/60">{t.addressPending}</p>
+                  )}
                 </div>
-                <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
-                  className="mt-8 inline-block border-b border-black/40 pb-2 text-sm font-bold uppercase tracking-[0.18em]">{t.inquire} →</a>
+                <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
+                  {mapsUrl(store) && (
+                    <a href={mapsUrl(store)!} target="_blank" rel="noopener noreferrer"
+                      className="inline-block border-b border-black/40 pb-2 text-sm font-bold uppercase tracking-[0.18em]">{t.directions} ↗</a>
+                  )}
+                  <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
+                    className="inline-block border-b border-black/40 pb-2 text-sm font-bold uppercase tracking-[0.18em]">{t.inquire} →</a>
+                </div>
               </article>
             ))}
           </div>
@@ -196,7 +183,7 @@ export default function HomePage() {
           <div className="space-y-4">
             <p className="font-serif text-3xl tracking-[0.08em]">LZ <span className="italic">FORTUNA</span></p>
             <p className="text-sm uppercase tracking-[0.18em] text-foreground/55">{t.footerDesc}</p>
-            <p className="text-sm tracking-widest text-foreground/50">LZ Fortuna · Cologno Monzese / Luisa Moda · Calusco</p>
+            <p className="text-sm tracking-widest text-foreground/50">LZ Fortuna · Cologno Monzese / Luisa Moda · Calusco d’Adda</p>
           </div>
           <nav className="flex flex-col gap-4 text-sm uppercase tracking-widest text-foreground/50" aria-label="Navigazione a piè di pagina">
             {nav.map((item) => (<a href={item.href} key={item.href} className="hover:text-foreground">{item.label}</a>))}

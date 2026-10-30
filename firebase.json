@@ -121,7 +121,27 @@
       ],
       "cleanUrls": true,
       "trailingSlash": true,
-      "site": "lzfortuna"
+      "site": "lzfortuna",
+      "headers": [
+        {
+          "source": "/_next/static/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(jpg|png|woff2)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=604800"
+            }
+          ]
+        }
+      ]
     },
     {
       "site": "lzfortuna-store-cologno",

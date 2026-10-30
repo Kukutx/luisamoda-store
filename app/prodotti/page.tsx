@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { SubpageHeader, SubpageFooter } from '@/components/subpage-chrome';
 import { merchandiseCategories } from '@/lib/merchandise';
 import { site } from '@/lib/site';
 
@@ -13,23 +13,7 @@ export const metadata: Metadata = {
 export default function ProdottiPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-black/10 bg-white">
-        <div className="container mx-auto flex min-h-20 items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-6 md:px-10">
-          <Link href="/" aria-label="LZ FORTUNA — Torna alla home"
-            className="shrink-0 font-serif text-[clamp(1.1rem,3vw,2rem)] tracking-[0.04em] sm:tracking-[0.065em]">
-            LZ <span className="italic">FORTUNA</span>
-          </Link>
-          <div className="flex shrink-0 items-center gap-2 sm:gap-5">
-            <Link href="/" className="py-3 text-xs font-semibold uppercase tracking-[0.15em] text-foreground/75 hover:text-foreground">
-              ← <span className="hidden sm:inline">HOME</span>
-            </Link>
-            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center bg-black px-2 text-[10px] font-bold uppercase text-white hover:bg-neutral-800 sm:px-5 sm:text-xs">
-              WHATSAPP <span className="hidden sm:inline">↗</span>
-            </a>
-          </div>
-        </div>
-      </header>
+      <SubpageHeader />
 
       <main>
         <section className="container mx-auto border-b border-black/10 px-6 py-16 md:px-10 md:py-24">
@@ -88,12 +72,7 @@ export default function ProdottiPage() {
         </section>
       </main>
 
-      <footer className="border-t border-black/10 px-6 py-9">
-        <div className="container mx-auto flex flex-wrap items-center justify-between gap-4 md:px-10">
-          <span className="font-serif text-xl italic tracking-[0.07em]">LZ FORTUNA</span>
-          <Link href="/" className="text-sm uppercase tracking-[0.18em] text-foreground/70">TORNA ALLA HOME ↑</Link>
-        </div>
-      </footer>
+      <SubpageFooter />
     </div>
   );
 }

@@ -61,7 +61,7 @@ test('LZ FORTUNA brand uses the original monochrome editorial visual style', () 
 
 test('browser icon remains separate from real HTML wordmark', () => {
   assert.ok(existsSync(new URL('../public/brand/icon.png', import.meta.url)));
-  assert.match(read('app/layout.tsx'), /icons: \{ icon: '\/brand\/icon\.png' \}/);
+  assert.match(read('app/layout.tsx'), /icons: \{ icon: '\/brand\/icon\.png', apple: '\/brand\/apple-touch-icon\.png' \}/);
   assert.ok(read('lib/site.ts').includes("name: 'LZ FORTUNA'"));
   assert.ok(read('app/layout.tsx').includes("const title = 'LZ FORTUNA"));
 });
@@ -171,4 +171,37 @@ test('static export ships an Italian 404, robots.txt and sitemap', () => {
 test('accessible labels on the Italian homepage are in Italian', () => {
   const page = read('app/page.tsx');
   assert.doesNotMatch(page, /'(Open|Close) menu'|aria-label="(Mobile |Footer )?[Nn]avigation"/);
+});
+
+test('old store address, map link and structured data are published', () => {
+  const html = read('out/index.html');
+  assert.ok(html.includes('Piazza S. Rocco, 51, 24033 Calusco d’Adda (BG)'));
+  assert.ok(html.includes('https://www.google.com/maps/search/?api=1&amp;query=Piazza%20S.%20Rocco%2C%2051'));
+  assert.ok(html.includes('"streetAddress":"Piazza S. Rocco, 51"'));
+  assert.ok(html.includes('"postalCode":"24033"'));
+  assert.ok(html.includes('INDIRIZZO DISPONIBILE SU RICHIESTA'), 'New store keeps the placeholder until its address is known');
+});
+
+test('link previews use the approved lockup and unused artwork is not published', () => {
+  const html = read('out/index.html');
+  assert.ok(html.includes('https://lzfortuna.web.app/brand/og-image.png'));
+  assert.ok(existsSync(new URL('../public/brand/og-image.png', import.meta.url)));
+  for (const file of ['lz-lockup.png', 'lz-wordmark.png', 'lz-monogram.png']) {
+    assert.ok(!existsSync(new URL('../public/brand/' + file, import.meta.url)), file + ' belongs in design/brand');
+    assert.ok(existsSync(new URL('../design/brand/' + file, import.meta.url)), file + ' source artwork must be kept');
+  }
+});
+
+test('homepage ships as static HTML with only the mobile menu as a client component', () => {
+  assert.doesNotMatch(read('app/page.tsx'), /^'use client'/);
+  assert.match(read('components/mobile-menu.tsx'), /^'use client'/);
+  const css = read('app/globals.css');
+  assert.doesNotMatch(css, /grain-overlay|bg-login-radial|soft-glow|\.glass/, 'Unused CSS from old templates must stay removed');
+});
+
+test('hashed build assets are cached long-term on Firebase Hosting', () => {
+  const hosting = JSON.parse(read('firebase.json')).hosting;
+  const main = hosting.find(({ site }) => site === 'lzfortuna');
+  const rule = main.headers.find(({ source }) => source === '/_next/static/**');
+  assert.ok(rule.headers.some(({ value }) => value.includes('immutable')));
 });
