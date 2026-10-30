@@ -11,12 +11,12 @@ export function SubpageHeader() {
           LZ <span className="italic">FORTUNA</span>
         </Link>
         <div className="flex shrink-0 items-center gap-2 sm:gap-5">
-          <Link href="/" className="py-3 text-xs font-semibold uppercase tracking-[0.15em] text-foreground/75 hover:text-foreground sm:tracking-[0.24em]">
-            ← <span className="hidden sm:inline">HOME</span>
+          <Link href="/" className="inline-flex min-h-12 items-center py-2 text-base font-semibold text-foreground/85 hover:text-foreground hover:underline">
+            ← Home
           </Link>
           <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center justify-center bg-black px-2 text-[10px] font-bold uppercase text-white hover:bg-neutral-800 sm:px-5 sm:text-xs">
-            WHATSAPP <span className="hidden sm:inline">↗</span>
+            className="inline-flex min-h-12 items-center justify-center bg-black px-3 text-sm font-semibold text-white hover:bg-neutral-800 sm:px-5">
+            WhatsApp
           </a>
         </div>
       </div>
@@ -29,8 +29,8 @@ export function SubpageFooter() {
     <footer className="border-t border-black/10 py-9">
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-4 px-6 md:px-10">
         <p className="font-serif text-xl italic tracking-[0.07em]">LZ FORTUNA</p>
-        <Link href="/" className="text-sm uppercase tracking-[0.18em] text-foreground/75 hover:text-foreground">
-          TORNA ALLA HOME ↑
+        <Link href="/" className="py-2 text-base font-semibold text-foreground/85 underline underline-offset-4 hover:text-foreground">
+          Torna alla home ↑
         </Link>
       </div>
     </footer>

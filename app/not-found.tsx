@@ -14,7 +14,7 @@ export default function NotFound() {
       <Link href="/" className="font-serif text-3xl tracking-[0.065em]" aria-label="LZ FORTUNA — Torna alla home">
         LZ <span className="italic">FORTUNA</span>
       </Link>
-      <p className="text-xs uppercase tracking-[0.4em] text-foreground/50">Errore 404</p>
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-foreground/70">Errore 404</p>
       <h1 className="font-serif text-4xl italic md:text-5xl">Pagina non trovata</h1>
       <p className="max-w-md text-base leading-7 text-foreground/70">
         L’indirizzo potrebbe essere cambiato. Torna alla home oppure scrivici su WhatsApp.

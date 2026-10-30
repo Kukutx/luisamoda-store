@@ -25,7 +25,7 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
       {open && (
         <nav id="mobile-menu" className="absolute inset-x-0 top-full flex flex-col gap-2 border-y border-black/5 bg-white px-6 py-5 md:hidden" aria-label="Navigazione mobile">
           {items.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="py-3 text-base tracking-widest uppercase">{item.label}</a>
+            <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="py-3 text-xl">{item.label}</a>
           ))}
         </nav>
       )}
