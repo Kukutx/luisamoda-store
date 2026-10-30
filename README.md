@@ -43,6 +43,10 @@
 
 **推荐 Firebase Hosting 静态托管**。虽然品牌使用 Firebase Hosting，但**不使用 Firebase Authentication、Firestore、Storage，也不运行服务端代码**。
 
+**自动部署（推荐）**：合并到 `main` 后，`.github/workflows/deploy.yml` 会检查并发布到 Firebase。只需在 GitHub 仓库 Settings → Secrets and variables → Actions 添加一次 `FIREBASE_SERVICE_ACCOUNT`（Firebase 服务账号的 JSON 密钥，角色为 Firebase Hosting Admin）。没设置时工作流只检查、跳过部署。
+
+手动部署：
+
 1. Firebase 项目：`lzfortuna-store-cologno`（配置见 `.firebaserc`）。
 2. 先执行 `npm run build`，再执行 `npm run deploy`（初次使用需先执行 `npx --yes firebase-tools@15.34.2 login` 登录自己的 Firebase 账户）。
 3. `firebase.json` 的 `hosting.public` 为 `out`。
@@ -57,7 +61,7 @@
 
 构建时会生成意大利语 404 页（`app/not-found.tsx`）、`robots.txt` 和 `sitemap.xml`（`app/robots.ts`、`app/sitemap.ts`）；新增页面时记得加进 sitemap。
 
-GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。
+GitHub Actions：`ci.yml` 在每个 PR 上检查 lint、类型、构建和测试；`deploy.yml` 在合并到 main 后自动部署（需要上面的密钥）。
 
 ## 面向本地顾客的设计约定
 
