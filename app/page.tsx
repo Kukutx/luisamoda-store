@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { MobileMenu } from '@/components/mobile-menu';
-import { site, fullAddress, mapsUrl, whatsappWith } from '@/lib/site';
+import { site, fullAddress, mapsUrl, whatsappWith, hoursLine } from '@/lib/site';
 
 // Monochrome editorial identity, written for local customers of every age:
 // large readable type, plain words and one tap to chat, call or get directions.
@@ -188,7 +188,13 @@ export default function HomePage() {
                 <dl className="mt-7 grid grid-cols-1 gap-5 border-t border-black/10 pt-6 sm:grid-cols-2">
                   <div>
                     <dt className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground/70">{t.hours}</dt>
-                    <dd className="mt-1 text-2xl tabular-nums">{store.hours}</dd>
+                    <dd className="mt-1">
+                      <p className="text-lg leading-7">{store.hours.days}</p>
+                      {store.hours.times.map((time) => (
+                        <p key={time.opens} className="text-2xl leading-9 tabular-nums">{time.opens}–{time.closes}</p>
+                      ))}
+                      <p className="mt-1 text-lg font-semibold leading-7">{store.hours.closed}</p>
+                    </dd>
                   </div>
                   <div>
                     <dt className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground/70">{t.address}</dt>
@@ -240,7 +246,7 @@ export default function HomePage() {
             <p className="text-base text-foreground/80">{t.footerDesc}</p>
             {site.stores.map((store) => (
               <p key={store.id} className="text-base leading-7 text-foreground/80">
-                <strong className="font-semibold text-foreground">{store.name}</strong> · {fullAddress(store) || store.city} · {store.hours}
+                <strong className="font-semibold text-foreground">{store.name}</strong> · {fullAddress(store) || store.city} · {hoursLine(store)}
               </p>
             ))}
             <p className="text-base text-foreground/80">Telefono e WhatsApp: <a href={`tel:${site.phone}`} className="font-semibold underline underline-offset-4">{site.displayPhone}</a></p>

@@ -59,6 +59,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       name: store.name,
       telephone: site.phone,
       ...(store.tiktok && { sameAs: [store.tiktok.url] }),
+      openingHoursSpecification: store.hours.times.map((time) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: time.opens,
+        closes: time.closes,
+      })),
       address: {
         '@type': 'PostalAddress',
         ...(fullAddress(store) && { streetAddress: store.address, postalCode: store.postalCode }),

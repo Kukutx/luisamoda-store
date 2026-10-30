@@ -17,7 +17,10 @@ test('both shops and their opening times are maintained together', () => {
   for (const name of ['LZ Fortuna', 'Luisa Moda', 'Cologno Monzese', 'Calusco']) {
     assert.ok(config.includes(name), 'Missing ' + name);
   }
-  assert.equal((config.match(/09:00–19:30/g) || []).length, 2);
+  assert.equal((config.match(/hours: sameHours/g) || []).length, 2, 'Both stores share one set of hours');
+  for (const time of ["'09:00'", "'13:00'", "'14:30'", "'19:30'", 'Domenica chiuso']) {
+    assert.ok(config.includes(time), 'Missing ' + time);
+  }
 });
 
 test('Italian is the only public UI language', () => {
@@ -176,10 +179,13 @@ test('accessible labels on the Italian homepage are in Italian', () => {
 test('old store address, map link and structured data are published', () => {
   const html = read('out/index.html');
   assert.ok(html.includes('Piazza S. Rocco, 51, 24033 Calusco d’Adda (BG)'));
-  assert.ok(html.includes('https://www.google.com/maps/search/?api=1&amp;query=Piazza%20S.%20Rocco%2C%2051'));
+  assert.ok(html.includes('https://www.google.com/maps/search/?api=1&amp;query=LZ%20Fortuna%3A%20Negozio%20tutto%20casa'), 'Old store directions open its Google listing');
   assert.ok(html.includes('"streetAddress":"Piazza S. Rocco, 51"'));
   assert.ok(html.includes('"postalCode":"24033"'));
-  assert.ok(html.includes('Via Guglielmo Marconi, 20093 Cologno Monzese (MI)'));
+  assert.ok(html.includes('Via Guglielmo Marconi, 2/4, 20093 Cologno Monzese (MI)'));
+  assert.ok(html.includes('"opens":"14:30","closes":"19:30"'));
+  assert.ok(html.includes('Domenica chiuso'));
+  assert.ok(html.includes('Lun–sab 09:00–13:00 e 14:30–19:30, domenica chiuso'));
   assert.ok(html.includes('"sameAs":["https://www.tiktok.com/@luisa5558"]'));
 });
 
