@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Cormorant_Garamond } from 'next/font/google';
+import { ContactBar } from '@/components/contact-bar';
 import { site, fullAddress } from '@/lib/site';
 import './globals.css';
 
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       '@type': 'LocalBusiness',
       name: store.name,
       telephone: site.phone,
+      ...(store.tiktok && { sameAs: [store.tiktok.url] }),
       address: {
         '@type': 'PostalAddress',
         ...(fullAddress(store) && { streetAddress: store.address, postalCode: store.postalCode }),
@@ -68,7 +70,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   };
   return (
     <html lang="it" className={`${inter.variable} ${cormorant.variable}`}>
-      <body>
+      <body className="pb-16 md:pb-0">
         <a href="#contenuto" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-foreground focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-background">
           Vai al contenuto
         </a>
@@ -77,6 +79,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
+        <ContactBar />
       </body>
     </html>
   );

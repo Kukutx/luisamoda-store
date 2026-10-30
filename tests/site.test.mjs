@@ -22,8 +22,8 @@ test('both shops and their opening times are maintained together', () => {
 
 test('Italian is the only public UI language', () => {
   const page = read('app/page.tsx');
-  assert.ok(page.includes("home: 'HOME'"));
-  assert.ok(page.includes("services: 'SERVIZI'"));
+  assert.ok(page.includes("services: 'Servizi'"));
+  assert.ok(page.includes("contact: 'Contatti'"));
   assert.doesNotMatch(page, /setLocale|changeLocale|langZh|langEn|langIt/);
   assert.ok(read('app/layout.tsx').includes('<html lang="it"'));
 });
@@ -179,7 +179,8 @@ test('old store address, map link and structured data are published', () => {
   assert.ok(html.includes('https://www.google.com/maps/search/?api=1&amp;query=Piazza%20S.%20Rocco%2C%2051'));
   assert.ok(html.includes('"streetAddress":"Piazza S. Rocco, 51"'));
   assert.ok(html.includes('"postalCode":"24033"'));
-  assert.ok(html.includes('INDIRIZZO DISPONIBILE SU RICHIESTA'), 'New store keeps the placeholder until its address is known');
+  assert.ok(html.includes('Via Guglielmo Marconi, 20093 Cologno Monzese (MI)'));
+  assert.ok(html.includes('"sameAs":["https://www.tiktok.com/@luisa5558"]'));
 });
 
 test('link previews use the approved lockup and unused artwork is not published', () => {
@@ -214,4 +215,24 @@ test('keyboard visitors can skip to the content on every page', () => {
   const css = read('app/globals.css');
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /text-wrap: balance/);
+});
+
+test('every page offers one-tap chat, call and ready-made WhatsApp messages', () => {
+  for (const file of ['out/index.html', 'out/sartoria/index.html', 'out/prodotti/index.html', 'out/404.html']) {
+    const html = read(file);
+    assert.ok(html.includes('aria-label="Contatti rapidi"'), 'Mobile contact bar missing on ' + file);
+    assert.ok(html.includes('href="tel:+393668927486"'), file);
+  }
+  const home = read('out/index.html');
+  assert.ok(home.includes('https://wa.me/393668927486?text=Buongiorno%2C%20vorrei%20sapere%20se%20avete%20disponibile'));
+  assert.ok(home.includes('https://www.tiktok.com/@luisa5558'));
+  assert.ok(read('out/sartoria/index.html').includes('Come funziona'));
+});
+
+test('public text stays readable: no tiny labels or faint grey text', () => {
+  for (const file of ['app/page.tsx', 'app/sartoria/page.tsx', 'app/prodotti/page.tsx', 'app/not-found.tsx', 'components/subpage-chrome.tsx', 'components/mobile-menu.tsx']) {
+    const source = read(file);
+    assert.doesNotMatch(source, /text-\[(9|10|11)px\]|\btext-xs\b/, 'Text smaller than 14px in ' + file);
+    assert.doesNotMatch(source, /text-foreground\/(30|40|50|55|60)\b/, 'Low-contrast text in ' + file);
+  }
 });

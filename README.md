@@ -58,3 +58,12 @@
 构建时会生成意大利语 404 页（`app/not-found.tsx`）、`robots.txt` 和 `sitemap.xml`（`app/robots.ts`、`app/sitemap.ts`）；新增页面时记得加进 sitemap。
 
 GitHub Actions 仅用于 lint、类型检查和静态构建验证，不会未经配置自动部署。
+
+## 面向本地顾客的设计约定
+
+来店顾客多数有点年纪，也有年轻人和带孩子的家庭。页面保持黑白品牌风格，同时：
+
+- 正文至少 16px（多数 18px），标签至少 14px，不用很淡的灰字；测试会拦下 `text-xs` 和低对比度文字。
+- 首屏就有“WhatsApp / 打电话”大按钮；手机底部固定联系栏（`components/contact-bar.tsx`）。
+- “Come possiamo aiutarti?” 三个入口会打开带好开头的 WhatsApp 消息（`whatsappWith()`，在 `lib/site.ts`）。
+- 每家店的介绍、卖什么、地址、TikTok 都在 `lib/site.ts` 的 `stores` 里维护。
