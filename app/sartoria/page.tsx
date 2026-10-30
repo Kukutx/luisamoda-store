@@ -15,7 +15,7 @@ export default function SartoriaPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SubpageHeader />
 
-      <main>
+      <main id="contenuto">
         <section className="container mx-auto border-b border-black/10 px-6 pb-14 pt-16 md:px-10 md:pb-20 md:pt-24">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-foreground/60">
             SARTORIA · SERVIZI

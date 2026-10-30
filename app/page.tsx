@@ -34,7 +34,7 @@ export default function HomePage() {
     { href: '#contact', label: t.contact },
   ];
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
+    <div id="top" className="min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 py-4 backdrop-blur-2xl">
         <div className="container mx-auto flex items-center justify-between gap-1.5 px-3 sm:gap-4 sm:px-6 md:px-10">
           <a href="#top" className="group shrink-0 font-serif text-[clamp(1.1rem,3vw,2rem)] tracking-[0.04em] text-foreground transition-opacity hover:opacity-65 sm:tracking-[0.065em]" aria-label="LZ FORTUNA — Inizio pagina">
@@ -55,7 +55,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main id="top">
+      <main id="contenuto" className="scroll-mt-20">
         {/* Original centred editorial composition, updated to the LZ identity. */}
         <section className="relative flex min-h-[72vh] items-center justify-center overflow-hidden px-6 pb-24 pt-40 text-center">
           <div className="pointer-events-none absolute inset-0 bg-radial-[circle_at_50%_0%] from-black/2 to-transparent to-50%" />

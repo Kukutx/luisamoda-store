@@ -15,7 +15,7 @@ export default function ProdottiPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SubpageHeader />
 
-      <main>
+      <main id="contenuto">
         <section className="container mx-auto border-b border-black/10 px-6 py-16 md:px-10 md:py-24">
           <span className="text-xs font-semibold uppercase tracking-[0.3em] text-foreground/65">IL NOSTRO EMPORIO</span>
           <h1 className="mt-5 max-w-4xl font-serif text-[clamp(3rem,7vw,5.8rem)] italic font-light leading-[1.08]">

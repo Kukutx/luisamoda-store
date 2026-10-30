@@ -69,6 +69,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="it" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
+        <a href="#contenuto" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-foreground focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-background">
+          Vai al contenuto
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
