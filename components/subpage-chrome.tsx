@@ -39,7 +39,7 @@ export function SubpageFooter() {
           <p className="text-base text-foreground/80">Telefono e WhatsApp: <a href={`tel:${site.phone}`} className="font-semibold underline underline-offset-4">{site.displayPhone}</a></p>
         </div>
         <Link href="/" className="py-2 text-base font-semibold text-foreground/85 underline underline-offset-4 hover:text-foreground">
-          Torna alla home ↑
+          ← Torna alla home
         </Link>
       </div>
     </footer>

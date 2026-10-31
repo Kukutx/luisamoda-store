@@ -33,7 +33,7 @@ export default function SartoriaPage() {
             Orli, riparazioni e piccoli lavori di sartoria. Qui trovi un riferimento ai
             prezzi per i servizi più richiesti.
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href={whatsappWith('Buongiorno, vorrei sapere il prezzo per sistemare questo capo: ')}
               target="_blank"
@@ -57,7 +57,7 @@ export default function SartoriaPage() {
             <ol className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
               {steps.map((step, index) => (
                 <li key={step.title} className="border border-black/15 bg-white p-6">
-                  <span className="font-serif text-4xl">{index + 1}</span>
+                  <span className="font-serif text-4xl lining-nums">{index + 1}</span>
                   <h3 className="mt-3 font-serif text-2xl">{step.title}</h3>
                   <p className="mt-2 text-lg leading-8 text-foreground/80">{step.detail}</p>
                 </li>
@@ -143,16 +143,15 @@ export default function SartoriaPage() {
             Raccontaci di cosa hai bisogno. Per informazioni e appuntamenti
             contattaci direttamente, senza moduli o ordini online.
           </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
               className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 py-4 text-lg font-semibold text-background hover:bg-neutral-800">
               Scrivici su WhatsApp
             </a>
-            <a href={`tel:${site.phone}`} className="inline-flex min-h-14 items-center justify-center border-2 border-foreground px-8 py-4 text-lg font-semibold">
-              Chiama
+            <a href={`tel:${site.phone}`} className="inline-flex min-h-14 items-center justify-center border-2 border-foreground px-8 py-4 text-lg font-semibold hover:bg-black/5">
+              Chiama {site.displayPhone}
             </a>
           </div>
-          <p className="mt-6 text-xl font-semibold">{site.displayPhone}</p>
         </section>
       </main>
 

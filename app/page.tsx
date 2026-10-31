@@ -19,7 +19,6 @@ const t = {
     sewingDesc: 'Orli, riparazioni e modifiche sartoriali. Consulta il listino e chiedici informazioni.',
     storesTitle: 'Dove trovarci',
     storesIntro: `Due negozi di famiglia, aperti dal lunedì al sabato. Un solo numero per tutti e due: ${site.displayPhone}.`,
-    oldStore: 'Negozio storico', newStore: 'Nuovo negozio',
     findHere: 'Cosa trovi', hours: 'Orario', address: 'Indirizzo', addressPending: 'Indirizzo disponibile su richiesta',
     directions: 'Indicazioni', inquire: 'Scrivici',
     contactTitle: 'Parliamone',
@@ -53,6 +52,7 @@ export default function HomePage() {
     { href: '#servizi', label: t.services },
     { href: '#negozi', label: t.stores },
     { href: '/sartoria/', label: 'Sartoria' },
+    { href: '/prodotti/', label: 'Prodotti' },
     { href: '#contatti', label: t.contact },
   ];
   return (
@@ -84,9 +84,9 @@ export default function HomePage() {
               LZ <span className="italic">FORTUNA</span>
             </h1>
             <p className="flex w-full max-w-[42rem] items-center justify-center gap-3 text-center text-sm font-medium uppercase leading-relaxed tracking-[0.14em] text-foreground/80 sm:gap-5 sm:tracking-[0.22em]">
-              <span aria-hidden="true" className="h-px min-w-6 flex-1 bg-foreground/30" />
+              <span aria-hidden="true" className="hidden h-px min-w-6 flex-1 bg-foreground/30 sm:block" />
               <span>Sartoria e servizi per il tuo stile</span>
-              <span aria-hidden="true" className="h-px min-w-6 flex-1 bg-foreground/30" />
+              <span aria-hidden="true" className="hidden h-px min-w-6 flex-1 bg-foreground/30 sm:block" />
             </p>
             <p className="text-base font-medium tracking-[0.08em] text-foreground/75">{t.heroDetail}</p>
             <p className="max-w-xl text-lg leading-8 text-foreground/85">{t.heroIntro}</p>
@@ -110,14 +110,14 @@ export default function HomePage() {
           <div className="container mx-auto md:px-5">
             <h2 id="aiuto-heading" className="font-serif text-4xl italic md:text-5xl">{t.quickTitle}</h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-foreground/80">{t.quickIntro}</p>
-            <ul className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
               {quickActions.map((action) => (
                 <li key={action.title}>
                   <a href={whatsappWith(action.message)} target="_blank" rel="noopener noreferrer"
                     className="flex h-full min-h-28 flex-col justify-between gap-3 border border-black/20 bg-white p-5 hover:border-black md:p-6">
                     <span className="font-serif text-2xl leading-tight">{action.title}</span>
                     <span className="text-base leading-7 text-foreground/75">{action.detail}</span>
-                    <span className="text-base font-semibold">Scrivi su WhatsApp →</span>
+                    <span className="whitespace-nowrap text-base font-semibold">Scrivi su WhatsApp →</span>
                   </a>
                 </li>
               ))}
@@ -172,10 +172,10 @@ export default function HomePage() {
         <section id="negozi" className="container mx-auto scroll-mt-24 border-t border-black/10 px-5 py-14 md:px-10 md:py-20">
           <h2 className="font-serif text-4xl italic md:text-5xl">{t.storesTitle}</h2>
           <p className="mb-10 mt-4 text-lg leading-8 text-foreground/80">{t.storesIntro}</p>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {site.stores.map((store) => (
               <article key={store.id} className="flex flex-col border border-black/15 p-6 md:p-9">
-                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-foreground/70">{store.mainContact ? t.newStore : t.oldStore} · {store.city}</p>
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-foreground/70">{store.city}</p>
                 <h3 className="font-serif text-4xl tracking-[0.06em]">{store.name}</h3>
                 <p className="mt-2 text-lg leading-7 text-foreground/80">{store.tagline}</p>
 
@@ -192,7 +192,7 @@ export default function HomePage() {
                     <dd className="mt-1">
                       <p className="text-lg leading-7">{store.hours.days}</p>
                       {store.hours.times.map((time) => (
-                        <p key={time.opens} className="text-2xl leading-9 tabular-nums">{time.opens}–{time.closes}</p>
+                        <p key={time.opens} className="whitespace-nowrap text-2xl leading-9 tabular-nums">{time.opens}–{time.closes}</p>
                       ))}
                       <p className="mt-1 text-lg font-semibold leading-7">{store.hours.closed}</p>
                       <OpenNow times={store.hours.times} />
@@ -210,7 +210,7 @@ export default function HomePage() {
                   </div>
                 </dl>
 
-                <div className="mt-8 flex flex-wrap gap-3 md:mt-auto md:pt-8">
+                <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-auto lg:pt-8">
                   {mapsUrl(store) && (
                     <a href={mapsUrl(store)!} target="_blank" rel="noopener noreferrer"
                       className="inline-flex min-h-12 items-center justify-center bg-foreground px-5 text-base font-semibold text-background hover:bg-neutral-800">{t.directions} ↗</a>
@@ -219,7 +219,7 @@ export default function HomePage() {
                     className="inline-flex min-h-12 items-center justify-center border-2 border-foreground px-5 text-base font-semibold hover:bg-black/5">{t.inquire}</a>
                   {store.tiktok && (
                     <a href={store.tiktok.url} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex min-h-12 items-center justify-center px-2 text-base font-semibold underline underline-offset-4">TikTok {store.tiktok.handle} ↗</a>
+                      className="inline-flex min-h-12 items-center text-base font-semibold underline underline-offset-4">TikTok {store.tiktok.handle} ↗</a>
                   )}
                 </div>
               </article>
@@ -230,7 +230,7 @@ export default function HomePage() {
         <section id="contatti" className="scroll-mt-24 border-t border-black/10 bg-neutral-50 px-5 py-14 text-center md:py-20">
           <h2 className="font-serif text-4xl italic md:text-5xl">{t.contactTitle}</h2>
           <p className="mx-auto mb-7 mt-5 max-w-2xl text-lg leading-8 text-foreground/80">{t.contactDesc}</p>
-          <a href={`tel:${site.phone}`} className="mb-8 inline-block font-serif text-4xl tracking-[0.12em] md:text-5xl">{site.displayPhone}</a>
+          <a href={`tel:${site.phone}`} className="mb-8 inline-block font-serif text-4xl tracking-[0.12em] lining-nums md:text-5xl">{site.displayPhone}</a>
           <div className="mx-auto flex max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
             <a href={site.whatsapp} target="_blank" rel="noopener noreferrer"
               className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 text-lg font-semibold text-background hover:bg-neutral-800">{t.whatsCta}</a>
@@ -248,13 +248,16 @@ export default function HomePage() {
             <p className="text-base text-foreground/80">{t.footerDesc}</p>
             {site.stores.map((store) => (
               <p key={store.id} className="text-base leading-7 text-foreground/80">
-                <strong className="font-semibold text-foreground">{store.name}</strong> · {fullAddress(store) || store.city} · {hoursLine(store)}
+                <strong className="block font-semibold text-foreground">{store.name}</strong>
+                {fullAddress(store) || store.city}
               </p>
             ))}
+            <p className="text-base leading-7 text-foreground/80">{hoursLine(site.stores[0])}</p>
             <p className="text-base text-foreground/80">Telefono e WhatsApp: <a href={`tel:${site.phone}`} className="font-semibold underline underline-offset-4">{site.displayPhone}</a></p>
+            <p className="pt-3 text-sm text-foreground/70">© {new Date().getFullYear()} LZ FORTUNA</p>
           </div>
-          <nav className="flex flex-col gap-1 text-base" aria-label="Navigazione a piè di pagina">
-            {[...nav, { href: '/prodotti/', label: 'Prodotti' }, { href: site.tiktok, label: 'TikTok' }].map((item) => (
+          <nav className="grid grid-cols-2 gap-x-8 text-base md:flex md:flex-col md:gap-1" aria-label="Navigazione a piè di pagina">
+            {[...nav, { href: site.tiktok, label: 'TikTok' }].map((item) => (
               <a href={item.href} key={item.href} className="py-2 text-foreground/80 hover:text-foreground hover:underline">{item.label}</a>
             ))}
           </nav>
