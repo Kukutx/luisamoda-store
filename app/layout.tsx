@@ -60,6 +60,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     subOrganization: site.stores.map((store) => ({
       '@type': 'LocalBusiness',
       name: store.name,
+      ...(store.googleListing && store.googleListing !== store.name && { alternateName: store.googleListing }),
       url: site.url,
       image: new URL('/brand/og-image.png', site.url).toString(),
       telephone: site.phone,

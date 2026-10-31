@@ -28,7 +28,7 @@
 | LZ Fortuna（新店） | Via Guglielmo Marconi, 2/4, 20093 Cologno Monzese (MI) | 周一至周六 09:00–13:00、14:30–19:30，周日休息 | **366 892 7486** |
 | Luisa Moda（老店） | Piazza S. Rocco, 51, 24033 Calusco d’Adda (BG) | 同上 | **统一联系新店** |
 
-两店营业时间相同，统一写在 `sameHours`。有地址的门店会自动显示 Google 地图链接，并写进结构化数据；老店在 Google 上的商家名是 “LZ Fortuna: Negozio tutto casa + Sartoria”（`googleListing`），路线按钮直接打开这个商家页面。新店还没有 Google 商家资料，建好后同样填 `googleListing`。门店卡片上的“Aperto ora / Chiuso ora”按意大利时间在浏览器里计算（`lib/hours.ts`），全国固定节假日不显示，避免误导。**不要在网站代码中公开老店号码。** WhatsApp 和拨号都使用新店号码。
+两店营业时间相同，统一写在 `sameHours`。有地址的门店会自动显示 Google 地图链接，并写进结构化数据；老店在 Google 上的商家名是 “LZ Fortuna: Negozio tutto casa + Sartoria”（`googleListing`），路线按钮直接打开这个商家页面。新店在 Google 地图上叫 “Newmoda”（店铺以后会慢慢统一名字），同样填在 `googleListing`；名字和网站不一致时，门店卡片会写“Su Google Maps: «…»”，方便顾客对上。门店卡片上的“Aperto ora / Chiuso ora”按意大利时间在浏览器里计算（`lib/hours.ts`），全国固定节假日不显示，避免误导。**不要在网站代码中公开老店号码。** WhatsApp 和拨号都使用新店号码。
 
 ## 日常维护
 
