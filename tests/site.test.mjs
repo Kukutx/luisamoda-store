@@ -183,6 +183,9 @@ test('old store address, map link and structured data are published', () => {
   assert.ok(html.includes('"streetAddress":"Piazza S. Rocco, 51"'));
   assert.ok(html.includes('"postalCode":"24033"'));
   assert.ok(html.includes('Via Guglielmo Marconi, 2/4, 20093 Cologno Monzese (MI)'));
+  assert.ok(html.includes('query=Newmoda%2C%20Cologno%20Monzese'), 'New store directions open its Google listing "Newmoda"');
+  assert.ok(html.includes('"alternateName":"Newmoda"'));
+  assert.ok(html.includes('Su Google Maps: «Newmoda»'));
   assert.ok(html.includes('"opens":"14:30","closes":"19:30"'));
   assert.ok(html.includes('Domenica chiuso'));
   assert.ok(html.includes('Lun–sab 09:00–13:00 e 14:30–19:30, domenica chiuso'));

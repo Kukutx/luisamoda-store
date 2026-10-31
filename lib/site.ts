@@ -33,7 +33,7 @@ type Store = {
   /** What a visitor finds in this store, in plain words. */
   highlights: string[];
   tiktok?: { handle: string; url: string };
-  /** Name of the store's Google Business listing, so directions open the listing with reviews and hours. */
+  /** Name of the store's Google Maps listing (may differ from the shop name), so directions open that listing. */
   googleListing?: string;
 };
 
@@ -47,6 +47,7 @@ const stores: Store[] = [
     province: 'MI',
     hours: sameHours,
     mainContact: true,
+    googleListing: 'Newmoda',
     tagline: 'Il negozio nuovo, piccolo e vicino a casa',
     highlights: [
       'Abbigliamento per tutti i giorni',

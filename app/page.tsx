@@ -178,6 +178,9 @@ export default function HomePage() {
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-foreground/70">{store.city}</p>
                 <h3 className="font-serif text-4xl tracking-[0.06em]">{store.name}</h3>
                 <p className="mt-2 text-lg leading-7 text-foreground/80">{store.tagline}</p>
+                {store.googleListing && store.googleListing !== store.name && (
+                  <p className="mt-1 text-base leading-7 text-foreground/75">{`Su Google Maps: «${store.googleListing}»`}</p>
+                )}
 
                 <h4 className="mt-7 font-sans text-sm font-semibold uppercase tracking-[0.14em] text-foreground/70">{t.findHere}</h4>
                 <ul className="mt-3 space-y-2 text-lg leading-7">
