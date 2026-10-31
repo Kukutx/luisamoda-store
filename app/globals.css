@@ -32,6 +32,8 @@
     font-weight: 400;
     letter-spacing: 0.05em;
     line-height: 1.1;
+    /* Cormorant defaults to old-style figures; lining digits are easier to read. */
+    font-variant-numeric: lining-nums;
     color: var(--color-foreground);
   }
 

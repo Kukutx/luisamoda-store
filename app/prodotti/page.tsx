@@ -67,17 +67,16 @@ export default function ProdottiPage() {
             Chiamaci o mandaci un messaggio. Ti aiutiamo a capire se l’articolo
             che cerchi è disponibile in negozio, senza ordini online.
           </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <a href={whatsappWith('Buongiorno, vorrei sapere se avete disponibile: ')} target="_blank" rel="noopener noreferrer"
               className="inline-flex min-h-14 items-center justify-center bg-foreground px-8 py-4 text-lg font-semibold text-background hover:bg-neutral-800">
               Chiedi se è disponibile
             </a>
             <a href={`tel:${site.phone}`}
-              className="inline-flex min-h-14 items-center justify-center border-2 border-foreground px-8 py-4 text-lg font-semibold">
-              Chiama
+              className="inline-flex min-h-14 items-center justify-center border-2 border-foreground px-8 py-4 text-lg font-semibold hover:bg-black/5">
+              Chiama {site.displayPhone}
             </a>
           </div>
-          <p className="mt-6 text-base font-medium">{site.displayPhone}</p>
         </section>
       </main>
 

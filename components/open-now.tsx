@@ -17,8 +17,8 @@ export function OpenNow({ times }: { times: OpenInterval[] }) {
 
   if (!status) return null;
   return (
-    <p className="mt-3 inline-flex items-center gap-2 text-lg font-semibold leading-7">
-      <span aria-hidden="true" className={`size-3 rounded-full ${status.open ? 'bg-green-700' : 'border-2 border-foreground/60'}`} />
+    <p className="mt-3 flex items-center gap-2 text-lg font-semibold leading-7">
+      <span aria-hidden="true" className={`size-3 shrink-0 rounded-full ${status.open ? 'bg-green-700' : 'border-2 border-foreground/60'}`} />
       {status.text}
     </p>
   );
